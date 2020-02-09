@@ -19,3 +19,8 @@ Watch and build client assets with:
 - [ ] Add POIs
 - [ ] Challenge applications
 - [ ] Delist POIs
+
+### Resources
+
+- [Foam Map View](https://map.foam.space)
+- [Gitcoin Challenge](https://gitcoin.co/issue/ryan-foamspace/Sustain-Web3-hackathon/3/3960)
