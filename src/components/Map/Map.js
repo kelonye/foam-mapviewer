@@ -12,7 +12,6 @@ class Component extends React.Component {
   };
 
   togglePopup(popupPt) {
-    console.log(popupPt);
     this.setState({ popupPt });
   }
 

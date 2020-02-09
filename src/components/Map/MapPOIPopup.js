@@ -15,7 +15,25 @@ class Component extends React.PureComponent {
         closeOnClick={false}
         onClose={onClose}
       >
-        <div>{pt.name}</div>
+        <div style={{ padding: '20px 10px' }} className="flex flex--column">
+          <div>{pt.name}</div>
+          <div>
+            {pt.tags.map(tag => (
+              <span
+                key={tag}
+                style={{
+                  fontSize: 10,
+                  marginRight: 5,
+                  borderRadius: 10,
+                  padding: '3px 7px',
+                  background: '#eee',
+                }}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
       </Popup>
     );
   }

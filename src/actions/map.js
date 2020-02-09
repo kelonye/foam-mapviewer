@@ -53,6 +53,7 @@ const fetchLayersData = _.throttle(async function([
       ({
         geohash,
         name,
+        tags,
         state: {
           status: { type: status },
         },
@@ -60,6 +61,7 @@ const fetchLayersData = _.throttle(async function([
         return {
           name,
           status,
+          tags,
           ...Geohash.decode(geohash),
         };
       }
