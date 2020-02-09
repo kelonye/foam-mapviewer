@@ -1,6 +1,6 @@
-![](https://foam-mapviewer.herokuapp.com/desktop.png)
-
-![](https://foam-mapviewer.herokuapp.com/mobile.png)
+| Desktop                                               | Mobile                                               |
+| ----------------------------------------------------- | ---------------------------------------------------- |
+| ![](https://foam-mapviewer.herokuapp.com/desktop.png) | ![](https://foam-mapviewer.herokuapp.com/mobile.png) |
 
 # Responsive FOAM Map Viewer
 
