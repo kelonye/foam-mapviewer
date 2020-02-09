@@ -1,0 +1,71 @@
+@media only screen and (max-width: $mobile-breakpoint) {
+  .menu-button {
+    & {
+      border: none !important;
+      padding: 7px 0 12px 0 !important;
+    }
+    &-badge,
+    &-label {
+      display: none !important;
+    }
+  }
+}
+
+.menu {
+  z-index: 10;
+  position: fixed;
+  background: white;
+  bottom: 0;
+  overflow-y: auto;
+  border-right: 1px solid #ccc;
+}
+
+.menu-button-container {
+  text-align: center;
+}
+
+.menu-button {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 0 18px 0;
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  position: relative;
+
+  & > div {
+    display: flex;
+    justify-content: center;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &-badge {
+    position: absolute !important;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+  }
+
+  &-icon,
+  &-label {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  &-icon {
+    background-size: 80px 80px !important;
+  }
+
+  &-label {
+    font-size: 0.7em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+}

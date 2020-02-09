@@ -1,0 +1,31 @@
+.flex {
+  display: flex;
+
+  &--grow {
+    flex-grow: 1;
+  }
+
+  &--shrink {
+    flex-shrink: 1;
+  }
+
+  &--align-center {
+    align-items: center;
+  }
+
+  &--align-end {
+    align-items: flex-end;
+  }
+
+  &--justify-center {
+    justify-content: center;
+  }
+
+  &--justify-end {
+    justify-content: flex-end;
+  }
+
+  &--column {
+    flex-direction: column;
+  }
+}

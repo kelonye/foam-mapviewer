@@ -1,0 +1,4 @@
+export const DRAWER_WIDTH = 360;
+
+export const DRAWER_TYPE_LAYERS = 'DRAWER_TYPE_LAYERS';
+export const DRAWER_TYPE_WALLET = 'DRAWER_TYPE_WALLET';
