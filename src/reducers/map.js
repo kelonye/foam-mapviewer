@@ -4,6 +4,7 @@ import {
   ACTION_TYPE_UPDATE_LAYERS_DATA,
   LAYER_TYPE_POI,
   DEFAULT_LOCATION,
+  ACTION_TYPE_POI_TAG_VISIBILITY,
 } from 'config';
 import cache from 'utils/cache';
 
@@ -12,7 +13,8 @@ const DEFAULT_STATE = {
   layers: {
     [LAYER_TYPE_POI]: {
       visible: true,
-      data: [],
+      pois: [],
+      tags: {},
     },
   },
 };
@@ -34,8 +36,17 @@ export default (state = DEFAULT_STATE, action) => {
       const layers = action.payload;
       const s = Object.assign({}, state);
       layers.forEach(({ type, data }) => {
-        s.layers[type].data = data;
+        Object.entries(data).forEach(([k, v]) => {
+          s.layers[type][k] = v;
+        });
       });
+      return s;
+    }
+
+    case ACTION_TYPE_POI_TAG_VISIBILITY: {
+      const s = Object.assign({}, state);
+      s.layers[LAYER_TYPE_POI].tags[action.payload] = !s.layers[LAYER_TYPE_POI]
+        .tags[action.payload];
       return s;
     }
 

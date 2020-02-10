@@ -56,9 +56,9 @@ class Component extends React.Component {
             if (el) this.map = el;
           }}
         >
-          {layers.map(({ Component: LayerComponent, id: key, data }) => (
+          {layers.map(({ Component: LayerComponent, id: key }) => (
             <LayerComponent
-              {...{ key, data }}
+              {...{ key }}
               showPopup={pt => this.togglePopup(pt)}
             />
           ))}

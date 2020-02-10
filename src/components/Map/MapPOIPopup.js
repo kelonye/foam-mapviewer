@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
 import { Popup } from 'react-map-gl';
 
-class Component extends React.PureComponent {
+class Component extends React.Component {
   render() {
     const { pt, onClose } = this.props;
     return !pt ? null : (
@@ -15,7 +15,7 @@ class Component extends React.PureComponent {
         closeOnClick={false}
         onClose={onClose}
       >
-        <div style={{ padding: '20px 10px' }} className="flex flex--column">
+        <div className="flex flex--column">
           <div>{pt.name}</div>
           <div>
             {pt.tags.map(tag => (

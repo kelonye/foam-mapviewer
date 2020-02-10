@@ -3,6 +3,7 @@ import {
   ACTION_TYPE_TOGGLE_LAYER_VISIBILITY,
   ACTION_TYPE_UPDATE_LAYERS_DATA,
   LAYER_TYPE_POI,
+  ACTION_TYPE_POI_TAG_VISIBILITY,
 } from 'config';
 import Geohash from 'latlon-geohash';
 import cache from 'utils/cache';
@@ -32,6 +33,12 @@ export function toggleLayerVisibility(payload) {
   };
 }
 
+export function togglePOITagVisibility(payload) {
+  return async(dispatch, getState) => {
+    dispatch({ type: ACTION_TYPE_POI_TAG_VISIBILITY, payload });
+  };
+}
+
 const fetchLayersData = _.throttle(async function([
   [swLng, swLat],
   [neLng, neLat],
@@ -47,33 +54,40 @@ const fetchLayersData = _.throttle(async function([
     status: ['application', 'challenged', 'listing'],
   };
 
-  let poi;
+  const tags = {};
+  let pois;
   try {
-    poi = await xhr('get', '/poi/filtered', query).map(
+    pois = await xhr('get', '/poi/filtered', query).map(
       ({
         geohash,
         name,
-        tags,
+        tags: ptags,
         state: {
           status: { type: status },
         },
       }) => {
+        ptags.forEach(tag => {
+          tags[tag] = true;
+        });
         return {
           name,
           status,
-          tags,
+          tags: ptags,
           ...Geohash.decode(geohash),
         };
       }
     );
   } catch (e) {
-    poi = [];
+    pois = [];
   }
 
   return [
     {
       type: LAYER_TYPE_POI,
-      data: poi,
+      data: {
+        pois,
+        tags,
+      },
     },
   ];
 },
