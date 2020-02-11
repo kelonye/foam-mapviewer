@@ -11,6 +11,8 @@ import cache from 'utils/cache';
 import xhr from 'utils/xhr';
 import _ from 'lodash';
 
+const { REACT_APP_IS_DEV: IS_DEV } = process.env;
+
 export function setMapViewport(viewport) {
   return async(dispatch, getState) => {
     // if (viewport.zoom < 2) {
@@ -51,8 +53,9 @@ const fetchLayersData = _.throttle(async function([
   const tags = {};
   let pois;
   try {
-    const data = await xhr('get', '/poi/filtered', query);
-    // const data = require('./data');
+    const data = IS_DEV
+      ? require('./data')
+      : await xhr('get', '/poi/filtered', query);
     pois = data.map(
       ({
         geohash,
