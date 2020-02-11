@@ -3,25 +3,17 @@ import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
 import { IconButton } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import {
-  HEADER_HEIGHT,
-  DRAWER_WIDTH,
-  DRAWER_TYPE_LAYERS,
-  DRAWER_TYPE_WALLET,
-} from 'config';
+import { Route, Switch } from 'react-router-dom';
+import { HEADER_HEIGHT, DRAWER_WIDTH } from 'config';
 import Layers from './DrawerLayers';
 import Wallet from './DrawerWallet';
+import Welcome from './DrawerWelcome';
+import AddPOI from './DrawerAddPOI';
 import { widthSelector as menuWidthSelector } from 'selectors/menu';
-
-const DRAWER_TYPE_COMPONENTS = {
-  [DRAWER_TYPE_LAYERS]: <Layers />,
-  [DRAWER_TYPE_WALLET]: <Wallet />,
-};
 
 const ICON_SIZE = 30;
 
 const Component = ({ drawer, menuWidth, hideDrawer }) => {
-  const drawerContent = DRAWER_TYPE_COMPONENTS[drawer.type];
   const drawerStyle = {
     top: HEADER_HEIGHT,
     left:
@@ -43,7 +35,12 @@ const Component = ({ drawer, menuWidth, hideDrawer }) => {
           />
         </IconButton>
       </span>
-      {drawerContent}
+      <Switch>
+        <Route exact path={'/layers'} component={Layers} />
+        <Route exact path={'/wallet'} component={Wallet} />
+        <Route exact path={'/add-poi/:lng/:lat'} component={AddPOI} />
+        <Route path={'/'} component={Welcome} />
+      </Switch>
     </div>
   );
 };

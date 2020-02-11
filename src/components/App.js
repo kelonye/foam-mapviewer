@@ -7,8 +7,9 @@ import MapGL from './Map/Map';
 import Drawer from './Drawer/Drawer';
 import Menu from './Menu/Menu';
 import Snackbar from './Snackbar';
-
 import Loader from './Loader';
+import { Router } from 'react-router-dom';
+import { history } from 'store';
 
 const Component = ({ error, isLoaded }) => {
   let pane;
@@ -27,7 +28,7 @@ const Component = ({ error, isLoaded }) => {
   } else {
     pane = <Loader />;
   }
-  return pane;
+  return <Router {...{ history }}>{pane}</Router>;
 };
 
 export default connect(state => {

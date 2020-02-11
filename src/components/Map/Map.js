@@ -14,13 +14,15 @@ function Component({
   setMapViewport,
   updateLayersData,
   isAddingPOI,
+  showDrawer,
+  setIsAddingPOI,
 }) {
   const [popupPt, togglePopup] = React.useState(null);
   const [hoveredOnPOI, setHoveredOnPOI] = React.useState(false);
   const map = React.useRef();
 
   function getCursor(e) {
-    if (isAddingPOI) return 'grabbing';
+    if (isAddingPOI) return 'crosshair';
     if (hoveredOnPOI) return 'pointer';
     return 'grab';
   }
@@ -59,6 +61,15 @@ function Component({
   }
 
   function onClick(event) {
+    if (isAddingPOI) {
+      const {
+        lngLat: [lon, lat],
+      } = event;
+      showDrawer(`/add-poi/${lon}/${lat}`);
+      setIsAddingPOI(false);
+      return;
+    }
+
     const {
       features,
       // srcEvent: { offsetX, offsetY },
@@ -74,9 +85,9 @@ function Component({
   return (
     <div className="map" style={{ top: HEADER_HEIGHT, left }}>
       <ReactMapGL
+        {...viewport}
         width="100%"
         height="100%"
-        {...viewport}
         onViewportChange={onViewportChange}
         onLoad={onLoad}
         getCursor={getCursor}

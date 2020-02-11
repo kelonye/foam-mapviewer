@@ -3,25 +3,18 @@ import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
 import { Snackbar, Button } from '@material-ui/core';
 
-class Component extends React.Component {
-  getIsOpen() {
-    const { isAddingPOI } = this.props;
+function Component({ isAddingPOI, setIsAddingPOI }) {
+  function getIsOpen() {
     return isAddingPOI;
   }
 
-  getContent() {
-    const { isAddingPOI } = this.props;
-
+  function getContent() {
     let message, action;
     if (isAddingPOI) {
       message = 'Click on map to add the new Point of Interest...';
       action = (
         <React.Fragment>
-          <Button
-            color="secondary"
-            size="small"
-            onClick={e => this.handleClose(e)}
-          >
+          <Button color="secondary" size="small" onClick={e => handleClose(e)}>
             CANCEL
           </Button>
         </React.Fragment>
@@ -30,27 +23,25 @@ class Component extends React.Component {
     return { message, action };
   }
 
-  handleClose() {
-    const { isAddingPOI, setIsAddingPOI } = this.props;
-
-    if (isAddingPOI) {
-      setIsAddingPOI(false);
+  function handleClose(e, reason) {
+    if (reason !== 'clickaway') {
+      if (isAddingPOI) {
+        setIsAddingPOI(false);
+      }
     }
   }
 
-  render() {
-    return (
-      <Snackbar
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-        }}
-        open={this.getIsOpen()}
-        onClose={e => this.handleClose(e)}
-        {...this.getContent()}
-      />
-    );
-  }
+  return (
+    <Snackbar
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'center',
+      }}
+      open={getIsOpen()}
+      onClose={handleClose}
+      {...getContent()}
+    />
+  );
 }
 
 export default connect(state => {

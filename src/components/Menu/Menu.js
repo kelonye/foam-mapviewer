@@ -1,12 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
-import {
-  HEADER_HEIGHT,
-  MENU_WIDTH,
-  DRAWER_TYPE_WALLET,
-  DRAWER_TYPE_LAYERS,
-} from 'config';
+import { HEADER_HEIGHT, MENU_WIDTH } from 'config';
 import LayersIcon from '@material-ui/icons/Layers';
 import WalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import AddIcon from '@material-ui/icons/Add';
@@ -17,13 +12,13 @@ import Add from './MenuAdd';
 
 const BUTTONS = [
   {
-    type: DRAWER_TYPE_LAYERS,
+    type: '/layers',
     tip: 'Layers',
     label: 'Layers',
     Icon: LayersIcon,
   },
   {
-    type: DRAWER_TYPE_WALLET,
+    type: '/wallet',
     tip: 'Wallet',
     label: 'Wallet',
     Icon: WalletIcon,
