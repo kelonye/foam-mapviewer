@@ -1,0 +1,1517 @@
+[
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-12-18T21:32:58Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-12-15T21:32:58Z",
+      "deposit": "0x56bc75e2d631000000"
+    },
+    "listingHash": "0x5ab07f3a5e392dd391b966cb6e5a03a0215101461554e87ab14d11fd6cfc50be",
+    "owner": "0x056f7c63ffde98b5639d1962966a7ad9e43bc066",
+    "geohash": "9q8yve4f842k",
+    "name": "Wooden Cafe",
+    "tags": ["Food"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-12-21T05:27:09Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-12-18T05:27:09Z",
+      "deposit": "0x3635c9adc5dea00000"
+    },
+    "listingHash": "0x49b708f5833f35a55be11fa3fe195a694033772e1c1ec538fd1675d739dc255f",
+    "owner": "0x056f7c63ffde98b5639d1962966a7ad9e43bc066",
+    "geohash": "9q8zn4qs7mkr",
+    "name": "Ghiradelli Square",
+    "tags": ["Food", "Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-12-21T05:24:23Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-12-18T05:24:23Z",
+      "deposit": "0x3635c9adc5dea00000"
+    },
+    "listingHash": "0x3a03db8924e3bfdc688797af33b6a4f2f4c151433ca56db302001c4d6a158915",
+    "owner": "0x056f7c63ffde98b5639d1962966a7ad9e43bc066",
+    "geohash": "9q8zn4301c7z",
+    "name": "Fort Mason",
+    "tags": ["Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-12-21T05:23:03Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-12-18T05:23:03Z",
+      "deposit": "0x3635c9adc5dea00000"
+    },
+    "listingHash": "0xd1920bb1fdcd50ca017df2d56955b6d9ea0d0d8a76f83beac8c6f1a65b383f38",
+    "owner": "0x056f7c63ffde98b5639d1962966a7ad9e43bc066",
+    "geohash": "9q8yy5ryvreb",
+    "name": "The San Francisco Armory",
+    "tags": ["Attraction", "Nightlife"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-12-16T19:58:24Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-12-13T19:58:24Z",
+      "deposit": "0x3635c9adc5dea00000"
+    },
+    "listingHash": "0x9c1e83713995e30816e1128a4c4e85a487b6a778614a7efa1ae2a39579f09071",
+    "owner": "0x056f7c63ffde98b5639d1962966a7ad9e43bc066",
+    "geohash": "9q8yvdfwe8kr",
+    "name": "Zazie",
+    "tags": ["Food"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-12-16T19:57:02Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-12-13T19:57:02Z",
+      "deposit": "0x3635c9adc5dea00000"
+    },
+    "listingHash": "0x0e2e903c4865e9583ae4b2f0cfe55b6c92e3adeeab443f6ee9b561096d48e691",
+    "owner": "0x056f7c63ffde98b5639d1962966a7ad9e43bc066",
+    "geohash": "9q8yvdfvgdkp",
+    "name": "Cole Hardware",
+    "tags": ["Retail"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-12-16T19:56:09Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-12-13T19:56:09Z",
+      "deposit": "0x3635c9adc5dea00000"
+    },
+    "listingHash": "0x7367e009704b022961937a2dd7ec041680a7bb9ab12dd9f245a6dab996346c72",
+    "owner": "0x056f7c63ffde98b5639d1962966a7ad9e43bc066",
+    "geohash": "9q8yvdfvjw21",
+    "name": "Luke's Local",
+    "tags": ["Retail", "Food"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-12-16T06:51:01Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-12-13T06:51:01Z",
+      "deposit": "0x3635c9adc5dea00000"
+    },
+    "listingHash": "0x5c943696187cb10e83e0d8f9fde7928589d0cf3efb4bc8de6c9ac4376de3a692",
+    "owner": "0x056f7c63ffde98b5639d1962966a7ad9e43bc066",
+    "geohash": "9q8yvuvz3k2w",
+    "name": "Alamo Square Park",
+    "tags": ["Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-09-16T14:21:37Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-09-13T14:21:37Z",
+      "deposit": "0x3635c9adc5dea00000"
+    },
+    "listingHash": "0xb9a5dfa6fca1ca1bca7780e8ef03185ea7a01f7a01dc1853d009131b0b311236",
+    "owner": "0xf627e5f4bad95a956468d8bb6ee20b119f992e96",
+    "geohash": "9q8zn7pd839b",
+    "name": "Pier 39",
+    "tags": ["Attraction", "Retail", "Food"]
+  },
+  {
+    "state": {
+      "status": {
+        "endDate": "2019-05-20T07:16:47Z",
+        "type": "applied"
+      },
+      "createdAt": "2019-05-17T07:16:47Z",
+      "deposit": "0x1b1ae4d6e2ef500000"
+    },
+    "listingHash": "0xe63364e01e816f525aad7032584b81c708b566dc1e08699c3f964719b9416716",
+    "owner": "0x94e64d925ea0d2ea9b143bce58a74946cf76da92",
+    "geohash": "9q8yy1zefsrk",
+    "name": "Amnesia Beer & Music Hall",
+    "tags": ["Nightlife", "Art"]
+  },
+  {
+    "state": {
+      "status": {
+        "endDate": "2019-05-20T07:16:47Z",
+        "type": "applied"
+      },
+      "createdAt": "2019-05-17T07:16:47Z",
+      "deposit": "0x1a745c467716a00000"
+    },
+    "listingHash": "0x2a74f0889a904fc83b0b007548d5dc2a44665a9676c522205f11552b9ac2ddbd",
+    "owner": "0x94e64d925ea0d2ea9b143bce58a74946cf76da92",
+    "geohash": "9q8yy4pcnmkp",
+    "name": "Wildhawk",
+    "tags": ["Nightlife", "Art"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-01-26T22:47:34Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-01-23T22:47:34Z",
+      "deposit": "0xd8d726b7177a80000"
+    },
+    "listingHash": "0xa8cbf604cc6f6f2f3e4391e2460ba7342c23da14996457e5a4e2dc6698d176e0",
+    "owner": "0x0fd297255ec21fbb88dee67cb8bbc372a593c539",
+    "geohash": "9q8yy1r7p6eb",
+    "name": "Ritual Coffee Roasters",
+    "tags": ["Food"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-04-10T16:09:52Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-04-07T16:09:52Z",
+      "deposit": "0xad78ebc5ac6200000"
+    },
+    "listingHash": "0x05964b748aa24b60a8eba8d218b267f353e417c27372261c1abfcc498358362e",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q9qbdxb9r1w",
+    "name": "City Center - Bishop Ranch",
+    "tags": ["Attraction", "Retail", "Food"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-04-06T15:36:11Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-04-03T15:36:11Z",
+      "deposit": "0xad78ebc5ac6200000"
+    },
+    "listingHash": "0x4ec3da6487a2cc4c72029e90c80a4fa938aa2caac73def8de3b51e3c31c0d053",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q9pw68y75gc",
+    "name": "St Mary of the Immaculate Conception School",
+    "tags": ["Education", "Religion"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-04-04T14:01:29Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-04-01T14:01:29Z",
+      "deposit": "0xad78ebc5ac6200000"
+    },
+    "listingHash": "0x6c1a480693fa4befa54f66278b75ae63a474432a936447cc88e46557be089272",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q9pwkcmxm9r",
+    "name": "Cafe California",
+    "tags": ["Retail", "Food"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-12-13T08:35:02Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-12-10T08:35:02Z",
+      "deposit": "0xad78ebc5ac6200000"
+    },
+    "listingHash": "0x6d61cd9762d649c7761b50ba94ffc2daa02b1599f6db924b0e86799f8a891422",
+    "owner": "0x70f800dc788c55d9bfbcb2ac190392282eb08b0b",
+    "geohash": "9q8yysk7f5rf",
+    "name": "Pinterest HQ",
+    "tags": ["Art", "Work"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-12-13T08:05:15Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-12-10T08:05:15Z",
+      "deposit": "0xad78ebc5ac6200000"
+    },
+    "listingHash": "0x08defd3cabb6c4252fca124c443bb4ef41587a50ce5edcb6fed80b1616bc01ae",
+    "owner": "0x70f800dc788c55d9bfbcb2ac190392282eb08b0b",
+    "geohash": "9q8yykcgrhcd",
+    "name": "Uber HQ",
+    "tags": ["Transportation", "Work"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-12-13T07:43:19Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-12-10T07:43:19Z",
+      "deposit": "0xad78ebc5ac6200000"
+    },
+    "listingHash": "0x71714499d95157fe029e4154b4fbee86f02d2e6c2104a76955257fbfcb84c3a5",
+    "owner": "0x70f800dc788c55d9bfbcb2ac190392282eb08b0b",
+    "geohash": "9q9jhrv25k01",
+    "name": "Facebook HQ",
+    "tags": ["Work"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-11-20T05:54:39Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-11-17T05:54:39Z",
+      "deposit": "0xad78ebc5ac6200000"
+    },
+    "listingHash": "0xb5da9bbd2cba5803061ab81e37f63398955fab9d4dfae86d3fbc6d2059dd2f23",
+    "owner": "0xa74ff9122f90bacc5c0e6b6a2464491b08b0263b",
+    "geohash": "9q9p1dtxcc7k",
+    "name": "Fox Theater",
+    "tags": ["Attraction", "Nightlife", "Art"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-11-20T03:58:02Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-11-17T03:58:02Z",
+      "deposit": "0xad78ebc5ac6200000"
+    },
+    "listingHash": "0x1bb26f5fa6fc0ce84db568bc51934a471c953989388ee8c423aae2f8e452e903",
+    "owner": "0xa74ff9122f90bacc5c0e6b6a2464491b08b0263b",
+    "geohash": "9q9p1dm88drt",
+    "name": "VSCO",
+    "tags": ["Art", "Work"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-11-20T03:36:56Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-11-17T03:36:56Z",
+      "deposit": "0xad78ebc5ac6200000"
+    },
+    "listingHash": "0x232a787a0f7db56a92091ecb07a104d7d6c44c029c9ca6e18e14362d8c552568",
+    "owner": "0xa74ff9122f90bacc5c0e6b6a2464491b08b0263b",
+    "geohash": "9q9p1gskwcpf",
+    "name": "Whole Foods Market",
+    "tags": ["Health", "Retail", "Food"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-10-21T23:31:47Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-10-18T23:31:47Z",
+      "deposit": "0xad78ebc5ac6200000"
+    },
+    "listingHash": "0x9ddb1e2e2aed05a50692f1a9756edd086a20cf678cb9b58a5c78431dd5e522b2",
+    "owner": "0xf794c2fd357962a5908a51a09cead6d5a8b75381",
+    "geohash": "9q8zj124x907",
+    "name": "Presidio Graduate School",
+    "tags": ["Work", "Education"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-10-09T20:52:53Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-10-06T20:52:53Z",
+      "deposit": "0xad78ebc5ac6200000"
+    },
+    "listingHash": "0x45db4a0013b85ad449598b17ef7504315825ebd10855137d9bb111f204c8b292",
+    "owner": "0x3baa72b69ae3abba5d5abd3936859b8f68b5d5a2",
+    "geohash": "9q9ng0nx3spd",
+    "name": "Oracle Arena",
+    "tags": ["Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-10-08T23:59:47Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-10-05T23:59:47Z",
+      "deposit": "0xad78ebc5ac6200000"
+    },
+    "listingHash": "0xa62572cb96d56b04c23bffff91c17f4527271ced47a388a92daa288c5dbbc548",
+    "owner": "0xf794c2fd357962a5908a51a09cead6d5a8b75381",
+    "geohash": "9q8zj1bezydb",
+    "name": "Fort Scott Field",
+    "tags": ["Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-10-06T03:51:40Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-10-03T03:51:40Z",
+      "deposit": "0xad78ebc5ac6200000"
+    },
+    "listingHash": "0x79c6df7539264fd0eb72ea29fb74700f49bbdd4cdeccbdcd5c8f042a85cea3d3",
+    "owner": "0x6c0686ca9b671df03ad82186c5855998a38358d7",
+    "geohash": "9q8zn8mhc5f6",
+    "name": "Transamerica Pyramid",
+    "tags": ["Work", "Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-09-16T01:34:58Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-09-13T01:34:58Z",
+      "deposit": "0xad78ebc5ac6200000"
+    },
+    "listingHash": "0xdec81204b4d2c5f16ea57216c1342fe39e02d4b784a886d14cb06adde06a4e0d",
+    "owner": "0x67229e248d9afef7a36efa7a652d458e951c3724",
+    "geohash": "9q8znnnktxfb",
+    "name": "Alcatraz Island",
+    "tags": ["Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-09-17T05:11:54Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-09-14T05:11:54Z",
+      "deposit": "0x9c2007651b2500000"
+    },
+    "listingHash": "0xa6ccebd68e4d0c99babb807f30f6ca792a6f541d7e8cf7759d6c515f2488b764",
+    "owner": "0x0b26595f88ff225dae79c01a6d34da847bca788d",
+    "geohash": "9q8yv13dju9y",
+    "name": "16th Ave Mosaic Stairway",
+    "tags": ["Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-01-22T22:56:48Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-01-19T22:56:48Z",
+      "deposit": "0x821ab0d4414980000"
+    },
+    "listingHash": "0x66e85c6ebb823f9c7241c48359f2ac0484de94fe5acd413c3798bcc050a197cd",
+    "owner": "0xae5126311d5644f681b64c6737fc6bc23296dac0",
+    "geohash": "9q8yveu77skp",
+    "name": "Haight Street Market",
+    "tags": ["Retail", "Food"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-05-26T13:35:58Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-05-23T13:35:58Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0xb37cc6c2f107c14cc853a109545e453a7d73be4d7e335faf49f49dbcb6b41e0f",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q9p1g4yc0z1",
+    "name": "The Cathedral of Christ the Light",
+    "tags": ["Attraction", "Religion"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-05-04T18:44:57Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-05-01T18:44:57Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0x62bd290812aa6d28af0ac921026d8bf6b3e9414b075eb142a43f0e9caf3c7339",
+    "owner": "0xf627e5f4bad95a956468d8bb6ee20b119f992e96",
+    "geohash": "9q8yytsmc5sn",
+    "name": "Mosso Apartment",
+    "tags": ["Residential"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-04-10T16:19:05Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-04-07T16:19:05Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0xe74a93dd240563d740b0b496516c960fcdf78cd8ac24ff75f82b02390da91686",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q9pw7wqx7mz",
+    "name": "Walnut Creek Library",
+    "tags": ["Art", "Government", "Education"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-04-10T15:57:42Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-04-07T15:57:42Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0xbe559550b833d057e096a8aa17748f1c77a758059f6a569f5819dc0fd69a9416",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q9jm5ekwwc1",
+    "name": "Dumbarton Bridge",
+    "tags": ["Government", "Work", "Transportation"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-04-10T15:26:25Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-04-07T15:26:25Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0xa763732938122b81a33e3c73e06848b5b88acbf829941f6e7f55521e09c4de8a",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q9jfuyckc86",
+    "name": "San Mateo Bridge",
+    "tags": ["Attraction", "Transportation", "Work"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-04-10T04:44:26Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-04-07T04:44:26Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0xea0b7af040eee9b75201136da7c9fba88c93fa6d88f98db30c403c9b01d5fecc",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q8yyzu7728t",
+    "name": "Rincon Center",
+    "tags": ["Attraction", "Food", "Art"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-04-10T04:39:17Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-04-07T04:39:17Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0x8b7ef9d3dc2d4957776e383ac06ccd5f19810a76a0c713b737b520217db4e58a",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q8znb7z48e2",
+    "name": "Ferry Building",
+    "tags": ["Retail", "Transportation", "Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-04-06T14:22:03Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-04-03T14:22:03Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0xb40ba373ec922efe65084c89081eaa317a9167893fe244e5e77222a6d99b495f",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q9pxsuprx5e",
+    "name": "Northgate High School",
+    "tags": ["Education"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-01-26T21:57:17Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-01-23T21:57:17Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0x23d9ca24beeae395636923adc476ff72ace87978e2e31f8cde6a3dd8d88444ed",
+    "owner": "0x0fd297255ec21fbb88dee67cb8bbc372a593c539",
+    "geohash": "9q8yy4rkvteb",
+    "name": "Mau",
+    "tags": ["Food"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-01-22T21:54:23Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-01-19T21:54:23Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0xfb2cf939b3c064893c5f8de47e105a3ad3da6a9b1a01a05dc93d5a9c4117b7c7",
+    "owner": "0xae5126311d5644f681b64c6737fc6bc23296dac0",
+    "geohash": "9q9p3wjvfjkr",
+    "name": "Machine Intelligence Research Institute",
+    "tags": ["Education", "Work"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-01-22T21:41:42Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-01-19T21:41:42Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0x3d75b8ea60ff7b678cb1b08130157e4ca0b9766a92cfa6e04503f10b90540b64",
+    "owner": "0xae5126311d5644f681b64c6737fc6bc23296dac0",
+    "geohash": "9q8yvet691kp",
+    "name": "Grateful Dead House",
+    "tags": ["Art", "Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-01-22T21:39:12Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-01-19T21:39:12Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0xfd9f833e51494c5ee43e0a91cbe1ad405ee40315ae8dfee5b3e1e79fbe77b407",
+    "owner": "0xae5126311d5644f681b64c6737fc6bc23296dac0",
+    "geohash": "9q8yve8eyxmh",
+    "name": "Amoeba Music",
+    "tags": ["Attraction", "Retail"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-12-16T16:22:49Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-12-13T16:22:49Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0x8271c3096fa16d6d7cf66bcf0042827ff277191696b4421c2caaf2491c6a751e",
+    "owner": "0x056f7c63ffde98b5639d1962966a7ad9e43bc066",
+    "geohash": "9q8yve48f4h7",
+    "name": "Padrecito",
+    "tags": ["Food"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-12-15T05:13:24Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-12-12T05:13:24Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0x126f66b5c1a620f22665a905163c54ea695e6a1124cbfc53bab9f0e12a2fd2e9",
+    "owner": "0xdff135f68f06495ec444f0c2d47eee3adcd3e4fe",
+    "geohash": "9q9p3yq0sm35",
+    "name": "UC Berkeley - Center for Long-Term Cybersecurity Research",
+    "tags": ["Education"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-12-15T05:11:02Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-12-12T05:11:02Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0x370320bbf49be999e5cf43c20ffd934f9d8642eedaf3eff842677a1e33ab49fa",
+    "owner": "0xdff135f68f06495ec444f0c2d47eee3adcd3e4fe",
+    "geohash": "9q9p3yq0d37p",
+    "name": "UC Berkeley - School of Information",
+    "tags": ["Education"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-12-15T05:08:20Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-12-12T05:08:20Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0x39f007537a845ca866060d27162d5f818197ba3776dafeb8f4c8970821ee6706",
+    "owner": "0xdff135f68f06495ec444f0c2d47eee3adcd3e4fe",
+    "geohash": "9q9p6n1qsu70",
+    "name": "Simons Institute for the Theory of Computing",
+    "tags": ["Education"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-12-15T04:51:37Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-12-12T04:51:37Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0xb706949991f7732c8b1df8da308cf37f93031ed5c830687e3c4792bbdbbed1ea",
+    "owner": "0xdff135f68f06495ec444f0c2d47eee3adcd3e4fe",
+    "geohash": "9q9p3ywb29jy",
+    "name": "Department of Physics",
+    "tags": ["Education"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-12-15T04:42:31Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-12-12T04:42:31Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0x9b3c69939ff8bb9afbe2a50aa32327e79cc490696090110b6d94a276c3f2cdc5",
+    "owner": "0xdff135f68f06495ec444f0c2d47eee3adcd3e4fe",
+    "geohash": "9q9p3ywtcc8k",
+    "name": "Department of Mathematics",
+    "tags": ["Education"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-12-15T04:28:31Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-12-12T04:28:31Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0xe0d71341997c3a8bda92c6a7a05b49a234581fe5503e751b21f8756ef4fa7eff",
+    "owner": "0xdff135f68f06495ec444f0c2d47eee3adcd3e4fe",
+    "geohash": "9q9p3zjcv281",
+    "name": "Department of Electrical Engineering and Computer Sciences ",
+    "tags": ["Education"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-10-21T23:46:45Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-10-18T23:46:45Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0xa69c1237a98f56f3527bd3c68b730407bf27c266c6a547b9224f40417b930546",
+    "owner": "0xf794c2fd357962a5908a51a09cead6d5a8b75381",
+    "geohash": "9q9p3yqsdq7c",
+    "name": "Sather Tower (Campanile)",
+    "tags": ["Art", "Education", "Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-10-21T23:41:40Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-10-18T23:41:40Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0x2c3c985f43c875bb1765bca32ae5ec5e9a3f43436ea5a9d34c917e0e7dc71b65",
+    "owner": "0xf794c2fd357962a5908a51a09cead6d5a8b75381",
+    "geohash": "9q8zhgnyy7bc",
+    "name": "Fort Point",
+    "tags": ["Art", "Education", "Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-10-21T23:34:46Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-10-18T23:34:46Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0xea9610e0ce5c8efaddaf0e33c47eaaa043a04a48334dc5051a99a30c36806202",
+    "owner": "0xf794c2fd357962a5908a51a09cead6d5a8b75381",
+    "geohash": "9q8zj48w0yuq",
+    "name": "Golden Gate Bridge Welcome Center",
+    "tags": ["Attraction", "Food", "Retail"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-10-21T23:25:58Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-10-18T23:25:58Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0x8420194e35c8a3fb1321521eed5fb2f67e341ac7c6550ddd1557e31c90ea3ee3",
+    "owner": "0xf794c2fd357962a5908a51a09cead6d5a8b75381",
+    "geohash": "9q8zj129pqu6",
+    "name": "World Economic Forum, Centre for the Fourth Industrial Revolution",
+    "tags": ["Education", "Work"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-10-21T23:20:11Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-10-18T23:20:11Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0x9c62629b80fa3deb3cee3dc52d1450174b2560262a1111da60d1e1f81b219565",
+    "owner": "0xf794c2fd357962a5908a51a09cead6d5a8b75381",
+    "geohash": "9q8yyz3etf1s",
+    "name": "Salesforce Transit Center",
+    "tags": ["Retail", "Food", "Transportation"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-10-21T23:17:01Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-10-18T23:17:01Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0x04b2ef97792a83e8b8934d629592e47d8e4113411e7818f1d7acae3d5d632f85",
+    "owner": "0xf794c2fd357962a5908a51a09cead6d5a8b75381",
+    "geohash": "9q8yy1zxuqgs",
+    "name": "Boba Guys",
+    "tags": ["Retail", "Food"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-10-21T20:23:33Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-10-18T20:23:33Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0xf2cb4e1c86f22300d8f703e22991ba199f66d5260f17ab31b47c083ac5af6df2",
+    "owner": "0x331f49fe0feccc9c7ff38585602c6759ad5323ea",
+    "geohash": "9q9p659gpjqp",
+    "name": "Rialto Cinemas Elmwood",
+    "tags": ["Art"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-10-21T20:06:48Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-10-18T20:06:48Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0x081f61689e6c9313471e9dd9a9c6b9a82556a7b289dec3384e54acd3b2e7dc7a",
+    "owner": "0x331f49fe0feccc9c7ff38585602c6759ad5323ea",
+    "geohash": "9q9p1zehcm53",
+    "name": "The Avenue",
+    "tags": ["Nightlife"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-09-28T18:26:03Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-09-25T18:26:03Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0x993cd2a7408ba5fa6c31417290b91537ab72f27fdd04d4c2959d9a548c22abfe",
+    "owner": "0x331f49fe0feccc9c7ff38585602c6759ad5323ea",
+    "geohash": "9q9pd4gbvfjt",
+    "name": "Lake Anza",
+    "tags": ["Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-09-25T01:36:49Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-09-22T01:36:49Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0xd3fc9d6b6e1d0cc9deeb626a15e27f3351cad63da7bbab2dadf2e8970615465d",
+    "owner": "0x94e64d925ea0d2ea9b143bce58a74946cf76da92",
+    "geohash": "9q8zp7qbtbv0",
+    "name": "Yerba Buena Island",
+    "tags": ["Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-09-25T01:36:49Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-09-22T01:36:49Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0x361dbdb08367c86229bcf463942e32a1a90d63ef6ca57f9561d2729bf07d83b6",
+    "owner": "0x94e64d925ea0d2ea9b143bce58a74946cf76da92",
+    "geohash": "9q8zpmsp3f7s",
+    "name": "Treasure Island",
+    "tags": ["Food", "Art", "Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-09-18T17:54:30Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-09-15T17:54:30Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0x52719849490783228fa39d7d7073005ff8e1b29f85e59e2148582bcad11d4c05",
+    "owner": "0xbe2ec7c367ca33560a33c666999b46f876c8fc08",
+    "geohash": "9q9p6n5wxmdd",
+    "name": "California Memorial Stadium",
+    "tags": ["Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-09-18T17:49:42Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-09-15T17:49:42Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0xa38da5cd61f07c78542fb905af77378fbcada164ae519e3a76acd41bc62ae7a6",
+    "owner": "0xbe2ec7c367ca33560a33c666999b46f876c8fc08",
+    "geohash": "9q9p3ymm7qcr",
+    "name": "Doe Memorial Library",
+    "tags": ["Work"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-09-16T20:32:21Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-09-13T20:32:21Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0x49c0857526db8d5d17827867601e990ce94bbec0b4bde6d6719c5e8ccab531d0",
+    "owner": "0xa1370cf8c241c4c94d3ce0930356e45096ccaa58",
+    "geohash": "9q8yywwq9beh",
+    "name": "San Francisco Museum of Modern Art",
+    "tags": ["Retail", "Attraction", "Art"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-09-16T05:06:35Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-09-13T05:06:35Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0xd856107f95ca57f2588c422b0e9068cf6a9fc333e9c12bc665bc543c2f20f2e0",
+    "owner": "0x94e64d925ea0d2ea9b143bce58a74946cf76da92",
+    "geohash": "9q8ytqpwpn7s",
+    "name": "Mount Davidson",
+    "tags": ["Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-09-16T00:23:17Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-09-13T00:23:17Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0xc9b1c4edb7de25b566bd227a0851e225043ca8f30a7bbfd6e6307d01af221dde",
+    "owner": "0xa1370cf8c241c4c94d3ce0930356e45096ccaa58",
+    "geohash": "9q9ndcnfgcp7",
+    "name": "Oakland International Airport, OAK",
+    "tags": ["Work", "Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-09-15T19:23:33Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-09-12T19:23:33Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0x27d767c7b73354c37b5058c3f5004c89d49fedbc868907b6dbfd1bf3bb464bdd",
+    "owner": "0xa1370cf8c241c4c94d3ce0930356e45096ccaa58",
+    "geohash": "9q8vyzz2ppwu",
+    "name": "San Francisco International Airport, SFO",
+    "tags": ["Work", "Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-09-15T17:44:20Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-09-12T17:44:20Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0x1bd6a208e66d99ce17e3efddcb69463ca55320682e2e16de1099077fc8330627",
+    "owner": "0x4bb53d16fe997bb03a2321e88c9b04364f2f9a62",
+    "geohash": "9q8ywh6u7h2c",
+    "name": "Superhaus",
+    "tags": ["Blockchain", "Food", "Art"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-09-15T16:56:40Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-09-12T16:56:40Z",
+      "deposit": "0x56bc75e2d63100000"
+    },
+    "listingHash": "0x0cc42c6272a15887da53f382ee5958972c7798e485b942b5d66b65fd4569573e",
+    "owner": "0x94e64d925ea0d2ea9b143bce58a74946cf76da92",
+    "geohash": "9q8yug8n9v4f",
+    "name": "Golden Gate Park",
+    "tags": ["Art", "Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-09-27T18:31:31Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-09-24T18:31:31Z",
+      "deposit": "0x31708ae0045440000"
+    },
+    "listingHash": "0xe5d3b31f83b85aabcb074f264b92c55a709458528d8cfdc785cd62874a072baa",
+    "owner": "0x331f49fe0feccc9c7ff38585602c6759ad5323ea",
+    "geohash": "9q9p34jwdcpx",
+    "name": "Prizefighter",
+    "tags": ["Nightlife"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2018-09-28T06:46:43Z",
+        "type": "listing"
+      },
+      "createdAt": "2018-09-25T06:46:43Z",
+      "deposit": "0x2be374fe8e2c40000"
+    },
+    "listingHash": "0xe8b6c643edcf6df72e270b3d85e625620702f452450511fb874d6f96d23e4e7c",
+    "owner": "0x331f49fe0feccc9c7ff38585602c6759ad5323ea",
+    "geohash": "9q9p3gkskukk",
+    "name": "Whole Foods Market",
+    "tags": ["Health", "Food"]
+  },
+  {
+    "state": {
+      "status": {
+        "endDate": "2020-02-13T06:29:16Z",
+        "type": "applied"
+      },
+      "createdAt": "2020-02-10T06:29:16Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0x48f4101eca4e1b1d80500611cc37d7d380fa5db04d3398478dce5649fcda7d0e",
+    "owner": "0x4795237e09bf7bff7b6fb3d42466e2917f571223",
+    "geohash": "9q8zjbuyv6vh",
+    "name": "Tacko",
+    "tags": ["Food"]
+  },
+  {
+    "state": {
+      "status": {
+        "endDate": "2020-02-13T06:23:01Z",
+        "type": "applied"
+      },
+      "createdAt": "2020-02-10T06:23:01Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0x0cfbeeda6693589f32c40de49ccbf6a41780bb74f96569b9d91dac617648b4ad",
+    "owner": "0x4795237e09bf7bff7b6fb3d42466e2917f571223",
+    "geohash": "9q8zjbyby50z",
+    "name": "Equinox Union Street",
+    "tags": ["Health", "Retail"]
+  },
+  {
+    "state": {
+      "status": {
+        "endDate": "2020-02-13T06:23:01Z",
+        "type": "applied"
+      },
+      "createdAt": "2020-02-10T06:23:01Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0xd86c1beba6770916a4fbd3deb9e4f9d7b222470b776d11029bc54041b9e1f4a1",
+    "owner": "0x4795237e09bf7bff7b6fb3d42466e2917f571223",
+    "geohash": "9q8zjct5x267",
+    "name": "Marina Middle School",
+    "tags": ["Government"]
+  },
+  {
+    "state": {
+      "status": {
+        "endDate": "2020-02-13T06:17:43Z",
+        "type": "applied"
+      },
+      "createdAt": "2020-02-10T06:17:43Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0x46a056f7bf7170ba9a091c41522d987ae2184748b2d7ca51ef2bac44aa21731c",
+    "owner": "0x4795237e09bf7bff7b6fb3d42466e2917f571223",
+    "geohash": "9q8zjcw1ngr9",
+    "name": "Marina Branch Library",
+    "tags": ["Government"]
+  },
+  {
+    "state": {
+      "status": {
+        "endDate": "2020-02-13T06:14:29Z",
+        "type": "applied"
+      },
+      "createdAt": "2020-02-10T06:14:29Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0x2576ffea9da51a6fe0fa9f1b59428ec63d0edff1b1bba15de6b84142c39dee33",
+    "owner": "0x4795237e09bf7bff7b6fb3d42466e2917f571223",
+    "geohash": "9q8zjby83bkp",
+    "name": "SoulCycle",
+    "tags": ["Health", "Retail"]
+  },
+  {
+    "state": {
+      "status": {
+        "endDate": "2020-02-13T06:12:01Z",
+        "type": "applied"
+      },
+      "createdAt": "2020-02-10T06:12:01Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0x921481ea820bdeb7d58a097a84d987648acbb1a8a0501bb4eecc19d174067386",
+    "owner": "0x4795237e09bf7bff7b6fb3d42466e2917f571223",
+    "geohash": "9q8zj9gcchrz",
+    "name": "Palace of Fine Arts",
+    "tags": ["Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "endDate": "2020-02-13T05:54:03Z",
+        "type": "applied"
+      },
+      "createdAt": "2020-02-10T05:54:03Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0x7e754016ebf684465efd353700078ede5921ccc989c83e59aec764e928ee5a5b",
+    "owner": "0x4795237e09bf7bff7b6fb3d42466e2917f571223",
+    "geohash": "9q8zjf6x2k2z",
+    "name": "Marina Green",
+    "tags": ["Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "endDate": "2019-10-24T19:17:25Z",
+        "type": "applied"
+      },
+      "createdAt": "2019-10-21T19:17:25Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0xda1ace91258692ccf45ca3214f3564aa931320f2dc05e255a3b15198da34e34a",
+    "owner": "0x64c971d7e3c0483fa97a7714ec55d1e1943731c7",
+    "geohash": "9q8yyxsf4h7x",
+    "name": "333 Bush Street",
+    "tags": ["Work", "Residential"]
+  },
+  {
+    "state": {
+      "status": {
+        "endDate": "2019-10-24T18:42:07Z",
+        "type": "applied"
+      },
+      "createdAt": "2019-10-21T18:42:07Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0xeb3a308c87d92533e732a2d1d832efbb2ac7ebc64401cb1c9fbdbf88f787659c",
+    "owner": "0x64c971d7e3c0483fa97a7714ec55d1e1943731c7",
+    "geohash": "9q8yyyb362s2",
+    "name": "222 Second Street",
+    "tags": ["Work"]
+  },
+  {
+    "state": {
+      "status": {
+        "endDate": "2019-10-24T18:18:14Z",
+        "type": "applied"
+      },
+      "createdAt": "2019-10-21T18:18:14Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0xd1ca636611d0d1b62bafda2b53b52116e7274bceef78bc0d0d2d7f6483ed428a",
+    "owner": "0x64c971d7e3c0483fa97a7714ec55d1e1943731c7",
+    "geohash": "9q8znb144pkp",
+    "name": "One California Street Building",
+    "tags": ["Work"]
+  },
+  {
+    "state": {
+      "status": {
+        "endDate": "2019-07-11T17:58:27Z",
+        "type": "applied"
+      },
+      "createdAt": "2019-07-08T17:58:27Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0x13ce66bfdf629891d946f8350c09325eb95d3a3e017f1a24a4002495dc6cb83e",
+    "owner": "0x8d95401c62a2b53d08da37ed53255c727e266e23",
+    "geohash": "9q8yvgwzjr6t",
+    "name": "Duboce Park",
+    "tags": ["Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-07-09T23:55:15Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-07-06T23:55:15Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0x307f4d19358429e5e4c318331c0e0058c8110b24518748ce708529d8cc98e358",
+    "owner": "0x08eb87fda95b7e0b4e56c7fe5f76a023b76337ff",
+    "geohash": "9q9m8kk8cdj2",
+    "name": "Kaiser Permanente Fremont Medical Center and Offices",
+    "tags": ["Health"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-07-09T23:38:29Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-07-06T23:38:29Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0xe64819a27ebd97e6eec1369d9591a5d3a36b7a79a964b79e5ac6be8d6750494f",
+    "owner": "0x08eb87fda95b7e0b4e56c7fe5f76a023b76337ff",
+    "geohash": "9q9jy6dnthex",
+    "name": "Starbucks",
+    "tags": ["Food"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-07-02T12:39:12Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-06-29T12:39:12Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0x4a8fbd59d0edc5ae72e3a5a63f2459d10dbe9215d74be7c4edb8fc28da4fcabc",
+    "owner": "0x8d95401c62a2b53d08da37ed53255c727e266e23",
+    "geohash": "9q8yve4d1rjs",
+    "name": "Crepes on Cole",
+    "tags": ["Retail", "Food"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-07-01T00:15:13Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-06-28T00:15:13Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0x528da87bd7fb6f499713bca12bb5f24f9d4fdd75cbcd771de6943fdbd8565fb0",
+    "owner": "0x282173335ae1f328b34eb9acadc052e59e70a89f",
+    "geohash": "9q9p5x538tm2",
+    "name": "Skyline Gate Staging Area Redwood Regional Park",
+    "tags": ["Attraction", "Health"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-07-01T00:11:51Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-06-28T00:11:51Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0xa773a05188855814cb16097ae718b7b3cae907e91497fc8e1f665c00cab7a866",
+    "owner": "0x282173335ae1f328b34eb9acadc052e59e70a89f",
+    "geohash": "9q9p6n8vn0d7",
+    "name": "Hearst Greek Theatre",
+    "tags": ["Art", "Nightlife"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-07-01T00:04:42Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-06-28T00:04:42Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0xe0b587b170e01091ec9a4f325e48cfe72ba0bd4a73a30e97b188bc12d824057a",
+    "owner": "0x282173335ae1f328b34eb9acadc052e59e70a89f",
+    "geohash": "9q8zmqw9ugdz",
+    "name": "Tiburon Ferry Terminal",
+    "tags": ["Transportation"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-07-01T00:02:03Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-06-28T00:02:03Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0x9b68cab24e5ce3613f71e11a18429a1f595bda5650cde492708634a2d25683b0",
+    "owner": "0x282173335ae1f328b34eb9acadc052e59e70a89f",
+    "geohash": "9q8zkgw4c6x0",
+    "name": "Sausalito Ferry Terminal",
+    "tags": ["Transportation"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-06-30T23:57:24Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-06-27T23:57:24Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0xc9257a68a834b7f7de1bb97ef5cc58e660984fa871f8866f263bc86875f784a2",
+    "owner": "0x282173335ae1f328b34eb9acadc052e59e70a89f",
+    "geohash": "9q8zqh3t8ukr",
+    "name": "Angel Island",
+    "tags": ["Attraction"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-06-18T14:51:02Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-06-15T14:51:02Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0xdfd692f90308753fcf8ad9c9a0de730b3ff8605b0c7708c645128ace0cfa772f",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q8ynj3n19g9",
+    "name": "St Veronica Catholic School",
+    "tags": ["Education", "Religion"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-06-18T14:48:47Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-06-15T14:48:47Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0xb7e5e2979f4b2770ccfb4dcd58c6808f5edd0b81ba2a8135469faeb58e299254",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q9jbb0p1m00",
+    "name": "St Timothy Catholic School",
+    "tags": ["Education", "Religion"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-06-18T14:45:44Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-06-15T14:45:44Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0xfaa49884962e62d28dcc79b6712614e39caa1e3adca7169ff171d5c26fc32431",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q8yn2582tk4",
+    "name": "St Robert Catholic School",
+    "tags": ["Education", "Religion"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-06-18T14:20:03Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-06-15T14:20:03Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0x608b2e2664466d985c7eea93cd077302b5b13337561a534a86fe7945299df764",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q9j8t24ub8b",
+    "name": "St Matthew Catholic School",
+    "tags": ["Education", "Religion"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-06-18T14:10:37Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-06-15T14:10:37Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0x708a75baf95484ca8ffe399a82552f1bb032bd9a4480c7dafee27be1baa3c195",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q9j8f4653s0",
+    "name": "St Gregory Catholic School",
+    "tags": ["Education", "Religion"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-06-18T14:08:32Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-06-15T14:08:32Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0x0d51f3351bcb78bafb7f7a6470a1a78d559d2cbce0dd6023ce3e23d6b43cae78",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q8vywp5557z",
+    "name": "St Dunstan Catholic School",
+    "tags": ["Education", "Religion"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-06-18T14:06:19Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-06-15T14:06:19Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0xe7b2e5f0aee3f3bcf1245c3b724e6fbfd64f9396e2ac86978f22da1f50775f0f",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q9j39zxk5yh",
+    "name": "St Charles School",
+    "tags": ["Education", "Religion"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-06-18T13:58:17Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-06-15T13:58:17Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0x82d63b8cd4492bb8893abf5493637448cd7047aafe50faa37714a01ac2a90499",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q8vzbrn5tej",
+    "name": "St Catherine of Siena Catholic School",
+    "tags": ["Education", "Religion"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-06-18T13:55:24Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-06-15T13:55:24Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0x50736e86e8fbbd09c63c50519f3a41a3edaf9fef3535372fc4ab12f7f13c4127",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q8yt24c85c0",
+    "name": "Our Lady of Perpetual Help Catholic School",
+    "tags": ["Education", "Religion"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-06-18T13:50:55Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-06-15T13:50:55Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0xd6032bd08d193fb8d63b61dbbb184ee7801970db80efd29c44362f2484c2667f",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q9j4rhr412q",
+    "name": "Our Lady of Mount Carmel Catholic School",
+    "tags": ["Education", "Religion"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-06-18T13:48:30Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-06-15T13:48:30Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0x23c4d9f411b37e131e1e392ee84591bbbf7e53499644cef7b2da5fa5073d77a8",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q8ykwybnbeb",
+    "name": "Our Lady of Mercy Catholic School",
+    "tags": ["Religion", "Education"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-06-18T13:44:28Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-06-15T13:44:28Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0x8bb3f79f9d5540ac28511fa3a303e80df8768a7662da238a2ee57cbb870a2d37",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q8vz65h4g7z",
+    "name": "Our Lady of Angels School",
+    "tags": ["Religion", "Education"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-06-18T13:41:25Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-06-15T13:41:25Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0xe58ba8575b726f811e32d561ead60a459dce72e5f53a79ae5c4e2ec5d16fd5ff",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q9j3mbh86j2",
+    "name": "Notre Dame Elementary School",
+    "tags": ["Religion", "Education"]
+  },
+  {
+    "state": {
+      "status": {
+        "listingSince": "2019-06-17T14:33:31Z",
+        "type": "listing"
+      },
+      "createdAt": "2019-06-14T14:33:31Z",
+      "deposit": "0x2b5e3af16b1880000"
+    },
+    "listingHash": "0xc15c9ff2322257b1b398fcddd31c9f55da9fc8e9adb14ecee8afaa6496fe54b6",
+    "owner": "0xe2d128323cf7560a6e7a82726d7b425aedc7a556",
+    "geohash": "9q9j3hejxm51",
+    "name": "Immaculate Heart of Mary Catholic School",
+    "tags": ["Religion", "Education"]
+  }
+]

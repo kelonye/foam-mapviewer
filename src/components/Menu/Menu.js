@@ -9,9 +9,11 @@ import {
 } from 'config';
 import LayersIcon from '@material-ui/icons/Layers';
 import WalletIcon from '@material-ui/icons/AccountBalanceWallet';
+import AddIcon from '@material-ui/icons/Add';
 import HelpIcon from '@material-ui/icons/Help';
 import Button from './MenuButton';
 import Tour from './MenuTour';
+import Add from './MenuAdd';
 
 const BUTTONS = [
   {
@@ -25,6 +27,13 @@ const BUTTONS = [
     tip: 'Wallet',
     label: 'Wallet',
     Icon: WalletIcon,
+  },
+  {
+    type: 'ADD',
+    tip: 'Add Points of Interest, Signals ... etc',
+    label: 'Add',
+    Icon: AddIcon,
+    Component: Add,
   },
   {
     type: 'HELP',

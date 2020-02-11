@@ -22,7 +22,7 @@ class Component extends React.Component {
   onClick(e) {
     const { showDrawer, type, onClick } = this.props;
     if (onClick) {
-      onClick();
+      onClick(e);
     } else {
       showDrawer(type);
     }

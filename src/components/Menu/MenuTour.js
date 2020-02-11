@@ -4,12 +4,7 @@ import * as mapDispatchToProps from 'actions';
 import Button from './MenuButton';
 
 class Component extends React.Component {
-  state = {
-    showingHelpMenu: false,
-    menuButton: null,
-  };
-
-  onClick(el) {
+  onClick(event) {
     const { hideDrawer } = this.props;
     hideDrawer();
   }

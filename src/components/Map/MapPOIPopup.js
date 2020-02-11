@@ -4,6 +4,10 @@ import * as mapDispatchToProps from 'actions';
 import { Popup } from 'react-map-gl';
 
 class Component extends React.Component {
+  shouldComponentUpdate(nextProps, newState) {
+    return this.props.pt !== nextProps.pt;
+  }
+
   render() {
     const { pt, onClose } = this.props;
     return !pt ? null : (

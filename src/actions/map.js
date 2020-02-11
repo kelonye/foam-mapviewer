@@ -4,6 +4,7 @@ import {
   ACTION_TYPE_UPDATE_LAYERS_DATA,
   LAYER_TYPE_POI,
   ACTION_TYPE_POI_TAG_VISIBILITY,
+  ACTION_TYPE_SET_IS_ADDING_POI,
 } from 'config';
 import Geohash from 'latlon-geohash';
 import cache from 'utils/cache';
@@ -16,14 +17,7 @@ export function setMapViewport(viewport) {
     //   viewport.zoom = 2;
     // }
     dispatch({ type: ACTION_TYPE_SET_MAP_VIEWPORT, payload: viewport });
-    const { latitude, longitude, zoom, bearing, pitch } = viewport;
-    cache('location', {
-      latitude,
-      longitude,
-      zoom,
-      bearing,
-      pitch,
-    });
+    cache('location', viewport);
   };
 }
 
@@ -57,7 +51,9 @@ const fetchLayersData = _.throttle(async function([
   const tags = {};
   let pois;
   try {
-    pois = await xhr('get', '/poi/filtered', query).map(
+    const data = await xhr('get', '/poi/filtered', query);
+    // const data = require('./data');
+    pois = data.map(
       ({
         geohash,
         name,
@@ -100,4 +96,8 @@ export function updateLayersData(bounds) {
       payload: await fetchLayersData(bounds),
     });
   };
+}
+
+export function setIsAddingPOI(payload) {
+  return { type: ACTION_TYPE_SET_IS_ADDING_POI, payload };
 }

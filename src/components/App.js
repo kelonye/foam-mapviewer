@@ -6,6 +6,8 @@ import Header from './Header/Header';
 import MapGL from './Map/Map';
 import Drawer from './Drawer/Drawer';
 import Menu from './Menu/Menu';
+import Snackbar from './Snackbar';
+
 import Loader from './Loader';
 
 const Component = ({ error, isLoaded }) => {
@@ -15,10 +17,11 @@ const Component = ({ error, isLoaded }) => {
   } else if (isLoaded) {
     pane = (
       <div>
-        <Header />
         <MapGL />
-        <Menu />
+        <Header />
         <Drawer />
+        <Menu />
+        <Snackbar />
       </div>
     );
   } else {

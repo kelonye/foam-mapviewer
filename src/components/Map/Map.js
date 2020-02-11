@@ -2,75 +2,103 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
 import { HEADER_HEIGHT } from 'config';
-import ReactMapGL from 'react-map-gl';
-import { leftSelector, layersSelector } from 'selectors/map';
+import ReactMapGL, { Source, Layer } from 'react-map-gl';
+import { leftSelector, poisMapDataSelector } from 'selectors/map';
 import MapPOIPopup from './MapPOIPopup';
+import dataLayer from './data-layer';
 
-class Component extends React.Component {
-  state = {
-    popupPt: null,
-  };
+function Component({
+  left,
+  viewport,
+  data,
+  setMapViewport,
+  updateLayersData,
+  isAddingPOI,
+}) {
+  const [popupPt, togglePopup] = React.useState(null);
+  const [hoveredOnPOI, setHoveredOnPOI] = React.useState(false);
+  const map = React.useRef();
 
-  togglePopup(popupPt) {
-    this.setState({ popupPt });
+  function getCursor(e) {
+    if (isAddingPOI) return 'grabbing';
+    if (hoveredOnPOI) return 'pointer';
+    return 'grab';
   }
 
-  render() {
+  function onLoad() {
+    if (map.current) {
+      updateLayersData(
+        map.current
+          .getMap()
+          .getBounds()
+          .toArray()
+      );
+    }
+  }
+
+  function onViewportChange({ latitude, longitude, zoom, bearing, pitch }) {
+    setMapViewport({ latitude, longitude, zoom, bearing, pitch });
+    if (map.current) {
+      updateLayersData(
+        map.current
+          .getMap()
+          .getBounds()
+          .toArray()
+      );
+    }
+  }
+
+  function onHover(event) {
     const {
-      left,
-      viewport,
-      setMapViewport,
-      updateLayersData,
-      layers,
-    } = this.props;
-    const { popupPt } = this.state;
-
-    return (
-      <div className="map" style={{ top: HEADER_HEIGHT, left }}>
-        <ReactMapGL
-          width="100%"
-          height="100%"
-          {...viewport}
-          onViewportChange={viewport => {
-            setMapViewport(viewport);
-            if (this.map) {
-              updateLayersData(
-                this.map
-                  .getMap()
-                  .getBounds()
-                  .toArray()
-              );
-            }
-          }}
-          onLoad={() => {
-            if (this.map) {
-              updateLayersData(
-                this.map
-                  .getMap()
-                  .getBounds()
-                  .toArray()
-              );
-            }
-          }}
-          ref={el => {
-            if (el) this.map = el;
-          }}
-        >
-          {layers.map(({ Component: LayerComponent, id: key }) => (
-            <LayerComponent
-              {...{ key }}
-              showPopup={pt => this.togglePopup(pt)}
-            />
-          ))}
-
-          <MapPOIPopup pt={popupPt} onClose={() => this.togglePopup(null)} />
-        </ReactMapGL>
-      </div>
-    );
+      features,
+      // srcEvent: { offsetX, offsetY },
+    } = event;
+    const hoveredFeature =
+      features && features.find(f => f.layer.id === 'pois');
+    setHoveredOnPOI(!!hoveredFeature);
   }
+
+  function onClick(event) {
+    const {
+      features,
+      // srcEvent: { offsetX, offsetY },
+    } = event;
+    const clickedFeature =
+      features && features.find(f => f.layer.id === 'pois');
+    if (clickedFeature) {
+      const { tags } = clickedFeature.properties;
+      togglePopup({ ...clickedFeature.properties, tags: tags.split(',') });
+    }
+  }
+
+  return (
+    <div className="map" style={{ top: HEADER_HEIGHT, left }}>
+      <ReactMapGL
+        width="100%"
+        height="100%"
+        {...viewport}
+        onViewportChange={onViewportChange}
+        onLoad={onLoad}
+        getCursor={getCursor}
+        ref={map}
+        onHover={onHover}
+        onClick={onClick}
+      >
+        <Source type="geojson" data={data}>
+          <Layer {...dataLayer} />
+        </Source>
+        <MapPOIPopup pt={popupPt} onClose={() => togglePopup(null)} />
+      </ReactMapGL>
+    </div>
+  );
 }
 
 export default connect(state => {
-  const { map } = state;
-  return { ...map, left: leftSelector(state), layers: layersSelector(state) };
+  const { isAddingPOI, viewport } = state.map;
+  return {
+    viewport,
+    left: leftSelector(state),
+    isAddingPOI,
+    data: poisMapDataSelector(state),
+  };
 }, mapDispatchToProps)(Component);

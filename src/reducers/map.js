@@ -5,6 +5,7 @@ import {
   LAYER_TYPE_POI,
   DEFAULT_LOCATION,
   ACTION_TYPE_POI_TAG_VISIBILITY,
+  ACTION_TYPE_SET_IS_ADDING_POI,
 } from 'config';
 import cache from 'utils/cache';
 
@@ -15,8 +16,10 @@ const DEFAULT_STATE = {
       visible: true,
       pois: [],
       tags: {},
+      tagsArray: [],
     },
   },
+  isAddingPOI: false,
 };
 
 export default (state = DEFAULT_STATE, action) => {
@@ -40,6 +43,9 @@ export default (state = DEFAULT_STATE, action) => {
           s.layers[type][k] = v;
         });
       });
+      s.layers[LAYER_TYPE_POI].tagsArray = recomputeTagsArray(
+        s.layers[LAYER_TYPE_POI].tags
+      );
       return s;
     }
 
@@ -47,10 +53,23 @@ export default (state = DEFAULT_STATE, action) => {
       const s = Object.assign({}, state);
       s.layers[LAYER_TYPE_POI].tags[action.payload] = !s.layers[LAYER_TYPE_POI]
         .tags[action.payload];
+      s.layers[LAYER_TYPE_POI].tagsArray = recomputeTagsArray(
+        s.layers[LAYER_TYPE_POI].tags
+      );
       return s;
+    }
+
+    case ACTION_TYPE_SET_IS_ADDING_POI: {
+      return Object.assign({}, state, { isAddingPOI: action.payload });
     }
 
     default:
       return state;
   }
 };
+
+function recomputeTagsArray(tags) {
+  return Object.entries(tags)
+    .filter(([, v]) => v)
+    .map(([k]) => k);
+}
