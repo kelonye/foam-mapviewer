@@ -4,6 +4,7 @@ import app from './app';
 import map from './map';
 import menu from './menu';
 import drawer from './drawer';
+import wallet from './wallet';
 
 export default asyncInitialState.outerReducer(
   combineReducers({
@@ -11,6 +12,7 @@ export default asyncInitialState.outerReducer(
     map,
     menu,
     drawer,
+    wallet,
     asyncInitialState: asyncInitialState.innerReducer, // last
   })
 );

@@ -4,3 +4,4 @@ export * from './drawer';
 export * from './menu';
 export * from './actions';
 export * from './header';
+export * from './wallet';

@@ -1,5 +1,6 @@
 import compose from 'utils/compose';
-import LoadUser from './user';
+import LoadData from './data';
+import MatchLocationPath from './match-location-path';
 
 class Init {
   async load(getState) {
@@ -13,10 +14,13 @@ class Init {
 
     this.state.app.isLoaded = true;
 
+    await this.loadContracts();
+    await this.matchLocationPath();
+
     return this.state;
   }
 }
 
-class Store extends compose([Init, LoadUser]) {}
+class Store extends compose([Init, LoadData, MatchLocationPath]) {}
 
 export default new Store();

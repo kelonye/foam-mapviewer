@@ -34,7 +34,7 @@ function Component({
           .getBounds()
           .toArray()
       );
-      showDrawer('/layers');
+      if (!window.location.pathname) showDrawer('/layers');
     }
   }
 
