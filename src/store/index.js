@@ -4,7 +4,6 @@ import reducer from 'reducers';
 import * as asyncInitialState from 'redux-async-initial-state';
 import loadStore from './load';
 import { createBrowserHistory } from 'history';
-import { local } from 'utils/location';
 
 const storeCreator = asyncInitialState.middleware(getState =>
   loadStore.load(getState)
@@ -15,7 +14,7 @@ export const store = (window.store = createStore(
   compose(applyMiddleware(thunk, storeCreator)) /// storeCreator should come last so dispatch works well i.e. returns promises
 ));
 
-export const basename = local ? '/' : '/nrmhub';
+export const basename = '/';
 
 export const history = createBrowserHistory({ basename });
 
