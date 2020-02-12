@@ -1,6 +1,8 @@
 import Promise from 'bluebird';
 import { web3, ACTION_TYPE_UPDATE_WALLET } from 'config';
-import FOAM_TOKEN_ABI from 'data/abis/form-token';
+import TOKEN_CONTRACT_ABI from 'data/abis/token';
+import REGISTRY_CONTRACT_ABI from 'data/abis/registry';
+import xhr from 'utils/xhr';
 
 export function loadWallet() {
   return async(dispatch, getState) => {
@@ -15,7 +17,11 @@ export function loadWallet() {
         wallet: { contracts },
       } = getState();
 
-      let contract, account;
+      const contract = web3.eth
+        .contract(TOKEN_CONTRACT_ABI.abi)
+        .at(contracts.foamToken);
+
+      let account;
 
       await new Promise((resolve, reject) => {
         web3.eth.getAccounts((err, accounts) => {
@@ -23,20 +29,13 @@ export function loadWallet() {
             return reject(err);
           }
 
-          const [a] = accounts;
-          if (!a) {
+          [account] = accounts;
+          if (!account) {
             return reject(new Error('No account was selected'));
           }
 
-          dispatch(updateWallet({ account: a }));
+          dispatch(updateWallet({ account }));
 
-          const {
-            wallet: { account: b },
-          } = getState();
-          contract = web3.eth
-            .contract(FOAM_TOKEN_ABI.abi)
-            .at(contracts.foamToken);
-          account = b;
           resolve();
         });
       });
@@ -77,5 +76,37 @@ export function updateWallet(payload) {
   return {
     type: ACTION_TYPE_UPDATE_WALLET,
     payload,
+  };
+}
+
+export function createPOI(fields) {
+  return async(dispatch, getState) => {
+    dispatch(updateWallet({ isLoaded: false }));
+
+    try {
+      if (!web3) {
+        throw new Error('You have to install MetaMask!');
+      }
+
+      const {
+        wallet: { contracts },
+      } = getState();
+
+      const contract = web3.eth
+        .contract(REGISTRY_CONTRACT_ABI.abi)
+        .at(contracts.foamRegistry);
+
+      // const ipfsAddress = 'QmZcP8baFoEgQgW6DT3pNiL9u86wgaQbgoQJzZy43CU3E2'; // await xhr('post', '/poi/ipfs', fields);
+      // const listingHash = web3.sha3(ipfsAddress);
+      // const amount = 500 * 10000;
+      // await new Promise((resolve, reject) => {
+      //   contract.apply(listingHash, amount, ipfsAddress, (err, x) => {
+      //     console.log(err, x);
+      //     resolve();
+      //   });
+      // });
+    } finally {
+      dispatch(updateWallet({ isLoaded: true }));
+    }
   };
 }

@@ -31,15 +31,18 @@ export default function(method, url, payload, headers = {}) {
         arrayFormat: 'none',
       })}`;
     } else {
-      opts.body = JSON.stringify(payload);
-      if (!('Content-Type' in opts.headers))
-        opts.headers['Content-Type'] = 'application/json';
-      if (-1 !== opts.headers['Content-Type'].search('www')) {
+      if (
+        opts.headers['Content-Type'] &&
+        -1 !== opts.headers['Content-Type'].search('www')
+      ) {
         opts.body = stringify(payload, {
           arrayFormat: 'none',
         });
       } else {
         opts.body = JSON.stringify(payload);
+        // if (!('Content-Type' in opts.headers)) {
+        //   opts.headers['Content-Type'] = 'application/json';
+        // }
       }
     }
   }

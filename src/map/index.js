@@ -7,13 +7,12 @@ import {
   ACTION_TYPE_UPDATE_LAYERS_DATA,
   LAYER_TYPE_POI,
   DEFAULT_LOCATION,
+  IS_DEV,
 } from 'config';
 import Geohash from 'latlon-geohash';
 import xhr from 'utils/xhr';
 import _ from 'lodash';
 import cache from 'utils/cache';
-
-const { REACT_APP_IS_DEV: IS_DEV } = process.env;
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 

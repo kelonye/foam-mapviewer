@@ -13,8 +13,9 @@ Watch and build client assets with:
 ### TODOs
 
 - [x] View Points of Interest
+- [x] Filter Points of Interest by tag
 - [ ] Filter Points of Interest by status
-- [ ] Connect w/ Metamask
+- [x] Connect w/ Metamask
 - [ ] Stake FOAM
 - [ ] Add POIs
 - [ ] Challenge applications

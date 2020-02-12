@@ -27,12 +27,6 @@ export default createSelector(isDarkSelector, isDark =>
       secondary: {
         main: SECONDARY_COLOR,
       },
-      // error: {
-      //   main: red.A400,
-      // },
-      background: {
-        default: isDark ? '#212121' : '#fff',
-      },
     },
     overrides: {
       MuiButton: {

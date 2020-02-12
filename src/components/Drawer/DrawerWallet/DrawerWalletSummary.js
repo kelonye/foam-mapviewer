@@ -3,13 +3,7 @@ import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
 import { makeStyles } from '@material-ui/core/styles';
 import FOAM from 'components/FOAM';
-import {
-  Paper,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from '@material-ui/core';
+import { List, ListItem, ListItemText, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {

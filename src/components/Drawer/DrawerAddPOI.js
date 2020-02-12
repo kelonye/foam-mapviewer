@@ -4,6 +4,9 @@ import * as mapDispatchToProps from 'actions';
 import { TextField, Chip, Button } from '@material-ui/core';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
+import Geohash from 'latlon-geohash';
+import uuid from 'uuid/v4';
+import { IS_DEV } from 'config';
 
 const TAGS = [
   'Art',
@@ -41,9 +44,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Component = ({ lat, lng }) => {
+const Component = ({ lat, lng, createPOI }) => {
   const classes = useStyles();
-  const [tags, setTags] = React.useState({});
+  const [tags, setTags] = React.useState(IS_DEV ? { Food: true } : {});
 
   function toggleTag(tag) {
     const buff = Object.assign({}, tags);
@@ -57,15 +60,19 @@ const Component = ({ lat, lng }) => {
     setTags(buff);
   }
 
-  function onFormSubmit(e) {
+  async function onFormSubmit(e) {
     e.preventDefault();
 
     const fields = {};
-    ['name', 'address', 'description', 'phoneNumber', 'website'].forEach(
+    ['name', 'address', 'description', 'phone', 'web'].forEach(
       field => (fields[field] = e.target[field].value)
     );
     fields.tags = Object.keys(tags);
+    fields.geohash = Geohash.encode(lat, lng);
+    fields.uUID = uuid();
     console.log(fields);
+
+    createPOI(fields);
   }
 
   return (
@@ -81,6 +88,7 @@ const Component = ({ lat, lng }) => {
               shrink: true,
             }}
             placeholder="Name of POI"
+            defaultValue={IS_DEV ? 'Google Inc' : ''}
             fullWidth
           />
         </div>
@@ -93,6 +101,7 @@ const Component = ({ lat, lng }) => {
               shrink: true,
             }}
             placeholder={'Please specify physical address of POI'}
+            defaultValue={IS_DEV ? '10 Downing Street' : ''}
             fullWidth
           />
         </div>
@@ -114,6 +123,7 @@ const Component = ({ lat, lng }) => {
             multiline
             rows="4"
             placeholder="Write a good description of the POI here."
+            defaultValue={IS_DEV ? 'Awesome place' : ''}
             fullWidth
           />
         </div>
@@ -134,25 +144,27 @@ const Component = ({ lat, lng }) => {
 
         <div className={classes.row}>
           <TextField
-            id="phoneNumber"
+            id="phone"
             label="Phone Number"
             type="tel"
             InputLabelProps={{
               shrink: true,
             }}
             placeholder="Phone number associated with POI"
+            defaultValue={IS_DEV ? '+1 650-253-0000' : ''}
             fullWidth
           />
         </div>
         <div className={classes.row}>
           <TextField
-            id="website"
+            id="web"
             label="Website"
             type="url"
             InputLabelProps={{
               shrink: true,
             }}
             placeholder={'Website associated with POI'}
+            defaultValue={IS_DEV ? 'https://google.com' : ''}
             fullWidth
           />
         </div>
