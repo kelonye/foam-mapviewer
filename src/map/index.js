@@ -28,7 +28,7 @@ export default new (class {
 
     const map = (this.map = new mapboxgl.Map({
       container,
-      style: 'mapbox://styles/mapbox/streets-v11',
+      style: this.getStyle(),
       center: [longitude, latitude],
       zoom,
       pitch,
@@ -83,7 +83,7 @@ export default new (class {
       .setLngLat(pt.geometry.coordinates)
       .setHTML(
         `
-      <div class="flex flex--column">
+      <div class="poi-popup flex flex--column">
         <div>${name}</div>
         <div>
           ${tags
@@ -202,5 +202,19 @@ export default new (class {
         },
       },
     ];
+  }
+
+  getStyle() {
+    const {
+      app: { theme },
+    } = store.getState();
+
+    return `mapbox://styles/mapbox/${
+      theme === 'dark' ? 'dark-v10' : 'streets-v11'
+    }`;
+  }
+
+  updateStyle() {
+    this.map.setStyle(this.getStyle());
   }
 })();

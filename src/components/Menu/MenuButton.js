@@ -10,8 +10,6 @@ const TOOLTIP_STYLES = {
   fontSize: 16,
   padding: '5px 10px',
 };
-const ACTIVE_BACKGROUND_COLOR = '#f50057';
-const ACTIVE_COLOR = '#ffffff';
 const ICON_SIZE = 30;
 
 class Component extends React.Component {
@@ -58,13 +56,11 @@ class Component extends React.Component {
 
     return (
       <div
-        className="menu-button"
+        className={`menu-button ${active ? 'active' : ''}`}
         onClick={e => this.onClick(e)}
         onMouseEnter={e => this.onMouse(e, true)}
         onMouseLeave={e => this.onMouse(e, false)}
         style={{
-          backgroundColor: active ? ACTIVE_BACKGROUND_COLOR : 'initial',
-          color: active ? ACTIVE_COLOR : 'initial',
           top,
         }}
       >

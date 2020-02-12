@@ -10,8 +10,11 @@ import Snackbar from './Snackbar';
 import Loader from './Loader';
 import { Router } from 'react-router-dom';
 import { history } from 'store';
+import themeSelector, { isDarkSelector } from 'selectors/theme';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { ThemeProvider } from '@material-ui/core/styles';
 
-const Component = ({ error, isLoaded }) => {
+const Component = ({ error, isLoaded, theme, isDark }) => {
   let pane;
   if (error) {
     pane = <div style={{ padding: 50, color: DANGER_COLOR }}>{error}</div>;
@@ -28,7 +31,15 @@ const Component = ({ error, isLoaded }) => {
   } else {
     pane = <Loader />;
   }
-  return <Router {...{ history }}>{pane}</Router>;
+  return (
+    <ThemeProvider theme={theme}>
+      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+      <CssBaseline />
+      <Router {...{ history }}>
+        <div className={isDark ? 'dark' : 'light'}>{pane}</div>
+      </Router>
+    </ThemeProvider>
+  );
 };
 
 export default connect(state => {
@@ -44,5 +55,7 @@ export default connect(state => {
     isLoaded,
     user,
     error: err,
+    theme: themeSelector(state),
+    isDark: isDarkSelector(state),
   };
 }, mapDispatchToProps)(Component);

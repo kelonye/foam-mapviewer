@@ -17,7 +17,12 @@
   background: white;
   bottom: 0;
   overflow-y: auto;
-  border-right: 1px solid #ccc;
+  border-right: 1px solid $border-color;
+
+  .dark & {
+    background: $dark-color;
+    border-right-color: $dark-border-color;
+  }
 }
 
 .menu-button-container {
@@ -31,7 +36,6 @@
   flex-direction: column;
   // justify-content: center;
   align-items: center;
-  background-color: transparent;
   position: relative;
 
   & > div {
@@ -42,6 +46,16 @@
   &:hover {
     cursor: pointer;
   }
+
+  &.active {
+    color: white;
+    background: #f50057;
+  }
+
+  // .dark &.active {
+  //   color: #f50057;
+  //   background: 'white';
+  // }
 
   &-badge {
     position: absolute !important;

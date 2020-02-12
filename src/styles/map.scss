@@ -17,7 +17,40 @@
   margin-right: 5px;
   border-radius: 10px;
   padding: 3px 7px;
-  background: #eee;
+  background: $border-color;
+
+  .dark & {
+    background: $dark-border-color;
+    color: white;
+  }
+}
+
+.mapboxgl-popup-content {
+  .dark & {
+    background: $dark-color;
+    color: $dark-text-color;
+  }
+}
+
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+  .dark & {
+    border-bottom-color: $dark-color;
+  }
+}
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+  .dark & {
+    border-top-color: $dark-color;
+  }
+}
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+  .dark & {
+    border-right-color: $dark-color;
+  }
+}
+.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+  .dark & {
+    border-left-color: $dark-color;
+  }
 }
 
 //

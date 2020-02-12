@@ -3,8 +3,11 @@
   position: fixed;
   left: 0;
   right: 0;
-  // box-shadow: $box-shadow;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid $border-color;
+
+  .dark & {
+    border-bottom-color: $dark-border-color;
+  }
 
   &__menu {
     margin-left: 14px;

@@ -8,7 +8,10 @@ export default Base =>
       // console.log(matchedUrl);
       switch (true) {
         default:
-          if (!!matchedUrl) this.state.drawer.isShowing = true;
+          if (!!matchedUrl) {
+            this.state.drawer.type = '/' + matchedUrl;
+            this.state.drawer.isShowing = true;
+          }
       }
     }
   };

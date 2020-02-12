@@ -3,11 +3,8 @@ import './styles';
 
 import React from 'react';
 import { render } from 'react-dom';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider } from '@material-ui/core/styles';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
-import theme from 'theme';
 import store from 'store';
 import App from 'components/App';
 
@@ -20,11 +17,7 @@ import App from 'components/App';
 
   render(
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
+      <App />
     </Provider>,
     document.getElementById('root')
   );
