@@ -209,9 +209,7 @@ export default new (class {
       app: { theme },
     } = store.getState();
 
-    return `mapbox://styles/mapbox/${
-      theme === 'dark' ? 'dark-v10' : 'streets-v11'
-    }`;
+    return `mapbox://styles/mapbox/${theme}-v10`;
   }
 
   updateStyle() {

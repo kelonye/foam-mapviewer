@@ -14,33 +14,54 @@ import themeSelector, { isDarkSelector } from 'selectors/theme';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 
-const Component = ({ error, isLoaded, theme, isDark }) => {
-  let pane;
-  if (error) {
-    pane = <div style={{ padding: 50, color: DANGER_COLOR }}>{error}</div>;
-  } else if (isLoaded) {
-    pane = (
-      <div>
-        <MapGL />
-        <Header />
-        <Drawer />
-        <Menu />
-        <Snackbar />
-      </div>
-    );
-  } else {
-    pane = <Loader />;
+class Component extends React.Component {
+  componentDidMount() {
+    this.updateBodyCss(this.props.isDark);
   }
-  return (
-    <ThemeProvider theme={theme}>
-      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-      <CssBaseline />
-      <Router {...{ history }}>
-        <div className={isDark ? 'dark' : 'light'}>{pane}</div>
-      </Router>
-    </ThemeProvider>
-  );
-};
+
+  componentWillReceiveProps({ isDark }) {
+    if (isDark !== this.props.isDark) {
+      this.updateBodyCss(isDark);
+    }
+  }
+
+  updateBodyCss(isDark) {
+    const root = document.documentElement;
+    root.classList.remove('dark');
+    root.classList.remove('light');
+    root.classList.add(isDark ? 'dark' : 'light');
+  }
+
+  render() {
+    const { error, isLoaded, theme } = this.props;
+
+    let pane;
+    if (error) {
+      pane = <div style={{ padding: 50, color: DANGER_COLOR }}>{error}</div>;
+    } else if (isLoaded) {
+      pane = (
+        <div>
+          <MapGL />
+          <Header />
+          <Drawer />
+          <Menu />
+          <Snackbar />
+        </div>
+      );
+    } else {
+      pane = <Loader />;
+    }
+    return (
+      <ThemeProvider theme={theme}>
+        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+        <CssBaseline />
+        <Router {...{ history }}>
+          <div>{pane}</div>
+        </Router>
+      </ThemeProvider>
+    );
+  }
+}
 
 export default connect(state => {
   const { app, user } = state;

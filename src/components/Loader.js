@@ -17,7 +17,6 @@ export default ({ opacity = 1, fullscreen = true }) => (
             bottom: 0,
           }
         : {}),
-      backgroundColor: 'white',
       zIndex: 1000,
       opacity,
     }}

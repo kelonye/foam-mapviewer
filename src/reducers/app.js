@@ -4,7 +4,7 @@ import { ACTION_TYPE_TOGGLE_THEME } from 'config';
 const DEFAULT_STATE = {
   isLoaded: false,
   error: null,
-  theme: cache('theme') || 'dark',
+  theme: cache('theme') || 'light',
 };
 
 export default (state = DEFAULT_STATE, action) => {
