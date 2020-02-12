@@ -3,6 +3,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 require('./setupProxy')(app);
+
 app.use(function(req, res, next) {
   // The 'x-forwarded-proto' check is for Heroku
   if (
@@ -14,7 +15,12 @@ app.use(function(req, res, next) {
   }
   next();
 });
+
 app.use(express.static(__dirname + '/../build'));
+
+app.get('*', function(request, response) {
+  response.sendFile(__dirname + '/../build/index.html');
+});
 
 app.listen(port);
 console.log(`::${port}`);
