@@ -7,7 +7,7 @@ import { Route, Switch } from 'react-router-dom';
 import { HEADER_HEIGHT, DRAWER_WIDTH } from 'config';
 import Layers from './DrawerLayers';
 import Wallet from './DrawerWallet';
-import Welcome from './DrawerWelcome';
+// import Welcome from './DrawerWelcome';
 import AddPOI from './DrawerAddPOI';
 import { widthSelector as menuWidthSelector } from 'selectors/menu';
 
@@ -39,7 +39,7 @@ const Component = ({ drawer, menuWidth, hideDrawer }) => {
         <Route exact path={'/layers'} component={Layers} />
         <Route exact path={'/wallet'} component={Wallet} />
         <Route exact path={'/add-poi/:lng/:lat'} component={AddPOI} />
-        <Route path={'/'} component={Welcome} />
+        {/*<Route path={'/'} component={Welcome} />*/}
       </Switch>
     </div>
   );
