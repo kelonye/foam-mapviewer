@@ -38,13 +38,14 @@ export default new (class {
     map.on('load', async() => {
       this.updatePOIs();
       map.on('move', e => this.onMove(e));
-      map.on('mouseenter', 'pois', e => this.onMouseEnter(e));
-      map.on('mouseleave', 'pois', e => this.onMouseLeave(e));
+      map.on('mouseenter', 'pois', e => this.onMouseEnterPOIs(e));
+      map.on('mouseleave', 'pois', e => this.onMouseLeavePOIs(e));
+      map.on('click', 'pois', e => this.onClickPOIs(e));
       map.on('click', e => this.onClick(e));
     });
   }
 
-  onMouseEnter(event) {
+  onMouseEnterPOIs(event) {
     const {
       map: { isAddingPOI },
     } = store.getState();
@@ -52,13 +53,10 @@ export default new (class {
       return;
     }
 
-    const { features } = event;
-    if (features && features.find(f => f.layer.id === 'pois')) {
-      this.updateCursor('pointer');
-    }
+    this.updateCursor('pointer');
   }
 
-  onMouseLeave(e) {
+  onMouseLeavePOIs(e) {
     const {
       map: { isAddingPOI },
     } = store.getState();
@@ -67,6 +65,36 @@ export default new (class {
     }
 
     this.updateCursor('');
+  }
+
+  onClickPOIs(event) {
+    const {
+      map: { isAddingPOI },
+    } = store.getState();
+    if (isAddingPOI) {
+      return;
+    }
+
+    const {
+      features: [pt],
+    } = event;
+    const { name, tags } = pt.properties;
+    new mapboxgl.Popup({ closeOnClick: false })
+      .setLngLat(pt.geometry.coordinates)
+      .setHTML(
+        `
+      <div class="flex flex--column">
+        <div>${name}</div>
+        <div>
+          ${tags
+            .split(',')
+            .map(tag => `<span class="map-tag">${tag}</span>`)
+            .join('')}
+        </div>
+      </div>
+      `
+      )
+      .addTo(this.map);
   }
 
   onClick(event) {
@@ -80,13 +108,6 @@ export default new (class {
       store.dispatch(showDrawer(`/add-poi/${lng}/${lat}`));
       store.dispatch(setIsAddingPOI(false));
       return;
-    }
-
-    const { features } = event;
-    const clickedFeature =
-      features && features.find(f => f.layer.id === 'pois');
-    if (event.features) {
-      this.previewPOI(clickedFeature);
     }
   }
 
@@ -103,23 +124,6 @@ export default new (class {
 
   updateCursor(cursor) {
     this.map.getCanvas().style.cursor = cursor;
-  }
-
-  previewPOI(pt) {
-    const { name, tags } = pt.properties;
-    new mapboxgl.Popup({ closeOnClick: false })
-      .setLngLat(pt.geometry.coordinates)
-      .setHTML(
-        `
-      <div class="flex flex--column">
-        <div>${name}</div>
-        <div>
-          ${tags.split(',').map(tag => `<span class="map-tag">${tag}</span>`)}
-        </div>
-      </div>
-      `
-      )
-      .addTo(this.map);
   }
 
   async updatePOIs() {
