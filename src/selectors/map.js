@@ -30,7 +30,7 @@ export const poisMapDataSelector = createSelector(poisSelector, pois => {
     features: pois.map(p => ({
       type: 'Feature',
       geometry: { type: 'Point', coordinates: [p.lon, p.lat] },
-      properties: { ...p, tags: p.tags.join(',') },
+      properties: { name: p.name, status: p.status, tags: p.tags.join(',') },
     })),
   };
 });

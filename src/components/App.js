@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
 import { DANGER_COLOR } from 'config';
 import Header from './Header/Header';
-import MapGL from './Map/Map';
+import MapGL from './Map';
 import Drawer from './Drawer/Drawer';
 import Menu from './Menu/Menu';
 import Snackbar from './Snackbar';

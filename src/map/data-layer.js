@@ -14,7 +14,7 @@ COLORS_STYLE.push('black');
 export default {
   id: 'pois',
   type: 'circle',
-  source: 'points',
+  source: 'pois',
   paint: {
     'circle-color': ['match', ['get', 'status'], ...COLORS_STYLE],
     'circle-radius': 4,

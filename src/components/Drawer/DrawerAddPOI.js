@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
 import { TextField, Chip, Button } from '@material-ui/core';
+import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 
 const TAGS = [
@@ -31,6 +32,9 @@ const useStyles = makeStyles(theme => ({
   chip: {
     marginBottom: 5,
     marginRight: 5,
+  },
+  button: {
+    width: 100,
   },
   addButton: {
     marginRight: 5,
@@ -157,11 +161,13 @@ const Component = ({ lat, lng }) => {
             variant="outlined"
             color="secondary"
             type="submit"
-            className={classes.addButton}
+            className={clsx(classes.button, classes.addButton)}
           >
             Add
           </Button>
-          <Button variant="outlined">Cancel</Button>
+          <Button variant="outlined" className={classes.button}>
+            Cancel
+          </Button>
         </div>
       </div>
     </form>
