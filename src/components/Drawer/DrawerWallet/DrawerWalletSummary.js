@@ -1,16 +1,53 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
+import { makeStyles } from '@material-ui/core/styles';
 import FOAM from 'components/FOAM';
+import {
+  Paper,
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+} from '@material-ui/core';
 
-const Component = ({ balance, account }) => {
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    padding: 0,
+  },
+  title: {
+    marginBottom: 10,
+  },
+  listItem: {
+    padding: 0,
+  },
+  small: { fontSize: 10 },
+}));
+
+const Component = ({ balance, approved }) => {
+  const classes = useStyles();
+  const stats = [
+    ['Staked in POIs', balance],
+    ['Amount of your approved tokens for each FOAM contract', approved],
+  ];
+
   return (
-    <div className="flex flex--column">
-      <strong>{account}</strong>
-      <div>
-        FOAM Staked in POIs: <FOAM amount={balance} />
-      </div>
-      {/*<button onClick={deactivateWallet}>disconnect</button>*/}
+    <div>
+      <Typography variant="h6" className={classes.title}>
+        FOAM
+      </Typography>
+
+      <List className={classes.root}>
+        {stats.map(([k, v]) => (
+          <ListItem key={k} className={classes.listItem}>
+            <ListItemText
+              primary={<FOAM amount={v} />}
+              secondary={<span className={classes.small}>{k}</span>}
+            />
+          </ListItem>
+        ))}
+      </List>
     </div>
   );
 };

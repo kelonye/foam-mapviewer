@@ -1,4 +1,4 @@
-import dataLayer from './data-layer';
+import poisLayer from './pois-layer';
 import store from 'store';
 import mapboxgl from 'mapbox-gl';
 import { poisMapDataSelector } from 'selectors/map';
@@ -142,7 +142,7 @@ export default new (class {
         type: 'geojson',
         data,
       });
-      this.map.addLayer(dataLayer);
+      this.map.addLayer(poisLayer);
       if (!window.location.pathname) store.dispatch(showDrawer('/layers'));
     } else {
       poisSource.setData(data);
@@ -167,7 +167,7 @@ export default new (class {
     let pois;
     try {
       const data = IS_DEV
-        ? require('./data')
+        ? require('data/sample-pois.json')
         : await xhr('get', '/poi/filtered', query);
       pois = data.map(
         ({

@@ -16,16 +16,17 @@ import { ThemeProvider } from '@material-ui/core/styles';
 
 class Component extends React.Component {
   componentDidMount() {
-    this.updateBodyCss(this.props.isDark);
+    this.updateBodyCss();
   }
 
-  componentWillReceiveProps({ isDark }) {
-    if (isDark !== this.props.isDark) {
-      this.updateBodyCss(isDark);
+  componentDidUpdate(prevProps) {
+    if (prevProps.isDark !== this.props.isDark) {
+      this.updateBodyCss();
     }
   }
 
-  updateBodyCss(isDark) {
+  updateBodyCss() {
+    const { isDark } = this.props;
     const root = document.documentElement;
     root.classList.remove('dark');
     root.classList.remove('light');

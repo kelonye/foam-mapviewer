@@ -23,7 +23,7 @@ body {
     sans-serif;
   color: #404040;
   background-color: #eceff1;
-  @include no-select;
+  // @include no-select;
 
   .dark {
     color: white;

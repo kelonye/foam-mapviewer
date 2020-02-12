@@ -1,5 +1,6 @@
 import Promise from 'bluebird';
 import { web3, ACTION_TYPE_UPDATE_WALLET } from 'config';
+import FOAM_TOKEN_ABI from 'data/abis/form-token';
 
 export function loadWallet() {
   return async(dispatch, getState) => {
@@ -10,41 +11,52 @@ export function loadWallet() {
         throw new Error('You have to install MetaMask!');
       }
 
+      const {
+        wallet: { contracts },
+      } = getState();
+
+      let contract, account;
+
       await new Promise((resolve, reject) => {
         web3.eth.getAccounts((err, accounts) => {
           if (err) {
             return reject(err);
           }
 
-          const [account] = accounts;
-          if (!account) {
+          const [a] = accounts;
+          if (!a) {
             return reject(new Error('No account was selected'));
           }
 
-          dispatch(updateWallet({ account }));
+          dispatch(updateWallet({ account: a }));
+
+          const {
+            wallet: { account: b },
+          } = getState();
+          contract = web3.eth
+            .contract(FOAM_TOKEN_ABI.abi)
+            .at(contracts.foamToken);
+          account = b;
           resolve();
         });
       });
 
       await new Promise((resolve, reject) => {
-        const abi = [
-          {
-            constant: true,
-            inputs: [{ name: '_owner', type: 'address' }],
-            name: 'balanceOf',
-            outputs: [{ name: 'balance', type: 'uint256' }],
-            payable: false,
-            stateMutability: 'view',
-            type: 'function',
-          },
-        ];
-        const { contracts, account } = getState().wallet;
-        const contract = web3.eth.contract(abi).at(contracts.foamToken);
         contract.balanceOf(account, (err, info) => {
           if (err) {
             return reject(err);
           }
           dispatch(updateWallet({ balance: info.c[0] }));
+          resolve();
+        });
+      });
+
+      await new Promise((resolve, reject) => {
+        contract.allowance(account, contracts.foamRegistry, (err, info) => {
+          if (err) {
+            return reject(err);
+          }
+          dispatch(updateWallet({ approved: info.c[0] }));
           resolve();
         });
       });
