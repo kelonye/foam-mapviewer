@@ -1,8 +1,8 @@
 import { ACTION_TYPE_SHOW_DRAWER, ACTION_TYPE_HIDE_DRAWER } from 'config';
 
 const DEFAULT_STATE = {
-  isShowing: !!process.env.REACT_APP_INITIAL_DRAWER_TYPE,
-  type: process.env.REACT_APP_INITIAL_DRAWER_TYPE || '',
+  isShowing: false,
+  type: null,
 };
 
 export default (state = DEFAULT_STATE, action) => {

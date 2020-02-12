@@ -1,14 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
-import { HEADER_HEIGHT } from 'config';
+import { HEADER_HEIGHT, MENU_WIDTH } from 'config';
 import ReactMapGL, { Source, Layer } from 'react-map-gl';
-import { leftSelector, poisMapDataSelector } from 'selectors/map';
+import { poisMapDataSelector } from 'selectors/map';
 import MapPOIPopup from './MapPOIPopup';
 import dataLayer from './data-layer';
 
 function Component({
-  left,
   viewport,
   data,
   setMapViewport,
@@ -27,14 +26,15 @@ function Component({
     return 'grab';
   }
 
-  function onLoad() {
+  async function onLoad() {
     if (map.current) {
-      updateLayersData(
+      await updateLayersData(
         map.current
           .getMap()
           .getBounds()
           .toArray()
       );
+      showDrawer('/layers');
     }
   }
 
@@ -83,7 +83,7 @@ function Component({
   }
 
   return (
-    <div className="map" style={{ top: HEADER_HEIGHT, left }}>
+    <div className="map" style={{ top: HEADER_HEIGHT, left: MENU_WIDTH }}>
       <ReactMapGL
         {...viewport}
         width="100%"
@@ -108,7 +108,6 @@ export default connect(state => {
   const { isAddingPOI, viewport } = state.map;
   return {
     viewport,
-    left: leftSelector(state),
     isAddingPOI,
     data: poisMapDataSelector(state),
   };
