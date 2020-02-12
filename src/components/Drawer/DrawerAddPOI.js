@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
-import { TextField, Chip } from '@material-ui/core';
+import { TextField, Chip, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const TAGS = [
@@ -26,9 +26,13 @@ const useStyles = makeStyles(theme => ({
   },
   chipsHeading: {
     marginBottom: 10,
+    color: theme.palette.action.active,
   },
   chip: {
     marginBottom: 5,
+    marginRight: 5,
+  },
+  addButton: {
     marginRight: 5,
   },
 }));
@@ -49,8 +53,19 @@ const Component = ({ lat, lng }) => {
     setTags(buff);
   }
 
+  function onFormSubmit(e) {
+    e.preventDefault();
+
+    const fields = {};
+    ['name', 'address', 'description', 'phoneNumber', 'website'].forEach(
+      field => (fields[field] = e.target[field].value)
+    );
+    fields.tags = Object.keys(tags);
+    console.log(fields);
+  }
+
   return (
-    <div>
+    <form type="action" onSubmit={onFormSubmit}>
       <h4 className="drawer--title">Add Point of Interest</h4>
       <div className="drawer--content flex flex--column">
         <div className={classes.row}>
@@ -137,8 +152,19 @@ const Component = ({ lat, lng }) => {
             fullWidth
           />
         </div>
+        <div className={classes.row}>
+          <Button
+            variant="outlined"
+            color="secondary"
+            type="submit"
+            className={classes.addButton}
+          >
+            Add
+          </Button>
+          <Button variant="outlined">Cancel</Button>
+        </div>
       </div>
-    </div>
+    </form>
   );
 };
 

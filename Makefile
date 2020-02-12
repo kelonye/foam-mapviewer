@@ -2,6 +2,7 @@ run: node_modules
 	@npm run start
 
 deploy:
+	@git push || xargs echo
 	@git push heroku master
 
 server:
