@@ -6,7 +6,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Route, Switch } from 'react-router-dom';
 import { HEADER_HEIGHT, DRAWER_WIDTH } from 'config';
 import Layers from './DrawerLayers';
-import Wallet from './DrawerWallet';
+import Wallet from './DrawerWallet/DrawerWallet';
 // import Welcome from './DrawerWelcome';
 import AddPOI from './DrawerAddPOI';
 import { widthSelector as menuWidthSelector } from 'selectors/menu';
