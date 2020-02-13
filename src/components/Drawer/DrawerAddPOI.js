@@ -7,6 +7,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Geohash from 'latlon-geohash';
 import uuid from 'uuid/v4';
 import { IS_DEV } from 'config';
+import sl from 'utils/sl';
+
+const MINIMUM_FOAM_STAKE = 50;
 
 const TAGS = [
   'Art',
@@ -44,9 +47,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Component = ({ lat, lng, createPOI }) => {
+const Component = ({ lat, lng, createPOI, approvedFOAM }) => {
   const classes = useStyles();
   const [tags, setTags] = React.useState(IS_DEV ? { Food: true } : {});
+  const hasMinimumFOAM = approvedFOAM >= MINIMUM_FOAM_STAKE;
 
   function toggleTag(tag) {
     const buff = Object.assign({}, tags);
@@ -64,15 +68,26 @@ const Component = ({ lat, lng, createPOI }) => {
     e.preventDefault();
 
     const fields = {};
-    ['name', 'address', 'description', 'phone', 'web'].forEach(
+    ['name', 'address', 'description', 'phone', 'web', 'foam'].forEach(
       field => (fields[field] = e.target[field].value)
     );
     fields.tags = Object.keys(tags);
     fields.geohash = Geohash.encode(lat, lng);
     fields.uUID = uuid();
-    console.log(fields);
 
-    createPOI(fields);
+    const opts = {};
+    opts.foam = parseFloat(fields.foam);
+    delete fields.foam;
+
+    if (opts.foam < MINIMUM_FOAM_STAKE) {
+      return sl(
+        'error',
+        `A minimum of ${MINIMUM_FOAM_STAKE} FOAM is required.`
+      );
+    }
+    console.log(fields, opts);
+
+    createPOI(fields, opts);
   }
 
   return (
@@ -169,11 +184,25 @@ const Component = ({ lat, lng, createPOI }) => {
           />
         </div>
         <div className={classes.row}>
+          <TextField
+            id="foam"
+            label="FOAM stake"
+            type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            placeholder={`${MINIMUM_FOAM_STAKE} FOAM minimum...`}
+            defaultValue={IS_DEV ? MINIMUM_FOAM_STAKE : null}
+            fullWidth
+          />
+        </div>
+        <div className={classes.row}>
           <Button
             variant="outlined"
             color="secondary"
             type="submit"
             className={clsx(classes.button, classes.addButton)}
+            disabled={!hasMinimumFOAM}
           >
             Add
           </Button>
@@ -186,6 +215,16 @@ const Component = ({ lat, lng, createPOI }) => {
   );
 };
 
-export default connect((_, { match: { params: { lat, lng } } }) => {
-  return { lat, lng };
-}, mapDispatchToProps)(Component);
+export default connect(
+  (
+    { wallet: { approved: approvedFOAM } },
+    {
+      match: {
+        params: { lat, lng },
+      },
+    }
+  ) => {
+    return { lat, lng, approvedFOAM };
+  },
+  mapDispatchToProps
+)(Component);

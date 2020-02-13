@@ -79,7 +79,7 @@ export function updateWallet(payload) {
   };
 }
 
-export function createPOI(fields) {
+export function createPOI(fields, { foam }) {
   return async(dispatch, getState) => {
     dispatch(updateWallet({ isLoaded: false }));
 
@@ -96,15 +96,22 @@ export function createPOI(fields) {
         .contract(REGISTRY_CONTRACT_ABI.abi)
         .at(contracts.foamRegistry);
 
-      // const ipfsAddress = 'QmZcP8baFoEgQgW6DT3pNiL9u86wgaQbgoQJzZy43CU3E2'; // await xhr('post', '/poi/ipfs', fields);
-      // const listingHash = web3.sha3(ipfsAddress);
-      // const amount = 500 * 10000;
-      // await new Promise((resolve, reject) => {
-      //   contract.apply(listingHash, amount, ipfsAddress, (err, x) => {
-      //     console.log(err, x);
-      //     resolve();
-      //   });
-      // });
+      // const ipfsAddress = 'QmZcP8baFoEgQgW6DT3pNiL9u86wgaQbgoQJzZy43CU3E2';
+      const ipfsAddress = await xhr('post', '/poi/ipfs', fields);
+      const listingHash = web3.sha3(ipfsAddress);
+      const amount = foam * 1000000000000000000;
+      console.log(listingHash, amount, ipfsAddress);
+      await new Promise((resolve, reject) => {
+        contract.apply(
+          listingHash,
+          amount,
+          ipfsAddress,
+          (err, transactionId) => {
+            console.log(err, transactionId);
+            resolve();
+          }
+        );
+      });
     } finally {
       dispatch(updateWallet({ isLoaded: true }));
     }
