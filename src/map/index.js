@@ -35,13 +35,27 @@ export default new (class {
     }));
 
     map.on('load', async() => {
-      this.updatePOIs();
+      this.onLoad();
       map.on('move', e => this.onMove(e));
       map.on('mouseenter', 'pois', e => this.onMouseEnterPOIs(e));
       map.on('mouseleave', 'pois', e => this.onMouseLeavePOIs(e));
       map.on('click', 'pois', e => this.onClickPOIs(e));
       map.on('click', e => this.onClick(e));
     });
+  }
+
+  onLoad() {
+    this.map.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true,
+        },
+        trackUserLocation: true,
+      }),
+      'bottom-right'
+    );
+
+    this.updatePOIs();
   }
 
   onMouseEnterPOIs(event) {
