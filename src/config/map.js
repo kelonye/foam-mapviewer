@@ -7,3 +7,7 @@ export const DEFAULT_LOCATION = {
   bearing: 0,
   pitch: 0,
 };
+
+export const {
+  REACT_APP_MAPBOX_ACCESS_TOKEN: MAPBOX_ACCESS_TOKEN,
+} = process.env;

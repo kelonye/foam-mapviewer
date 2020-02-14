@@ -3,10 +3,20 @@ import Promise from 'bluebird';
 import fetch from 'unfetch';
 import { stringify } from 'query-string';
 import cache from './cache';
+import { MAPBOX_ACCESS_TOKEN } from 'config';
 
-export default function(method, url, payload, headers = {}) {
+export default function foam(method, url, payload) {
   url = `https://map-api-direct.foam.space${url}`;
+  return xhr(method, url, payload);
+}
 
+export function mapbox(method, url, payload = {}) {
+  payload.access_token = MAPBOX_ACCESS_TOKEN;
+  url = `https://api.mapbox.com${url}`;
+  return xhr(method, url, payload);
+}
+
+function xhr(method, url, payload, headers = {}) {
   method = method.toUpperCase();
 
   const opts = {

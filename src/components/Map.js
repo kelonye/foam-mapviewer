@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
 import { HEADER_HEIGHT } from 'config';
 import map from 'map';
-import { leftSelector } from 'selectors/map';
+import { widthSelector } from 'selectors/menu';
 
 class Component extends React.Component {
   componentDidMount() {
@@ -35,6 +35,6 @@ class Component extends React.Component {
 
 export default connect(state => {
   return {
-    left: leftSelector(state),
+    left: widthSelector(state),
   };
 }, mapDispatchToProps)(Component);

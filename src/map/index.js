@@ -8,13 +8,16 @@ import {
   LAYER_TYPE_POI,
   DEFAULT_LOCATION,
   IS_DEV,
+  MAPBOX_ACCESS_TOKEN,
+  SECONDARY_COLOR,
 } from 'config';
 import Geohash from 'latlon-geohash';
 import xhr from 'utils/xhr';
 import _ from 'lodash';
 import cache from 'utils/cache';
+import pinSVG from './pin';
 
-mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
+mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 
 export default new (class {
   constructor() {
@@ -54,6 +57,8 @@ export default new (class {
       }),
       'bottom-right'
     );
+
+    this.map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
     this.updatePOIs();
   }
@@ -227,5 +232,23 @@ export default new (class {
 
   updateStyle() {
     this.map.setStyle(this.getStyle());
+  }
+
+  showPOIBeingApplied(coordinates) {
+    this.removePOIBeingApplied();
+
+    const el = document.createElement('div');
+    el.className = 'marker';
+    el.innerHTML = pinSVG({ size: 20, fill: SECONDARY_COLOR });
+
+    this.poiBeingApplied = new mapboxgl.Marker(el)
+      .setLngLat(coordinates)
+      .addTo(this.map);
+  }
+
+  removePOIBeingApplied() {
+    if (this.poiBeingApplied) {
+      this.poiBeingApplied.remove();
+    }
   }
 })();

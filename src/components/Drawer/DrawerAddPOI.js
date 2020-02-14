@@ -8,6 +8,8 @@ import Geohash from 'latlon-geohash';
 import uuid from 'uuid/v4';
 import { IS_DEV } from 'config';
 import sl from 'utils/sl';
+import xhr, { mapbox as xhrMapbox } from 'utils/xhr';
+import map from 'map';
 
 const MINIMUM_FOAM_STAKE = 50;
 
@@ -50,7 +52,35 @@ const useStyles = makeStyles(theme => ({
 const Component = ({ lat, lng, createPOI, approvedFOAM }) => {
   const classes = useStyles();
   const [tags, setTags] = React.useState(IS_DEV ? { Food: true } : {});
+  const [address, setAddress] = React.useState(
+    IS_DEV ? '10 Downing Street' : ''
+  );
   const hasMinimumFOAM = approvedFOAM >= MINIMUM_FOAM_STAKE;
+
+  const onMount = async() => {
+    map.showPOIBeingApplied([lng, lat]);
+
+    console.log('looking up address %s, %s', lng, lat);
+    // const {
+    //   features: [feature],
+    // } = await xhrMapbox(
+    //   'get',
+    //   `/geocoding/v5/mapbox.places/${[lng, lat].join(',')}.json`,
+    //   { types: 'address,region,country' }
+    // );
+    //
+    // if (feature) {
+    //   setAddress(feature.text);
+    // }
+    try {
+      setAddress(await xhr('get', '/poi/address', { lng, lat }));
+    } catch (e) {}
+  };
+
+  React.useEffect(() => {
+    onMount();
+    return map.removePOIBeingApplied.bind(map); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lng, lat]);
 
   function toggleTag(tag) {
     const buff = Object.assign({}, tags);
@@ -116,7 +146,7 @@ const Component = ({ lat, lng, createPOI, approvedFOAM }) => {
               shrink: true,
             }}
             placeholder={'Please specify physical address of POI'}
-            defaultValue={IS_DEV ? '10 Downing Street' : ''}
+            value={address}
             fullWidth
           />
         </div>
