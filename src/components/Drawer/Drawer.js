@@ -9,6 +9,7 @@ import Layers from './DrawerLayers';
 import Wallet from './DrawerWallet/DrawerWallet';
 // import Welcome from './DrawerWelcome';
 import AddPOI from './DrawerAddPOI';
+import ViewPOI from './DrawerViewPOI';
 import { widthSelector as menuWidthSelector } from 'selectors/menu';
 
 const ICON_SIZE = 30;
@@ -39,6 +40,7 @@ const Component = ({ drawer, menuWidth, hideDrawer }) => {
         <Route path={'/layers'} component={Layers} />
         <Route path={'/wallet'} component={Wallet} />
         <Route path={'/add-poi/:lng/:lat'} component={AddPOI} />
+        <Route path={'/poi/:listingHash'} component={ViewPOI} />
         {/*<Route path={'/'} component={Welcome} />*/}
       </Switch>
     </div>

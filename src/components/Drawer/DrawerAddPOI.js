@@ -161,9 +161,9 @@ const Component = ({
         </div>
         <div className={classes.row}>
           <div style={{ fontSize: 10 }}>
-            Latitude: {lat}
-            <br />
             Longitude: {lng}
+            <br />
+            Latitude: {lat}
           </div>
         </div>
         <div className={classes.row}>

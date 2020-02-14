@@ -16,11 +16,14 @@ export const leftSelector = createSelector(
 export const poisSelector = createSelector(
   state => state.map.layers[LAYER_TYPE_POI].visible,
   state => state.map.layers[LAYER_TYPE_POI].tagsArray,
-  state => state.map.layers[LAYER_TYPE_POI].pois,
-  (visible, tags, pois) => {
+  state => state.map.layers[LAYER_TYPE_POI].poisIds,
+  state => state.map.layers[LAYER_TYPE_POI].poisByListingHash,
+  (visible, tags, poisIds, poisByListingHash) => {
     return !visible
       ? []
-      : pois.filter(p => !!_.intersection(p.tags, tags).length);
+      : poisIds
+          .map(poiId => poisByListingHash[poiId])
+          .filter(poi => !!_.intersection(poi.tags, tags).length);
   }
 );
 
@@ -30,7 +33,12 @@ export const poisMapDataSelector = createSelector(poisSelector, pois => {
     features: pois.map(p => ({
       type: 'Feature',
       geometry: { type: 'Point', coordinates: [p.lon, p.lat] },
-      properties: { name: p.name, status: p.status, tags: p.tags.join(',') },
+      properties: {
+        name: p.name,
+        status: p.status,
+        foam: p.foam,
+        listingHash: p.listingHash,
+      },
     })),
   };
 });

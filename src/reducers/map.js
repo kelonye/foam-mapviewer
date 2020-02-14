@@ -11,6 +11,7 @@ const DEFAULT_STATE = {
     [LAYER_TYPE_POI]: {
       visible: true,
       pois: [],
+      poisByListingHash: {},
       tags: {},
       tagsArray: [],
     },

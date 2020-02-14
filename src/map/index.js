@@ -10,6 +10,7 @@ import {
   IS_DEV,
   MAPBOX_ACCESS_TOKEN,
   SECONDARY_COLOR,
+  web3,
 } from 'config';
 import Geohash from 'latlon-geohash';
 import xhr from 'utils/xhr';
@@ -72,6 +73,30 @@ export default new (class {
     }
 
     this.updateCursor('pointer');
+
+    if (this.hoverPopup) {
+      this.hoverPopup.remove();
+    }
+
+    const {
+      features: [pt],
+    } = event;
+    const { name, foam } = pt.properties;
+    this.hoverPopup = new mapboxgl.Popup({ closeButton: false })
+      .setLngLat(pt.geometry.coordinates)
+      .setHTML(
+        `
+      <div class="poi-popup flex flex--column">
+        <div>${name}</div>
+        <div class="flex flex--shrink flex--justify-center">
+          <div class="map-popup-foam flex flex--justify-center flex--align-center">
+            ${foam} FOAM
+          </div>
+        </div>
+      </div>
+      `
+      )
+      .addTo(this.map);
   }
 
   onMouseLeavePOIs(e) {
@@ -82,7 +107,11 @@ export default new (class {
       return;
     }
 
-    this.updateCursor('');
+    // this.updateCursor('');
+    //
+    // if (this.hoverPopup) {
+    //   this.hoverPopup.remove();
+    // }
   }
 
   onClickPOIs(event) {
@@ -96,23 +125,9 @@ export default new (class {
     const {
       features: [pt],
     } = event;
-    const { name, tags } = pt.properties;
-    new mapboxgl.Popup({ closeOnClick: false })
-      .setLngLat(pt.geometry.coordinates)
-      .setHTML(
-        `
-      <div class="poi-popup flex flex--column">
-        <div>${name}</div>
-        <div>
-          ${tags
-            .split(',')
-            .map(tag => `<span class="map-tag">${tag}</span>`)
-            .join('')}
-        </div>
-      </div>
-      `
-      )
-      .addTo(this.map);
+    const { listingHash } = pt.properties;
+
+    store.dispatch(showDrawer(`/poi/${listingHash}`));
   }
 
   onClick(event) {
@@ -182,41 +197,49 @@ export default new (class {
     };
 
     const tags = {};
-    let pois;
+    const poisByListingHash = {};
+    const poisIds = [];
     try {
-      // const data = IS_DEV
-      //   ? require('data/sample-pois.json')
-      //   : await xhr('get', '/poi/filtered', query);
-      const data = await xhr('get', '/poi/filtered', query);
-      pois = data.map(
+      const data = IS_DEV
+        ? require('data/sample-pois.json')
+        : await xhr('get', '/poi/filtered', query);
+      // const data = await xhr('get', '/poi/filtered', query);
+      data.forEach(
         ({
+          listingHash,
+          owner,
           geohash,
           name,
           tags: ptags,
           state: {
             status: { type: status },
+            deposit,
           },
         }) => {
           ptags.forEach(tag => {
             tags[tag] = true;
           });
-          return {
+          const poi = {
+            listingHash,
+            owner,
             name,
             status,
+            foam: web3.toDecimal(deposit) / 1000000000000000000,
             tags: ptags,
             ...Geohash.decode(geohash),
           };
+          poisIds.push(poi.listingHash);
+          poisByListingHash[poi.listingHash] = poi;
         }
       );
-    } catch (e) {
-      pois = [];
-    }
+    } catch (e) {}
 
     return [
       {
         type: LAYER_TYPE_POI,
         data: {
-          pois,
+          poisIds,
+          poisByListingHash,
           tags,
         },
       },
