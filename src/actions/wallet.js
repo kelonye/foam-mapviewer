@@ -9,7 +9,8 @@ export function loadWallet() {
 
     try {
       if (!web3) {
-        throw new Error('You have to install MetaMask!');
+        // throw new Error('You have to install MetaMask!');
+        return;
       }
 
       const {

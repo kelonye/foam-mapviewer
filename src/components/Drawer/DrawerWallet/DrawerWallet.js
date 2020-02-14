@@ -10,6 +10,8 @@ import Registry from './DrawerWalletRegistry';
 import Voting from './DrawerWalletVoting';
 import Signaling from './DrawerWalletSignaling';
 import { history } from 'store';
+import { web3, SECONDARY_COLOR } from 'config';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
   metaMaskButton: {
@@ -28,6 +30,10 @@ const useStyles = makeStyles(theme => ({
   },
   activeTabContent: {
     paddingTop: 20,
+  },
+  walletError: {
+    color: SECONDARY_COLOR,
+    marginTop: 10,
   },
 }));
 
@@ -101,10 +107,23 @@ const Component = ({
               variant="contained"
               onClick={activateWallet}
               className={classes.metaMaskButton}
+              disabled={!web3}
               fullWidth
             >
               Connect to Wallet
             </Button>
+            <div
+              className={clsx(
+                classes.walletError,
+                'flex',
+                'flex--justify-center',
+                'center-align'
+              )}
+            >
+              {web3
+                ? null
+                : 'A Web 3.0-enabled Ethereum Wallet (such as MetaMask) is required'}
+            </div>
           </div>
         )}
       </div>
