@@ -3,14 +3,7 @@ import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
 import { makeStyles } from '@material-ui/core/styles';
 import FOAM from 'components/FOAM';
-import {
-  Card,
-  CardContent,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from '@material-ui/core';
+import { List, ListItem, ListItemText, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { SECONDARY_COLOR } from 'config';
 
@@ -18,13 +11,13 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     padding: 0,
+    display: 'flex',
+    flexDirection: 'row',
   },
   title: {
     marginBottom: 10,
     fontSize: 13,
     fontWeight: 'bolder',
-    textTransform: 'uppercase',
-    textDecoration: 'underline',
   },
   listItem: {
     padding: 0,
@@ -34,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     color: SECONDARY_COLOR,
     textTransform: 'uppercase',
     fontSize: 10,
-    marginLeft: 10,
+    marginLeft: 5,
   },
   paper: {
     marginBottom: 10,
@@ -58,11 +51,11 @@ const Component = ({
         [
           'Balance',
           <FOAM amount={balance} />,
-          { url: '/wallet/registry', name: 'top up' },
+          { url: '/top-up', name: 'top up' },
         ],
-        ['Staked in POIs', <FOAM amount={staked} />],
+        ['Staked', <FOAM amount={staked} />],
         [
-          'Amount of your approved tokens for each FOAM contract',
+          'Approved',
           <FOAM amount={approved} />,
           { url: '/wallet/registry', name: 'update' },
         ],
@@ -81,36 +74,31 @@ const Component = ({
   return (
     <div>
       {stats.map(stat => (
-        <Card key={stat.heading} className={classes.paper} variant="outlined">
-          <CardContent>
-            <Typography variant="h6" className={classes.title}>
-              {stat.heading}
-            </Typography>
+        <div key={stat.heading} className={classes.paper}>
+          <Typography variant="h6" className={classes.title}>
+            {stat.heading}
+          </Typography>
 
-            <List className={classes.root}>
-              {stat.stats.map(([k, v, link]) => (
-                <ListItem key={k} className={classes.listItem}>
-                  <ListItemText
-                    primary={
-                      <div className={'flex flex--align-center'}>
-                        {v}
-                        {!link ? null : (
-                          <Link
-                            to={link.url}
-                            className="flex flex--align-center"
-                          >
-                            <small className={classes.link}>{link.name}</small>
-                          </Link>
-                        )}
-                      </div>
-                    }
-                    secondary={<span className={classes.small}>{k}</span>}
-                  />
-                </ListItem>
-              ))}
-            </List>
-          </CardContent>
-        </Card>
+          <List className={classes.root}>
+            {stat.stats.map(([k, v, link]) => (
+              <ListItem key={k} className={classes.listItem}>
+                <ListItemText
+                  primary={
+                    <div className={'flex flex--align-center'}>
+                      {v}
+                      {!link ? null : (
+                        <Link to={link.url} className="flex flex--align-center">
+                          <small className={classes.link}>{link.name}</small>
+                        </Link>
+                      )}
+                    </div>
+                  }
+                  secondary={<span className={classes.small}>{k}</span>}
+                />
+              </ListItem>
+            ))}
+          </List>
+        </div>
       ))}
     </div>
   );

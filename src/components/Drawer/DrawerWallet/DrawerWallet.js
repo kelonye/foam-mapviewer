@@ -34,7 +34,15 @@ const ROUTES = ['/', '/registry', '/voting', '/signaling'];
 const ROUTE_COMPONENTS = [Summary, Registry, Voting, Signaling];
 const ROUTE_LABELS = ['Summary', 'Registry', 'Voting', 'Signaling'];
 
-const Component = ({ isLoaded, loadWallet, account, activateWallet, path }) => {
+const Component = ({
+  isLoaded,
+  loadWallet,
+  account,
+  activateWallet,
+  path,
+  showDrawer,
+  match,
+}) => {
   const classes = useStyles();
   let activeTab = ROUTES.indexOf(path);
   activeTab = -1 === activeTab ? 0 : activeTab;
@@ -48,7 +56,8 @@ const Component = ({ isLoaded, loadWallet, account, activateWallet, path }) => {
   React.useEffect(
     function() {
       loadWallet();
-    },
+      showDrawer(match.params.url);
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
     [loadWallet]
   );
 
@@ -93,7 +102,7 @@ const Component = ({ isLoaded, loadWallet, account, activateWallet, path }) => {
               className={classes.metaMaskButton}
               fullWidth
             >
-              Connect to MetaMask
+              Connect to Wallet
             </Button>
           </div>
         )}

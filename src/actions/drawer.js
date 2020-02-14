@@ -19,3 +19,10 @@ export function navigate(payload) {
     history.push(payload);
   };
 }
+
+export function goHome(payload) {
+  return async(dispatch, getState) => {
+    dispatch(navigate('/'));
+    dispatch(hideDrawer());
+  };
+}

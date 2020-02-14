@@ -21,8 +21,18 @@ const Component = ({
   layers,
   toggleLayerVisibility,
   togglePOITagVisibility,
+  showDrawer,
+  match,
 }) => {
   const classes = useStyles();
+
+  React.useEffect(
+    () => {
+      showDrawer(match.params.url);
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
   return (
     <div>
       <h4 className="drawer--title">Layers</h4>

@@ -52,8 +52,9 @@ const Component = ({
   lng,
   createPOI,
   approvedFOAM,
-  navigate,
-  hideDrawer,
+  goHome,
+  showDrawer,
+  match,
 }) => {
   const classes = useStyles();
   const [tags, setTags] = React.useState(IS_DEV ? { Food: true } : {});
@@ -84,6 +85,7 @@ const Component = ({
 
   React.useEffect(() => {
     onMount();
+    showDrawer(match.params.url);
     return map.removePOIBeingApplied.bind(map); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lng, lat]);
 
@@ -252,8 +254,7 @@ const Component = ({
             variant="outlined"
             className={classes.button}
             onClick={() => {
-              hideDrawer();
-              navigate('/');
+              goHome();
             }}
           >
             Cancel

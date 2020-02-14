@@ -8,6 +8,7 @@ import Drawer from './Drawer/Drawer';
 import Menu from './Menu/Menu';
 import Snackbar from './Snackbar';
 import Loader from './Loader';
+import Modals from './Modals/Modals';
 import { Router } from 'react-router-dom';
 import { history } from 'store';
 import themeSelector, { isDarkSelector } from 'selectors/theme';
@@ -47,6 +48,7 @@ class Component extends React.Component {
           <Drawer />
           <Menu />
           <Snackbar />
+          <Modals />
         </div>
       );
     } else {

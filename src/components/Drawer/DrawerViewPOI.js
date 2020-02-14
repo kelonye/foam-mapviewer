@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
 import { makeStyles } from '@material-ui/core/styles';
-import { LAYER_TYPE_POI, SECONDARY_COLOR } from 'config';
-import { Paper, Typography, Chip } from '@material-ui/core';
+import { Typography, Chip } from '@material-ui/core';
 import xhr from 'utils/xhr';
 import Geohash from 'latlon-geohash';
 
@@ -21,12 +20,6 @@ const useStyles = makeStyles(theme => ({
     padding: 0,
   },
   small: { fontSize: 10 },
-  link: {
-    color: SECONDARY_COLOR,
-    textTransform: 'uppercase',
-    fontSize: 10,
-    marginLeft: 10,
-  },
   paper: {
     marginBottom: 10,
     padding: '10px 10px 0',
@@ -38,10 +31,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Component = ({
-  data,
   match: {
-    params: { listingHash },
+    params: { url, listingHash },
   },
+  showDrawer,
 }) => {
   const classes = useStyles();
   const [
@@ -50,13 +43,17 @@ const Component = ({
   ] = React.useState({});
 
   const onMount = async() => {
-    const poi = data || (await xhr('get', `/poi/${listingHash}`)).data.data;
+    const poi = (await xhr('get', `/poi/${listingHash}`)).data.data;
     setPOI(poi);
   };
 
-  React.useEffect(() => {
-    onMount(); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [listingHash, data]);
+  React.useEffect(
+    () => {
+      onMount();
+      showDrawer(url);
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    [listingHash]
+  );
 
   const { lon, lat } = !geohash ? {} : Geohash.decode(geohash);
 
@@ -110,7 +107,5 @@ const Component = ({
 };
 
 export default connect((state, { match: { params: { listingHash } } }) => {
-  return {
-    // data: state.map.layers[LAYER_TYPE_POI].poisByListingHash[listingHash],
-  };
+  return {};
 }, mapDispatchToProps)(Component);
