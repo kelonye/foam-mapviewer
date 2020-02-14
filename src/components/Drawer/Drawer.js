@@ -36,9 +36,9 @@ const Component = ({ drawer, menuWidth, hideDrawer }) => {
         </IconButton>
       </span>
       <Switch>
-        <Route exact path={'/layers'} component={Layers} />
-        <Route exact path={'/wallet'} component={Wallet} />
-        <Route exact path={'/add-poi/:lng/:lat'} component={AddPOI} />
+        <Route path={'/layers'} component={Layers} />
+        <Route path={'/wallet'} component={Wallet} />
+        <Route path={'/add-poi/:lng/:lat'} component={AddPOI} />
         {/*<Route path={'/'} component={Welcome} />*/}
       </Switch>
     </div>

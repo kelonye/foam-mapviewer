@@ -115,7 +115,8 @@ const Component = ({ lat, lng, createPOI, approvedFOAM }) => {
     }
     console.log(fields, opts);
 
-    createPOI(fields, opts);
+    await createPOI(fields, opts);
+    sl('success', 'Success', 'Waiting for transaction to be mined...');
   }
 
   return (
@@ -133,6 +134,7 @@ const Component = ({ lat, lng, createPOI, approvedFOAM }) => {
             placeholder="Name of POI"
             defaultValue={IS_DEV ? 'Google Inc' : ''}
             fullWidth
+            required
           />
         </div>
         <div className={classes.row}>
@@ -146,6 +148,7 @@ const Component = ({ lat, lng, createPOI, approvedFOAM }) => {
             placeholder={'Please specify physical address of POI'}
             value={address}
             fullWidth
+            required
           />
         </div>
         <div className={classes.row}>
@@ -168,6 +171,7 @@ const Component = ({ lat, lng, createPOI, approvedFOAM }) => {
             placeholder="Write a good description of the POI here."
             defaultValue={IS_DEV ? 'Awesome place' : ''}
             fullWidth
+            required
           />
         </div>
         <div className={classes.row}>
@@ -196,6 +200,7 @@ const Component = ({ lat, lng, createPOI, approvedFOAM }) => {
             placeholder="Phone number associated with POI"
             defaultValue={IS_DEV ? '+1 650-253-0000' : ''}
             fullWidth
+            required
           />
         </div>
         <div className={classes.row}>
@@ -222,6 +227,7 @@ const Component = ({ lat, lng, createPOI, approvedFOAM }) => {
             placeholder={`${MINIMUM_FOAM_STAKE} FOAM minimum...`}
             defaultValue={IS_DEV ? MINIMUM_FOAM_STAKE : null}
             fullWidth
+            required
           />
         </div>
         <div className={classes.row}>

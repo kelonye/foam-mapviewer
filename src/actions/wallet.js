@@ -19,6 +19,12 @@ export function loadWallet() {
       const tokenContract = getTokenContract();
       const registryContract = getRegistryContract();
 
+      let staked = 0,
+        approved = 0,
+        balance = 0,
+        poisListed = 0,
+        poisChallenged = 0,
+        poisPending = 0;
       let account;
 
       await new Promise((resolve, reject) => {
@@ -38,39 +44,68 @@ export function loadWallet() {
         });
       });
 
-      await new Promise((resolve, reject) => {
-        tokenContract.balanceOf(account, (err, info) => {
-          if (err) {
-            return reject(err);
-          }
-          dispatch(updateWallet({ balance: info.c[0] }));
-          resolve();
-        });
-      });
-
-      await new Promise((resolve, reject) => {
-        tokenContract.allowance(
-          account,
-          contracts.foamRegistry,
-          (err, info) => {
+      [
+        balance,
+        approved,
+        staked,
+        {
+          pendingPOIs: poisPending,
+          challengedPOIs: poisChallenged,
+          verifiedPOIs: poisListed,
+        },
+      ] = await Promise.all([
+        new Promise((resolve, reject) => {
+          tokenContract.balanceOf(account, (err, info) => {
             if (err) {
               return reject(err);
             }
-            dispatch(updateWallet({ approved: info.c[0] }));
-            resolve();
-          }
-        );
+            resolve(info.c[0]);
+          });
+        }),
+        new Promise((resolve, reject) => {
+          tokenContract.allowance(
+            account,
+            contracts.foamRegistry,
+            (err, info) => {
+              if (err) {
+                return reject(err);
+              }
+              resolve(info.c[0]);
+            }
+          );
+        }),
+
+        new Promise((resolve, reject) => {
+          registryContract.totalStaked(account, (err, info) => {
+            if (err) {
+              return reject(err);
+            }
+            resolve(info.c[0]);
+          });
+        }),
+
+        xhr('get', `/user/${account}/assets`),
+      ]);
+
+      console.log({
+        staked,
+        approved,
+        balance,
+        poisListed,
+        poisChallenged,
+        poisPending,
       });
 
-      await new Promise((resolve, reject) => {
-        registryContract.totalStaked(account, (err, info) => {
-          if (err) {
-            return reject(err);
-          }
-          dispatch(updateWallet({ staked: info.c[0] }));
-          resolve();
-        });
-      });
+      dispatch(
+        updateWallet({
+          staked,
+          approved,
+          balance,
+          poisListed,
+          poisChallenged,
+          poisPending,
+        })
+      );
     } finally {
       dispatch(updateWallet({ isLoaded: true }));
     }
@@ -137,10 +172,14 @@ export function approveFOAM(amount) {
     const contract = getTokenContract();
 
     await new Promise((resolve, reject) => {
-      contract.approve(account, amount, (err, transactionId) => {
-        console.log(err, transactionId);
-        resolve();
-      });
+      contract.approve(
+        account,
+        amount * 100000000000000000000,
+        (err, transactionId) => {
+          console.log(err, transactionId);
+          resolve();
+        }
+      );
     });
   };
 }

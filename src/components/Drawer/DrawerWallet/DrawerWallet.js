@@ -4,10 +4,12 @@ import * as mapDispatchToProps from 'actions';
 import { Button, Tabs, Tab } from '@material-ui/core';
 import Loader from 'components/Loader';
 import { makeStyles } from '@material-ui/core/styles';
+import { Route, Switch } from 'react-router-dom';
 import Summary from './DrawerWalletSummary';
 import Registry from './DrawerWalletRegistry';
 import Voting from './DrawerWalletVoting';
 import Signaling from './DrawerWalletSignaling';
+import { history } from 'store';
 
 const useStyles = makeStyles(theme => ({
   metaMaskButton: {
@@ -28,14 +30,19 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const TAB_COMPONENTS = [Summary, Registry, Voting, Signaling];
+const ROUTES = ['/', '/registry', '/voting', '/signaling'];
+const ROUTE_COMPONENTS = [Summary, Registry, Voting, Signaling];
+const ROUTE_LABELS = ['Summary', 'Registry', 'Voting', 'Signaling'];
 
-const Component = ({ isLoaded, loadWallet, account, activateWallet }) => {
+const Component = ({ isLoaded, loadWallet, account, activateWallet, path }) => {
   const classes = useStyles();
-  const [activeTab, setActiveTab] = React.useState(0);
-  const ActiveTabContent = TAB_COMPONENTS[activeTab];
+  let activeTab = ROUTES.indexOf(path);
+  activeTab = -1 === activeTab ? 0 : activeTab;
+
+  // console.log(activeTab, path);
+
   const handleActiveTabChange = (event, newValue) => {
-    setActiveTab(newValue);
+    history.push(`/wallet${newValue ? ROUTES[newValue] : ''}`);
   };
 
   React.useEffect(
@@ -60,14 +67,22 @@ const Component = ({ isLoaded, loadWallet, account, activateWallet }) => {
               onChange={handleActiveTabChange}
               aria-label="tabs"
             >
-              <Tab className={classes.tab} label="Summary" />
-              <Tab className={classes.tab} label="Registry" />
-              <Tab className={classes.tab} label="Voting" />
-              <Tab className={classes.tab} label="Signaling" />
+              {ROUTE_LABELS.map(label => (
+                <Tab className={classes.tab} key={label} {...{ label }} />
+              ))}
             </Tabs>
 
             <div className={classes.activeTabContent}>
-              <ActiveTabContent />
+              <Switch>
+                {ROUTES.map((path, i) => (
+                  <Route
+                    exact
+                    key={path}
+                    path={`/wallet${ROUTES[i]}`}
+                    component={ROUTE_COMPONENTS[i]}
+                  />
+                ))}
+              </Switch>
             </div>
           </div>
         ) : (
@@ -87,8 +102,9 @@ const Component = ({ isLoaded, loadWallet, account, activateWallet }) => {
   );
 };
 
-export default connect(({ wallet }) => {
+export default connect(({ wallet }, { match }) => {
   return {
     ...wallet,
+    path: window.location.pathname.replace('/wallet', ''),
   };
 }, mapDispatchToProps)(Component);
