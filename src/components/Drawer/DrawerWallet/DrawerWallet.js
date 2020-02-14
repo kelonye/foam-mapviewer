@@ -24,6 +24,7 @@ const useStyles = makeStyles(theme => ({
   tab: {
     minWidth: 'auto',
     padding: 7,
+    fontSize: 13,
   },
   activeTabContent: {
     paddingTop: 20,
@@ -71,8 +72,8 @@ const Component = ({
           <div>
             <Tabs
               value={activeTab}
-              indicatorColor="primary"
-              textColor="primary"
+              indicatorColor="secondary"
+              textColor="inherit"
               onChange={handleActiveTabChange}
               aria-label="tabs"
             >

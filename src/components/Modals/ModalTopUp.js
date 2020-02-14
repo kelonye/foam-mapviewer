@@ -35,7 +35,9 @@ function Component({ handleClose, hideDrawer }) {
       aria-labelledby="dialog-title"
       aria-describedby="dialog-description"
     >
-      <DialogTitle id="dialog-title">Get FOAM</DialogTitle>
+      <DialogTitle id="dialog-title">
+        Get FOAM (<small>work in progress</small>)
+      </DialogTitle>
       <DialogContent>
         <DialogContentText id="dialog-description">
           Select one of the options to purchase FOAM:

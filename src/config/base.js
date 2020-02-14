@@ -1,4 +1,4 @@
-export const APP_SLUG = 'form-mapviewer';
+export const APP_SLUG = 'foam-mapviewer';
 
 export const PRIMARY_COLOR = '#404040';
 export const SECONDARY_COLOR = '#f50057';

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -26,6 +26,30 @@
     -->
     <title>FOAM Map Viewer</title>
 
+    <script>
+      if (supportsHTML5Storage()) {
+        var theme = getTheme();
+        document.documentElement.classList.add(theme);
+      }
+
+      function supportsHTML5Storage() {
+        try {
+          return 'localStorage' in window && window['localStorage'] !== null;
+        } catch(e) {
+          return false;
+        }
+      }
+
+      function getTheme() {
+        try {
+          var theme = localStorage.getItem('foam-mapviewer:theme')) {
+          return JSON.parse(theme);
+        } catch (e) {
+          return 'dark';
+        }
+      }
+    </script>
+
     <link
       href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
       rel="stylesheet"
@@ -45,7 +69,7 @@
         padding: 0;
         font-family: 'Avenir', 'proxima-nova', 'Source Sans Pro', Arial, sans-serif;
         color: #404040;
-        background-color: white;
+        background: white;
       }
 
       .anim-loading,
@@ -58,7 +82,10 @@
       .anim-loading body {
         display: flex;
         flex-direction: row;
-        background: white;
+      }
+
+      .dark body {
+        background: #212121
       }
 
       #loader-container {

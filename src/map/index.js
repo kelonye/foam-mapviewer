@@ -107,8 +107,8 @@ export default new (class {
       return;
     }
 
-    // this.updateCursor('');
-    //
+    this.updateCursor('grab');
+
     // if (this.hoverPopup) {
     //   this.hoverPopup.remove();
     // }

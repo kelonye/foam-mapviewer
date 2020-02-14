@@ -29,9 +29,10 @@ class Component extends React.Component {
   updateBodyCss() {
     const { isDark } = this.props;
     const root = document.documentElement;
-    root.classList.remove('dark');
-    root.classList.remove('light');
-    root.classList.add(isDark ? 'dark' : 'light');
+    if (root.classList.contains(isDark ? 'light' : 'dark')) {
+      root.classList.remove(isDark ? 'light' : 'dark');
+      root.classList.add(isDark ? 'dark' : 'light');
+    }
   }
 
   render() {

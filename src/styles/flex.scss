@@ -25,6 +25,14 @@
     justify-content: flex-end;
   }
 
+  &--justify-space {
+    justify-content: space-between;
+  }
+
+  &--justify-space-around {
+    justify-content: space-around;
+  }
+
   &--column {
     flex-direction: column;
   }

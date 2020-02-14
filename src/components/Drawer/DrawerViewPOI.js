@@ -19,7 +19,6 @@ const useStyles = makeStyles(theme => ({
   listItem: {
     padding: 0,
   },
-  small: { fontSize: 10 },
   paper: {
     marginBottom: 10,
     padding: '10px 10px 0',
@@ -58,6 +57,7 @@ const Component = ({
   const { lon, lat } = !geohash ? {} : Geohash.decode(geohash);
 
   const info = [
+    !name ? null : ['Name', name],
     !address ? null : ['Address', address],
     !status ? null : ['Status', status],
     !phone ? null : ['Phone', phone],
@@ -66,7 +66,7 @@ const Component = ({
       ? null
       : [
           'Location',
-          <div style={{ fontSize: 10 }}>
+          <div>
             Longitude: {lon}
             <br />
             Latitude: {lat}
@@ -90,7 +90,7 @@ const Component = ({
 
   return (
     <div>
-      <h4 className="drawer--title">{name}</h4>
+      <h4 className="drawer--title">Point of Interest</h4>
       <div className="drawer--content">
         {info.map(([k, v]) => (
           <div key={k} elevation={0} className={classes.paper}>

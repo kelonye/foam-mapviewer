@@ -3,24 +3,25 @@ import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
 import { makeStyles } from '@material-ui/core/styles';
 import FOAM from 'components/FOAM';
-import { List, ListItem, ListItemText, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { SECONDARY_COLOR } from 'config';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
-  root: {
+  list: {
     flexGrow: 1,
     padding: 0,
     display: 'flex',
     flexDirection: 'row',
   },
+  listItem: {
+    padding: 0,
+  },
   title: {
     marginBottom: 10,
     fontSize: 13,
     fontWeight: 'bolder',
-  },
-  listItem: {
-    padding: 0,
   },
   small: { fontSize: 10 },
   link: {
@@ -79,25 +80,29 @@ const Component = ({
             {stat.heading}
           </Typography>
 
-          <List className={classes.root}>
+          <div
+            className={clsx(
+              classes.root,
+              'flex',
+              'flex--justify-space',
+              'flex--grow'
+            )}
+          >
             {stat.stats.map(([k, v, link]) => (
-              <ListItem key={k} className={classes.listItem}>
-                <ListItemText
-                  primary={
-                    <div className={'flex flex--align-center'}>
-                      {v}
-                      {!link ? null : (
-                        <Link to={link.url} className="flex flex--align-center">
-                          <small className={classes.link}>{link.name}</small>
-                        </Link>
-                      )}
-                    </div>
-                  }
-                  secondary={<span className={classes.small}>{k}</span>}
-                />
-              </ListItem>
+              <div
+                key={k}
+                className={clsx('flex', 'flex--column', 'flex--align-center')}
+              >
+                <div>{v}</div>
+                <span className={classes.small}>{k}</span>{' '}
+                {!link ? null : (
+                  <Link to={link.url}>
+                    <small className={classes.link}>{link.name}</small>
+                  </Link>
+                )}
+              </div>
             ))}
-          </List>
+          </div>
         </div>
       ))}
     </div>
