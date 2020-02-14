@@ -6,12 +6,10 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Geohash from 'latlon-geohash';
 import uuid from 'uuid/v4';
-import { IS_DEV } from 'config';
+import { IS_DEV, MINIMUM_FOAM_STAKE } from 'config';
 import sl from 'utils/sl';
-import xhr, { mapbox as xhrMapbox } from 'utils/xhr';
+import xhr from 'utils/xhr';
 import map from 'map';
-
-const MINIMUM_FOAM_STAKE = 50;
 
 const TAGS = [
   'Art',

@@ -1,7 +1,6 @@
 import Promise from 'bluebird';
 import { web3, ACTION_TYPE_UPDATE_WALLET } from 'config';
-import TOKEN_CONTRACT_ABI from 'data/abis/token';
-import REGISTRY_CONTRACT_ABI from 'data/abis/registry';
+import { getTokenContract, getRegistryContract } from 'utils/wallet';
 import xhr from 'utils/xhr';
 
 export function loadWallet() {
@@ -17,9 +16,8 @@ export function loadWallet() {
         wallet: { contracts },
       } = getState();
 
-      const contract = web3.eth
-        .contract(TOKEN_CONTRACT_ABI.abi)
-        .at(contracts.foamToken);
+      const tokenContract = getTokenContract();
+      const registryContract = getRegistryContract();
 
       let account;
 
@@ -41,7 +39,7 @@ export function loadWallet() {
       });
 
       await new Promise((resolve, reject) => {
-        contract.balanceOf(account, (err, info) => {
+        tokenContract.balanceOf(account, (err, info) => {
           if (err) {
             return reject(err);
           }
@@ -51,24 +49,28 @@ export function loadWallet() {
       });
 
       await new Promise((resolve, reject) => {
-        contract.allowance(account, contracts.foamRegistry, (err, info) => {
+        tokenContract.allowance(
+          account,
+          contracts.foamRegistry,
+          (err, info) => {
+            if (err) {
+              return reject(err);
+            }
+            dispatch(updateWallet({ approved: info.c[0] }));
+            resolve();
+          }
+        );
+      });
+
+      await new Promise((resolve, reject) => {
+        registryContract.totalStaked(account, (err, info) => {
           if (err) {
             return reject(err);
           }
-          dispatch(updateWallet({ approved: info.c[0] }));
+          dispatch(updateWallet({ staked: info.c[0] }));
           resolve();
         });
       });
-
-      // await new Promise((resolve, reject) => {
-      //   contract.allowance(account, contracts.foamRegistry, (err, info) => {
-      //     if (err) {
-      //       return reject(err);
-      //     }
-      //     dispatch(updateWallet({ staked: info.c[0] }));
-      //     resolve();
-      //   });
-      // });
     } finally {
       dispatch(updateWallet({ isLoaded: true }));
     }
@@ -98,13 +100,7 @@ export function createPOI(fields, { foam }) {
         throw new Error('You have to install MetaMask!');
       }
 
-      const {
-        wallet: { contracts },
-      } = getState();
-
-      const contract = web3.eth
-        .contract(REGISTRY_CONTRACT_ABI.abi)
-        .at(contracts.foamRegistry);
+      const contract = getRegistryContract();
 
       // const ipfsAddress = 'QmZcP8baFoEgQgW6DT3pNiL9u86wgaQbgoQJzZy43CU3E2';
       const ipfsAddress = await xhr('post', '/poi/ipfs', fields);
@@ -125,5 +121,26 @@ export function createPOI(fields, { foam }) {
     } finally {
       dispatch(updateWallet({ isLoaded: true }));
     }
+  };
+}
+
+export function approveFOAM(amount) {
+  return async(dispatch, getState) => {
+    if (!web3) {
+      throw new Error('You have to install MetaMask!');
+    }
+
+    const {
+      wallet: { account },
+    } = getState();
+
+    const contract = getTokenContract();
+
+    await new Promise((resolve, reject) => {
+      contract.approve(account, amount, (err, transactionId) => {
+        console.log(err, transactionId);
+        resolve();
+      });
+    });
   };
 }
