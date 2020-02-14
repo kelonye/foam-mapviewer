@@ -1,5 +1,5 @@
 run: node_modules
-	@npm run start
+	@NODE_ENV=development npm run start
 
 deploy:
 	@git push || xargs echo

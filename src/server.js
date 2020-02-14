@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
+const { join } = require('path');
+const path = p => join(__dirname, p);
 
 require('./setupProxy')(app);
 
@@ -16,10 +18,10 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(express.static(__dirname + '/../build'));
+app.use(express.static(path('/../build')));
 
-app.get('*', function(request, response) {
-  response.sendFile(__dirname + '/../build/index.html');
+app.get('*', function(req, res) {
+  res.sendFile(path('/../build/index.html'));
 });
 
 app.listen(port);
