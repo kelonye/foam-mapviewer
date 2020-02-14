@@ -55,7 +55,11 @@ const Component = ({
     {
       heading: 'FOAM',
       stats: [
-        ['Balance', <FOAM amount={balance} />],
+        [
+          'Balance',
+          <FOAM amount={balance} />,
+          { url: '/wallet/registry', name: 'top up' },
+        ],
         ['Staked in POIs', <FOAM amount={staked} />],
         [
           'Amount of your approved tokens for each FOAM contract',

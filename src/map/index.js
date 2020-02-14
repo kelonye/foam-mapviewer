@@ -184,9 +184,10 @@ export default new (class {
     const tags = {};
     let pois;
     try {
-      const data = IS_DEV
-        ? require('data/sample-pois.json')
-        : await xhr('get', '/poi/filtered', query);
+      // const data = IS_DEV
+      //   ? require('data/sample-pois.json')
+      //   : await xhr('get', '/poi/filtered', query);
+      const data = await xhr('get', '/poi/filtered', query);
       pois = data.map(
         ({
           geohash,

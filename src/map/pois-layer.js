@@ -1,7 +1,8 @@
 const COLORS = {
-  applied: '#ffc966',
+  applied: '#3182ed',
   challenged: 'hsl(204, 88%, 52%)',
   listing: '#28af60',
+  signal: '#ffc966',
 };
 
 const COLORS_STYLE = [];

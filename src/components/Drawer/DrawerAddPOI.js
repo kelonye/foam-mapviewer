@@ -47,7 +47,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Component = ({ lat, lng, createPOI, approvedFOAM }) => {
+const Component = ({
+  lat,
+  lng,
+  createPOI,
+  approvedFOAM,
+  navigate,
+  hideDrawer,
+}) => {
   const classes = useStyles();
   const [tags, setTags] = React.useState(IS_DEV ? { Food: true } : {});
   const [address, setAddress] = React.useState(
@@ -116,7 +123,7 @@ const Component = ({ lat, lng, createPOI, approvedFOAM }) => {
     console.log(fields, opts);
 
     await createPOI(fields, opts);
-    sl('success', 'Waiting for transaction to be mined...', 'Success');
+    sl('success', 'Waiting for transaction to be verified...', 'Success');
   }
 
   return (
@@ -147,6 +154,7 @@ const Component = ({ lat, lng, createPOI, approvedFOAM }) => {
             }}
             placeholder={'Please specify physical address of POI'}
             value={address}
+            onChange={e => setAddress(e.target.value)}
             fullWidth
             required
           />
@@ -240,7 +248,14 @@ const Component = ({ lat, lng, createPOI, approvedFOAM }) => {
           >
             Add
           </Button>
-          <Button variant="outlined" className={classes.button}>
+          <Button
+            variant="outlined"
+            className={classes.button}
+            onClick={() => {
+              hideDrawer();
+              navigate('/');
+            }}
+          >
             Cancel
           </Button>
         </div>

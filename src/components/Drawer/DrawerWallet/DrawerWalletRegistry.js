@@ -31,7 +31,7 @@ function Component({ approveFOAM, approved }) {
     }
 
     await approveFOAM(amount);
-    sl('success', 'Waiting for transaction to be mined...', 'Success');
+    sl('success', 'Waiting for transaction to be verified...', 'Success');
   }
 
   return (

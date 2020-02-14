@@ -87,15 +87,6 @@ export function loadWallet() {
         xhr('get', `/user/${account}/assets`),
       ]);
 
-      console.log({
-        staked,
-        approved,
-        balance,
-        poisListed,
-        poisChallenged,
-        poisPending,
-      });
-
       dispatch(
         updateWallet({
           staked,
