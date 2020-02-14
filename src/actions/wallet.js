@@ -59,6 +59,16 @@ export function loadWallet() {
           resolve();
         });
       });
+
+      // await new Promise((resolve, reject) => {
+      //   contract.allowance(account, contracts.foamRegistry, (err, info) => {
+      //     if (err) {
+      //       return reject(err);
+      //     }
+      //     dispatch(updateWallet({ staked: info.c[0] }));
+      //     resolve();
+      //   });
+      // });
     } finally {
       dispatch(updateWallet({ isLoaded: true }));
     }

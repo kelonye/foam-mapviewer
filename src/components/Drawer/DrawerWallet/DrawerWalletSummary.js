@@ -19,10 +19,11 @@ const useStyles = makeStyles(theme => ({
   small: { fontSize: 10 },
 }));
 
-const Component = ({ balance, approved }) => {
+const Component = ({ balance, approved, staked }) => {
   const classes = useStyles();
   const stats = [
-    ['Staked in POIs', balance],
+    ['Balance', balance],
+    ['Staked in POIs', staked],
     ['Amount of your approved tokens for each FOAM contract', approved],
   ];
 
