@@ -166,15 +166,15 @@ export function approveFOAM(amount) {
     }
 
     const {
-      wallet: { account },
+      wallet: { contracts },
     } = getState();
 
     const contract = getTokenContract();
 
     await new Promise((resolve, reject) => {
       contract.approve(
-        account,
-        amount * 100000000000000000000,
+        contracts.foamRegistry,
+        amount * 1000000000000000000,
         (err, transactionId) => {
           console.log(err, transactionId);
           resolve();

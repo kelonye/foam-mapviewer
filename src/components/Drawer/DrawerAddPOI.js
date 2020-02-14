@@ -116,7 +116,7 @@ const Component = ({ lat, lng, createPOI, approvedFOAM }) => {
     console.log(fields, opts);
 
     await createPOI(fields, opts);
-    sl('success', 'Success', 'Waiting for transaction to be mined...');
+    sl('success', 'Waiting for transaction to be mined...', 'Success');
   }
 
   return (
