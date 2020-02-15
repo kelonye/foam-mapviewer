@@ -73,7 +73,7 @@ const Component = ({
       <h4 className="drawer--title">Wallet</h4>
       <div className="drawer--content">
         {!isLoaded ? (
-          <Loader fullscreen={false} />
+          <Loader />
         ) : account ? (
           <div>
             <Tabs

@@ -53,7 +53,7 @@ class Component extends React.Component {
         </div>
       );
     } else {
-      pane = <Loader />;
+      pane = <Loader fullscreen />;
     }
     return (
       <ThemeProvider theme={theme}>

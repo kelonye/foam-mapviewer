@@ -2,11 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Chip } from '@material-ui/core';
+import { Typography, Chip, Button } from '@material-ui/core';
 import { web3 } from 'config';
 import xhr from 'utils/xhr';
 import Geohash from 'latlon-geohash';
 import FOAM from 'components/FOAM';
+import { Link } from 'react-router-dom';
+import Loader from 'components/Loader';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -52,8 +54,11 @@ const Component = ({
     },
     setPOI,
   ] = React.useState({});
+  const [isLoaded, setIsLoaded] = React.useState(false);
 
   const onMount = async() => {
+    setIsLoaded(false);
+
     const {
       data: {
         data,
@@ -63,6 +68,7 @@ const Component = ({
 
     data.foam = web3.toDecimal(deposit);
     setPOI(data);
+    setIsLoaded(true);
   };
 
   React.useEffect(
@@ -112,15 +118,32 @@ const Component = ({
     <div>
       <h4 className="drawer--title">Point of Interest</h4>
       <div className="drawer--content">
-        {info.map(([k, v]) => (
-          <div key={k} elevation={0} className={classes.paper}>
-            <Typography variant="h6" className={classes.title}>
-              {k}
-            </Typography>
+        {!isLoaded ? (
+          <Loader />
+        ) : (
+          <React.Fragment>
+            {info.map(([k, v]) => (
+              <div key={k} elevation={0} className={classes.paper}>
+                <Typography variant="h6" className={classes.title}>
+                  {k}
+                </Typography>
 
-            <div>{v}</div>
-          </div>
-        ))}
+                <div>{v}</div>
+              </div>
+            ))}
+
+            <Link to={`/poi/${listingHash}/challenge`}>
+              <Button
+                variant="outlined"
+                color="secondary"
+                type="submit"
+                fullWidth
+              >
+                Challenge
+              </Button>
+            </Link>
+          </React.Fragment>
+        )}
       </div>
     </div>
   );

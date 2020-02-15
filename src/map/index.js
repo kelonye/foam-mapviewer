@@ -201,10 +201,10 @@ export default new (class {
     const poisByListingHash = {};
     const poisIds = [];
     try {
-      const data = IS_DEV
-        ? require('data/sample-pois.json')
-        : await xhr('get', '/poi/filtered', query);
-      // const data = await xhr('get', '/poi/filtered', query);
+      // const data = IS_DEV
+      //   ? require('data/sample-pois.json')
+      //   : await xhr('get', '/poi/filtered', query);
+      const data = await xhr('get', '/poi/filtered', query);
       data.forEach(
         ({
           listingHash,
