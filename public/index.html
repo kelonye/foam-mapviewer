@@ -42,7 +42,7 @@
 
       function getTheme() {
         try {
-          var theme = localStorage.getItem('foam-mapviewer:theme')) {
+          var theme = localStorage.getItem('foam-mapviewer:theme');
           return JSON.parse(theme);
         } catch (e) {
           return 'dark';
