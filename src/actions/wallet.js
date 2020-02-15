@@ -1,5 +1,5 @@
 import Promise from 'bluebird';
-import { web3, ACTION_TYPE_UPDATE_WALLET } from 'config';
+import { web3, ACTION_TYPE_UPDATE_WALLET, FOAM_G } from 'config';
 import { getTokenContract, getRegistryContract } from 'utils/wallet';
 import xhr from 'utils/xhr';
 
@@ -132,7 +132,7 @@ export function createPOI(fields, { foam }) {
       // const ipfsAddress = 'QmZcP8baFoEgQgW6DT3pNiL9u86wgaQbgoQJzZy43CU3E2';
       const ipfsAddress = await xhr('post', '/poi/ipfs', fields);
       const listingHash = web3.sha3(ipfsAddress);
-      const amount = foam * 1000000000000000000;
+      const amount = foam * FOAM_G;
       console.log(listingHash, amount, ipfsAddress);
       await new Promise((resolve, reject) => {
         contract.apply(
@@ -166,7 +166,7 @@ export function approveFOAM(amount) {
     await new Promise((resolve, reject) => {
       contract.approve(
         contracts.foamRegistry,
-        amount * 1000000000000000000,
+        amount * FOAM_G,
         (err, transactionId) => {
           console.log(err, transactionId);
           resolve();

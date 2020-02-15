@@ -10,6 +10,7 @@ import {
   IS_DEV,
   MAPBOX_ACCESS_TOKEN,
   SECONDARY_COLOR,
+  FOAM_G,
   web3,
 } from 'config';
 import Geohash from 'latlon-geohash';
@@ -224,7 +225,7 @@ export default new (class {
             owner,
             name,
             status,
-            foam: web3.toDecimal(deposit) / 1000000000000000000,
+            foam: web3.toDecimal(deposit) / FOAM_G,
             tags: ptags,
             ...Geohash.decode(geohash),
           };

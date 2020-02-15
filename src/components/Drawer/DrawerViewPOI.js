@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Chip } from '@material-ui/core';
+import { web3 } from 'config';
 import xhr from 'utils/xhr';
 import Geohash from 'latlon-geohash';
+import FOAM from 'components/FOAM';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,13 +39,30 @@ const Component = ({
 }) => {
   const classes = useStyles();
   const [
-    { name, address, status, description, phone, web, geohash, tags = [] },
+    {
+      name,
+      address,
+      status,
+      description,
+      phone,
+      web,
+      geohash,
+      tags = [],
+      foam,
+    },
     setPOI,
   ] = React.useState({});
 
   const onMount = async() => {
-    const poi = (await xhr('get', `/poi/${listingHash}`)).data.data;
-    setPOI(poi);
+    const {
+      data: {
+        data,
+        state: { deposit },
+      },
+    } = await xhr('get', `/poi/${listingHash}`);
+
+    data.foam = web3.toDecimal(deposit);
+    setPOI(data);
   };
 
   React.useEffect(
@@ -58,6 +77,7 @@ const Component = ({
 
   const info = [
     !name ? null : ['Name', name],
+    !foam ? null : ['Foam', <FOAM amount={foam} g />],
     !address ? null : ['Address', address],
     !status ? null : ['Status', status],
     !phone ? null : ['Phone', phone],
