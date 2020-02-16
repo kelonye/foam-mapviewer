@@ -31,6 +31,12 @@ const useStyles = makeStyles(theme => ({
     marginBottom: 5,
     marginRight: 5,
   },
+  link: {
+    color: 'white',
+    '&:hover': {
+      opacity: 0.8,
+    },
+  },
 }));
 
 const Component = ({
@@ -86,8 +92,27 @@ const Component = ({
     !foam ? null : ['Foam', <FOAM amount={foam} g />],
     !address ? null : ['Address', address],
     !status ? null : ['Status', status],
-    !phone ? null : ['Phone', phone],
-    !web ? null : ['Website', web],
+    !phone
+      ? null
+      : [
+          'Phone',
+          <a href={`tel:${phone}`} className={classes.link}>
+            {phone}
+          </a>,
+        ],
+    !web
+      ? null
+      : [
+          'Website',
+          <a
+            href={web}
+            target="_blank"
+            className={classes.link}
+            rel="noreferrer noopener"
+          >
+            {web}
+          </a>,
+        ],
     !geohash
       ? null
       : [

@@ -11,6 +11,10 @@ import {
   DialogTitle,
   TextField,
 } from '@material-ui/core';
+import { getRegistryContract } from 'utils/wallet';
+import Promise from 'bluebird';
+import xhr from 'utils/xhr';
+import sl from 'utils/sl';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -27,6 +31,7 @@ function Component({
 }) {
   const classes = useStyles();
   const [reason, setReason] = React.useState('');
+  const [amount, setAmount] = React.useState(50);
 
   React.useEffect(
     function() {}, // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -38,7 +43,34 @@ function Component({
   };
 
   const handleSubmit = async() => {
-    handleClose();
+    if (!amount) {
+      return sl('error', 'A minimum of 50 FOAM is required.', 'Error');
+    }
+    if (!reason) {
+      return sl('error', 'Please enter a reason(s)...', 'Error');
+    }
+    const ipfsAddr = await xhr('post', '/challenge/ipfs', { reason });
+    await new Promise((resolve, reject) => {
+      getRegistryContract().challenge(
+        listingHash,
+        amount,
+        ipfsAddr,
+        (err, info) => {
+          if (err) {
+            return reject(err);
+          }
+          console.log(info);
+          resolve();
+        }
+      );
+    });
+
+    sl(
+      'success',
+      'Waiting for transaction to be verified...',
+      'Success',
+      handleClose
+    );
   };
 
   return (
@@ -57,6 +89,20 @@ function Component({
         <DialogContentText id="dialog-description">
           Describe the issues with this Point of Interest
         </DialogContentText>
+        <div className="flex flex--justify-center" style={{ marginBottom: 20 }}>
+          <TextField
+            id="amount"
+            label="FOAM"
+            type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            placeholder={'50 FOAM minimum...'}
+            value={amount}
+            onChange={e => setAmount(e.target.value)}
+            fullWidth
+          />
+        </div>
         <div className="flex flex--justify-center">
           <TextField
             id="reason"
@@ -70,8 +116,7 @@ function Component({
             onChange={e => setReason(e.target.value)}
             fullWidth
             multiline
-            rows="4"
-            required
+            rows="2"
           />
         </div>
       </DialogContent>
@@ -79,7 +124,7 @@ function Component({
         <Button onClick={handleClose} color="default">
           Cancel
         </Button>
-        <Button onClick={handleSubmit} color="secondary" disabled>
+        <Button onClick={handleSubmit} color="secondary">
           Challenge
         </Button>
       </DialogActions>

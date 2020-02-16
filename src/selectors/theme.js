@@ -22,7 +22,7 @@ export default createSelector(isDarkSelector, isDark =>
     palette: {
       type: isDark ? 'dark' : 'light',
       primary: {
-        main: PRIMARY_COLOR,
+        main: isDark ? '#ffffff' : '#373836',
       },
       secondary: {
         main: SECONDARY_COLOR,
