@@ -125,7 +125,11 @@ const Component = ({
     console.log(fields, opts);
 
     await createPOI(fields, opts);
-    sl('success', 'Waiting for transaction to be verified...', 'Success');
+    sl(
+      'success',
+      'Transaction was created, Wait until it\'s mined ...',
+      'Success'
+    );
   }
 
   return (

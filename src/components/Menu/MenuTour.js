@@ -2,17 +2,64 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
 import Button from './MenuButton';
+import Joyride, { STATUS } from 'react-joyride';
 
-class Component extends React.Component {
-  onClick(event) {
-    const { hideDrawer } = this.props;
-    hideDrawer();
-  }
+const STEPS = [
+  {
+    target: '[data-tour=layers]',
+    content: 'Filter Points of Interests, Signals etc on map.',
+  },
+  {
+    target: '[data-tour=wallet]',
+    content: 'Manage your FOAM assets.',
+  },
+  {
+    target: '[data-tour=add]',
+    content: 'Add Points of Interest, Signals ... etc',
+  },
+  {
+    target: '[data-tour=theme]',
+    content: 'Toggle light/dark theme.',
+  },
+].map(t => ({ ...t, disableBeacon: true }));
 
-  render() {
-    return <Button {...this.props} onClick={e => this.onClick(e)} />;
-  }
-}
+const Tour = ({ isRunningTour, setIsRunningTour }) => {
+  const handleJoyrideCallback = data => {
+    const { status } = data;
+
+    if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
+      setIsRunningTour(false);
+    }
+  };
+
+  return (
+    <div className="app">
+      <Joyride
+        run={isRunningTour}
+        callback={handleJoyrideCallback}
+        steps={STEPS}
+        showSkipButton={true}
+        showProgress={true}
+        continuous={true}
+      />
+    </div>
+  );
+};
+
+const Component = props => {
+  const [isRunningTour, setIsRunningTour] = React.useState(false);
+
+  const onClick = event => {
+    setIsRunningTour(true);
+  };
+
+  return (
+    <React.Fragment>
+      <Button {...props} {...{ onClick }} />
+      <Tour {...{ isRunningTour, setIsRunningTour }} />
+    </React.Fragment>
+  );
+};
 
 export default connect(state => {
   const { drawer } = state;

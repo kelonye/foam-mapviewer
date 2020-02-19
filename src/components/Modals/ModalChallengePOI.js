@@ -67,7 +67,7 @@ function Component({
 
     sl(
       'success',
-      'Waiting for transaction to be verified...',
+      'Transaction was created, Wait until it\'s mined ...',
       'Success',
       handleClose
     );

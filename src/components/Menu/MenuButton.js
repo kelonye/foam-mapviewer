@@ -22,7 +22,7 @@ class Component extends React.Component {
     if (onClick) {
       onClick(e);
     } else {
-      showDrawer(type);
+      showDrawer(`/${type}`);
     }
   }
 
@@ -41,7 +41,7 @@ class Component extends React.Component {
       top,
     } = this.props;
     const { isHover } = this.state;
-    const isActive = drawerType === type;
+    const isActive = drawerType === `/${type}`;
     const active = isHover || isActive;
 
     const badge =
@@ -57,6 +57,7 @@ class Component extends React.Component {
     return (
       <div
         className={`menu-button ${active ? 'active' : ''}`}
+        data-tour={`${type.toLowerCase()}`}
         onClick={e => this.onClick(e)}
         onMouseEnter={e => this.onMouse(e, true)}
         onMouseLeave={e => this.onMouse(e, false)}

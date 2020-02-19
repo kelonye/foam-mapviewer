@@ -36,7 +36,7 @@ function Component({ toggleMenu, toggleTheme, isDark }) {
 
   const right = (
     <Tooltip title="Toggle light/dark theme">
-      <IconButton onClick={toggleTheme}>
+      <IconButton onClick={toggleTheme} data-tour="theme">
         {isDark ? (
           <LightIcon className={classes.icon} />
         ) : (

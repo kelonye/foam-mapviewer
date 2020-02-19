@@ -12,26 +12,28 @@ import Add from './MenuAdd';
 
 const BUTTONS = [
   {
-    type: '/layers',
+    type: 'layers',
     tip: 'Layers',
     label: 'Layers',
     Icon: LayersIcon,
+    route: true,
   },
   {
-    type: '/wallet',
+    type: 'wallet',
     tip: 'Wallet',
     label: 'Wallet',
     Icon: WalletIcon,
+    route: true,
   },
   {
-    type: 'ADD',
+    type: 'add',
     tip: 'Add Points of Interest, Signals ... etc',
     label: 'Add',
     Icon: AddIcon,
     Component: Add,
   },
   {
-    type: 'HELP',
+    type: 'help',
     tip: 'Help',
     label: 'Help',
     Icon: HelpIcon,

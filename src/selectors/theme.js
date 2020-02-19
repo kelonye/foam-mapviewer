@@ -1,5 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import { PRIMARY_COLOR, SECONDARY_COLOR } from 'config';
+import { SECONDARY_COLOR } from 'config';
 import { createSelector } from 'reselect';
 
 export const isDarkSelector = createSelector(
