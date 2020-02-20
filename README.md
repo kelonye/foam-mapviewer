@@ -18,9 +18,12 @@ Watch and build client assets with:
 - [ ] Filter Points of Interest by status
 - [x] Connect w/ Metamask
 - [ ] Stake FOAM
-- [ ] Add POIs
+- [x] Add POIs
 - [ ] Challenge applications
 - [ ] Delist POIs
+- [ ] Voting
+- [ ] Rewards
+- [ ] Support other wallets
 
 ### Resources
 
@@ -29,4 +32,4 @@ Watch and build client assets with:
 
 ### Attribution
 
-This project is greatly inspired by my other project Geovez, an ESRI/ArcGIS based map viewer (checkout a demo here https://bcg.geovez.com).
+This project is greatly inspired by my other project [Geovez](https://geovez.com), an ESRI/ArcGIS based map viewer.

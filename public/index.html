@@ -25,31 +25,25 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>FOAM Map Viewer</title>
-
     <script>
-      if (supportsHTML5Storage()) {
-        var theme = getTheme();
-        document.documentElement.classList.add(theme);
+      if (themeIsLight()) {
+        var root = document.documentElement.classList;
+        root.remove('dark');
+        root.add('light');
       }
 
-      function supportsHTML5Storage() {
+      function themeIsLight() {
         try {
-          return 'localStorage' in window && window['localStorage'] !== null;
-        } catch(e) {
+          if (!('localStorage' in window && window['localStorage'] !== null)) {
+            return false;
+          }
+          var theme = localStorage.getItem('foam-mapviewer:theme');
+          return 'dark' === JSON.parse(theme);
+        } catch (e) {
           return false;
         }
       }
-
-      function getTheme() {
-        try {
-          var theme = localStorage.getItem('foam-mapviewer:theme');
-          return JSON.parse(theme);
-        } catch (e) {
-          return 'dark';
-        }
-      }
     </script>
-
     <link
       href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
       rel="stylesheet"
