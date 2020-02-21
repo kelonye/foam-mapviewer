@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
+import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import { DANGER_COLOR } from 'config';
 import Header from './Header/Header';
 import MapGL from './Map';
@@ -12,59 +13,48 @@ import Modals from './Modals/Modals';
 import { Router } from 'react-router-dom';
 import { history } from 'store';
 import themeSelector, { isDarkSelector } from 'selectors/theme';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { CssBaseline } from '@material-ui/core';
 
-class Component extends React.Component {
-  componentDidMount() {
-    this.updateBodyCss();
-  }
+const useStyles = makeStyles(theme => ({
+  error: { padding: 50, color: DANGER_COLOR },
+}));
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.isDark !== this.props.isDark) {
-      this.updateBodyCss();
-    }
-  }
+function Component({ error, isLoaded, theme, isDark }) {
+  const classes = useStyles();
 
-  updateBodyCss() {
-    const { isDark } = this.props;
+  React.useEffect(() => {
     const root = document.documentElement;
     if (root.classList.contains(isDark ? 'light' : 'dark')) {
       root.classList.remove(isDark ? 'light' : 'dark');
       root.classList.add(isDark ? 'dark' : 'light');
     }
-  }
+  }, [isDark]);
 
-  render() {
-    const { error, isLoaded, theme } = this.props;
-
-    let pane;
-    if (error) {
-      pane = <div style={{ padding: 50, color: DANGER_COLOR }}>{error}</div>;
-    } else if (isLoaded) {
-      pane = (
-        <div>
-          <MapGL />
-          <Header />
-          <Drawer />
-          <Menu />
-          <Snackbar />
-          <Modals />
-        </div>
-      );
-    } else {
-      pane = <Loader fullscreen />;
-    }
-    return (
-      <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        <Router {...{ history }}>
-          <div>{pane}</div>
-        </Router>
-      </ThemeProvider>
+  let pane;
+  if (error) {
+    pane = <div className={classes.error}>{error}</div>;
+  } else if (isLoaded) {
+    pane = (
+      <div>
+        <MapGL />
+        <Header />
+        <Drawer />
+        <Menu />
+        <Snackbar />
+        <Modals />
+      </div>
     );
+  } else {
+    pane = <Loader fullscreen />;
   }
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Router {...{ history }}>
+        <div>{pane}</div>
+      </Router>
+    </ThemeProvider>
+  );
 }
 
 export default connect(state => {
