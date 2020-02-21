@@ -2,7 +2,7 @@ run: node_modules
 	@npm run start
 
 deploy:
-	@git push || xargs echo
+#	@git push || xargs echo
 	@git push heroku master
 #	@npm run build
 #	@surge -d https://foam-mapviewer.surge.sh -p dist

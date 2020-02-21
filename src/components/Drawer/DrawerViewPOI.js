@@ -1,12 +1,12 @@
 import React from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Chip, Button } from '@material-ui/core';
-import { web3 } from 'config';
+import { WEB3, FOAM_TOKEN_DECIMALS } from 'utils/wallet';
 import xhr from 'utils/xhr';
 import Geohash from 'latlon-geohash';
-import FOAM from 'components/FOAM';
 import { Link } from 'react-router-dom';
 import Loader from 'components/Loader';
 
@@ -43,6 +43,7 @@ const Component = ({
   match: {
     params: { url, listingHash },
   },
+  account,
   showDrawer,
 }) => {
   const classes = useStyles();
@@ -71,8 +72,10 @@ const Component = ({
         state: { deposit },
       },
     } = await xhr('get', `/poi/${listingHash}`);
-
-    data.foam = web3.toDecimal(deposit);
+    data.foam = WEB3.utils
+      .toBN(deposit)
+      .div(FOAM_TOKEN_DECIMALS)
+      .toNumber();
     setPOI(data);
     setIsLoaded(true);
   };
@@ -89,7 +92,7 @@ const Component = ({
 
   const info = [
     !name ? null : ['Name', name],
-    !foam ? null : ['Foam', <FOAM amount={foam} g />],
+    _.isNil(foam) ? null : ['Foam', foam],
     !address ? null : ['Address', address],
     !status ? null : ['Status', status],
     !phone
@@ -157,12 +160,13 @@ const Component = ({
               </div>
             ))}
 
-            <Link to={`/poi/${listingHash}/challenge`}>
+            <Link to={!account ? '#' : `/poi/${listingHash}/challenge`}>
               <Button
                 variant="outlined"
                 color="secondary"
                 type="submit"
                 fullWidth
+                disabled={!account}
               >
                 Challenge
               </Button>
@@ -174,6 +178,16 @@ const Component = ({
   );
 };
 
-export default connect((state, { match: { params: { listingHash } } }) => {
-  return {};
-}, mapDispatchToProps)(Component);
+export default connect(
+  (
+    { wallet: { account } },
+    {
+      match: {
+        params: { listingHash },
+      },
+    }
+  ) => {
+    return { account };
+  },
+  mapDispatchToProps
+)(Component);

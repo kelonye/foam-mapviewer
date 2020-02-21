@@ -10,14 +10,13 @@ import {
   // IS_DEV,
   MAPBOX_ACCESS_TOKEN,
   SECONDARY_COLOR,
-  FOAM_G,
-  web3,
 } from 'config';
 import Geohash from 'latlon-geohash';
 import xhr from 'utils/xhr';
 import _ from 'lodash';
 import cache from 'utils/cache';
 import pinSVG from './pin';
+import { FOAM_TOKEN_DECIMALS, WEB3 } from 'utils/wallet';
 
 mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 
@@ -225,7 +224,10 @@ export default new (class {
             owner,
             name,
             status,
-            foam: web3.toDecimal(deposit) / FOAM_G,
+            foam: WEB3.utils
+              .toBN(deposit)
+              .div(FOAM_TOKEN_DECIMALS)
+              .toNumber(),
             tags: ptags,
             ...Geohash.decode(geohash),
           };

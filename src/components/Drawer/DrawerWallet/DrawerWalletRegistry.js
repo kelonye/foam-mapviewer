@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
-import { MINIMUM_FOAM_STAKE, FOAM_K } from 'config';
+import { MINIMUM_FOAM_STAKE } from 'config';
+import { FOAM_TOKEN_DECIMALS, WEB3 } from 'utils/wallet';
 import { makeStyles } from '@material-ui/core/styles';
 import sl from 'utils/sl';
 import { TextField, Button } from '@material-ui/core';
@@ -56,7 +57,14 @@ function Component({ approveFOAM, approved }) {
             shrink: true,
           }}
           placeholder={`${MINIMUM_FOAM_STAKE} FOAM minimum...`}
-          defaultValue={(approved || 0) / FOAM_K}
+          defaultValue={
+            !approved
+              ? 0
+              : WEB3.utils
+                  .toBN(approved)
+                  .div(FOAM_TOKEN_DECIMALS)
+                  .toNumber()
+          }
           fullWidth
           required
         />

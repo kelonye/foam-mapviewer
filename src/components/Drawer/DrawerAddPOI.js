@@ -10,6 +10,7 @@ import { IS_DEV, MINIMUM_FOAM_STAKE } from 'config';
 import sl from 'utils/sl';
 import xhr from 'utils/xhr';
 import map from 'map';
+import _ from 'lodash';
 
 const TAGS = [
   'Art',
@@ -47,6 +48,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const SAMPLE_PLACE = {
+  name: 'Google Inc',
+  web: 'https://google.com',
+  address: '10 Downing Street',
+  description: 'Awesome place',
+  phone: '+1 650-253-0000',
+};
+
 const Component = ({
   lat,
   lng,
@@ -55,12 +64,14 @@ const Component = ({
   goHome,
   showDrawer,
   match,
+  loadWalletApproved,
 }) => {
   const classes = useStyles();
   const [tags, setTags] = React.useState(IS_DEV ? { Food: true } : {});
   const [address, setAddress] = React.useState(
-    IS_DEV ? '10 Downing Street' : ''
+    IS_DEV ? SAMPLE_PLACE.address : ''
   );
+
   const hasMinimumFOAM = approvedFOAM >= MINIMUM_FOAM_STAKE;
 
   const onMount = async() => {
@@ -85,9 +96,10 @@ const Component = ({
 
   React.useEffect(() => {
     onMount();
+    if (_.isNil(approvedFOAM)) loadWalletApproved();
     showDrawer(match.params.url);
     return map.removePOIBeingApplied.bind(map); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lng, lat]);
+  }, [lng, lat, approvedFOAM]);
 
   function toggleTag(tag) {
     const buff = Object.assign({}, tags);
@@ -145,7 +157,7 @@ const Component = ({
               shrink: true,
             }}
             placeholder="Name of POI"
-            defaultValue={IS_DEV ? 'Google Inc' : ''}
+            defaultValue={IS_DEV ? SAMPLE_PLACE.name : ''}
             fullWidth
             required
           />
@@ -183,7 +195,7 @@ const Component = ({
             multiline
             rows="4"
             placeholder="Write a good description of the POI here."
-            defaultValue={IS_DEV ? 'Awesome place' : ''}
+            defaultValue={IS_DEV ? SAMPLE_PLACE.description : ''}
             fullWidth
             required
           />
@@ -212,7 +224,7 @@ const Component = ({
               shrink: true,
             }}
             placeholder="Phone number associated with POI"
-            defaultValue={IS_DEV ? '+1 650-253-0000' : ''}
+            defaultValue={IS_DEV ? SAMPLE_PLACE.phone : ''}
             fullWidth
             required
           />
@@ -226,7 +238,7 @@ const Component = ({
               shrink: true,
             }}
             placeholder={'Website associated with POI'}
-            defaultValue={IS_DEV ? 'https://google.com' : ''}
+            defaultValue={IS_DEV ? SAMPLE_PLACE.web : ''}
             fullWidth
           />
         </div>

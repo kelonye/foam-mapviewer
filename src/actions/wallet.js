@@ -1,21 +1,22 @@
 import Promise from 'bluebird';
-import { web3, ACTION_TYPE_UPDATE_WALLET, FOAM_G } from 'config';
-import { getTokenContract, getRegistryContract } from 'utils/wallet';
+import { ACTION_TYPE_UPDATE_WALLET } from 'config';
+import {
+  WEB3,
+  FOAM_TOKEN_DECIMALS,
+  getTokenContract,
+  getRegistryContract,
+} from 'utils/wallet';
 import xhr from 'utils/xhr';
 
 export function loadWallet() {
   return async(dispatch, getState) => {
-    dispatch(updateWallet({ isLoaded: false }));
-
     try {
-      if (!web3) {
-        // throw new Error('You have to install MetaMask!');
-        return;
-      }
-
       const {
-        wallet: { contracts },
+        wallet: { contracts, account },
       } = getState();
+      if (!account) return;
+
+      dispatch(updateWallet({ isLoaded: false }));
 
       const tokenContract = getTokenContract();
       const registryContract = getRegistryContract();
@@ -26,24 +27,8 @@ export function loadWallet() {
         poisListed = 0,
         poisChallenged = 0,
         poisPending = 0;
-      let account;
 
-      await new Promise((resolve, reject) => {
-        web3.eth.getAccounts((err, accounts) => {
-          if (err) {
-            return reject(err);
-          }
-
-          [account] = accounts;
-          if (!account) {
-            return reject(new Error('No account was selected'));
-          }
-
-          dispatch(updateWallet({ account }));
-
-          resolve();
-        });
-      });
+      dispatch(updateWallet({ account }));
 
       [
         balance,
@@ -55,36 +40,9 @@ export function loadWallet() {
           verifiedPOIs: poisListed,
         },
       ] = await Promise.all([
-        new Promise((resolve, reject) => {
-          tokenContract.balanceOf(account, (err, info) => {
-            if (err) {
-              return reject(err);
-            }
-            resolve(info.c[0]);
-          });
-        }),
-        new Promise((resolve, reject) => {
-          tokenContract.allowance(
-            account,
-            contracts.foamRegistry,
-            (err, info) => {
-              if (err) {
-                return reject(err);
-              }
-              resolve(info.c[0]);
-            }
-          );
-        }),
-
-        new Promise((resolve, reject) => {
-          registryContract.totalStaked(account, (err, info) => {
-            if (err) {
-              return reject(err);
-            }
-            resolve(info.c[0]);
-          });
-        }),
-
+        tokenContract.read('balanceOf', account),
+        tokenContract.read('allowance', account, contracts.foamRegistry),
+        registryContract.read('totalStaked', account),
         xhr('get', `/user/${account}/assets`),
       ]);
 
@@ -123,28 +81,18 @@ export function createPOI(fields, { foam }) {
     dispatch(updateWallet({ isLoaded: false }));
 
     try {
-      if (!web3) {
-        throw new Error('You have to install MetaMask!');
-      }
-
-      const contract = getRegistryContract();
-
-      // const ipfsAddress = 'QmZcP8baFoEgQgW6DT3pNiL9u86wgaQbgoQJzZy43CU3E2';
       const ipfsAddress = await xhr('post', '/poi/ipfs', fields);
-      const listingHash = web3.sha3(ipfsAddress);
-      const amount = foam * FOAM_G;
-      console.log(listingHash, amount, ipfsAddress);
-      await new Promise((resolve, reject) => {
-        contract.apply(
-          listingHash,
-          amount,
-          ipfsAddress,
-          (err, transactionId) => {
-            console.log(err, transactionId);
-            resolve();
-          }
-        );
-      });
+      const listingHash = WEB3.utils.sha3(ipfsAddress);
+      const amount = WEB3.utils.toHex(
+        new WEB3.utils.BN(foam).mul(FOAM_TOKEN_DECIMALS)
+      );
+
+      await getRegistryContract().write(
+        'apply',
+        listingHash,
+        amount,
+        ipfsAddress
+      );
     } finally {
       dispatch(updateWallet({ isLoaded: true }));
     }
@@ -153,25 +101,32 @@ export function createPOI(fields, { foam }) {
 
 export function approveFOAM(amount) {
   return async(dispatch, getState) => {
-    if (!web3) {
-      throw new Error('You have to install MetaMask!');
-    }
-
     const {
       wallet: { contracts },
     } = getState();
+    await getTokenContract().write(
+      'approve',
+      contracts.foamRegistry,
+      WEB3.utils.toHex(new WEB3.utils.BN(amount).mul(FOAM_TOKEN_DECIMALS))
+    );
+  };
+}
 
-    const contract = getTokenContract();
+export function loadWalletApproved(amount) {
+  return async(dispatch, getState) => {
+    const {
+      wallet: { contracts, account },
+    } = getState();
+    if (!account) return;
 
-    await new Promise((resolve, reject) => {
-      contract.approve(
-        contracts.foamRegistry,
-        amount * FOAM_G,
-        (err, transactionId) => {
-          console.log(err, transactionId);
-          resolve();
-        }
-      );
-    });
+    dispatch(
+      updateWallet({
+        approved: await getTokenContract().read(
+          'allowance',
+          account,
+          contracts.foamRegistry
+        ),
+      })
+    );
   };
 }

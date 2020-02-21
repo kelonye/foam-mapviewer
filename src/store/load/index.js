@@ -7,7 +7,7 @@ class Init {
     this.state = getState();
 
     try {
-      await this.loadUser();
+      await this.loadData();
     } catch (error) {
       this.state.app.error = error;
     }

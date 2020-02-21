@@ -1,6 +1,13 @@
 import React from 'react';
-import { FOAM_G, FOAM_K } from 'config';
+import { WEB3, FOAM_TOKEN_DECIMALS } from 'utils/wallet';
 
-export default ({ amount, g, k }) => (
-  <span>{((amount || 0) / (g ? FOAM_G : FOAM_K)).toFixed(2)}</span>
-);
+export default function({ amount }) {
+  return (
+    <span>
+      {new WEB3.utils.toBN(amount.toString())
+        .div(FOAM_TOKEN_DECIMALS)
+        .toNumber()
+        .toFixed(2)}
+    </span>
+  );
+}

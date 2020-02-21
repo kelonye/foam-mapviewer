@@ -10,7 +10,7 @@ import Registry from './DrawerWalletRegistry';
 import Voting from './DrawerWalletVoting';
 import Signaling from './DrawerWalletSignaling';
 import { history } from 'store';
-import { web3, SECONDARY_COLOR } from 'config';
+import { SECONDARY_COLOR } from 'config';
 import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
@@ -65,7 +65,7 @@ const Component = ({
       loadWallet();
       showDrawer(match.params.url);
     }, // eslint-disable-next-line react-hooks/exhaustive-deps
-    [loadWallet]
+    [loadWallet, account]
   );
 
   return (
@@ -107,7 +107,7 @@ const Component = ({
               variant="contained"
               onClick={activateWallet}
               className={classes.metaMaskButton}
-              disabled={!web3}
+              disabled={!account}
               fullWidth
             >
               Connect to Wallet
@@ -120,7 +120,7 @@ const Component = ({
                 'center-align'
               )}
             >
-              {web3
+              {account
                 ? null
                 : 'A Web 3.0-enabled Ethereum Wallet (such as MetaMask) is required'}
             </div>
