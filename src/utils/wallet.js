@@ -42,15 +42,16 @@ export class Contract {
   }
 
   async callContract(write, method, ...args) {
-    if (!WEB3) {
-      throw new Error('Web3 client required.');
-    }
-    const {
-      wallet: { account },
-    } = store.getState();
     return new Promise((resolve, reject) => {
+      const writeOpts = {};
+      if (write) {
+        const {
+          wallet: { account },
+        } = store.getState();
+        writeOpts.from = account;
+      }
       this.contract.methods[method](...args)[write ? 'send' : 'call'](
-        ...(write ? [{ from: account }] : []),
+        ...(write ? [writeOpts] : []),
         (err, response) => {
           if (err) return reject(err);
           resolve(response.c?.[0] ?? response);

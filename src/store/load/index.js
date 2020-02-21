@@ -8,14 +8,12 @@ class Init {
 
     try {
       await this.loadData();
+      await this.matchLocationPath();
     } catch (error) {
       this.state.app.error = error;
     }
 
     this.state.app.isLoaded = true;
-
-    await this.loadContracts();
-    await this.matchLocationPath();
 
     return this.state;
   }

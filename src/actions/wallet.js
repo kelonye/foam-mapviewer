@@ -28,8 +28,6 @@ export function loadWallet() {
         poisChallenged = 0,
         poisPending = 0;
 
-      dispatch(updateWallet({ account }));
-
       [
         balance,
         approved,
