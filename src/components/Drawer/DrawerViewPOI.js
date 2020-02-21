@@ -37,6 +37,9 @@ const useStyles = makeStyles(theme => ({
       opacity: 0.8,
     },
   },
+  challengeContainer: {
+    marginTop: 20,
+  },
 }));
 
 const Component = ({
@@ -160,7 +163,10 @@ const Component = ({
               </div>
             ))}
 
-            <Link to={!account ? '#' : `/poi/${listingHash}/challenge`}>
+            <Link
+              to={!account ? '#' : `/poi/${listingHash}/challenge`}
+              className={classes.challengeContainer}
+            >
               <Button
                 variant="outlined"
                 color="secondary"
