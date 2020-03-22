@@ -107,11 +107,11 @@ const Component = ({
               variant="contained"
               onClick={activateWallet}
               className={classes.metaMaskButton}
-              disabled={!account}
               fullWidth
             >
               Connect to Wallet
             </Button>
+            {/*
             <div
               className={clsx(
                 classes.walletError,
@@ -124,6 +124,7 @@ const Component = ({
                 ? null
                 : 'A Web 3.0-enabled Ethereum Wallet (such as MetaMask) is required'}
             </div>
+            */}
           </div>
         )}
       </div>
