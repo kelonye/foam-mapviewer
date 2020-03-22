@@ -19,7 +19,15 @@ const useStyles = makeStyles(theme => ({
   error: { padding: 50, color: DANGER_COLOR },
 }));
 
-function Component({ error, isLoaded, theme, isDark }) {
+function Component({
+  error,
+  isLoaded,
+  theme,
+  isDark,
+
+  networkSupported,
+  updateWallet,
+}) {
   const classes = useStyles();
 
   React.useEffect(() => {
@@ -28,7 +36,17 @@ function Component({ error, isLoaded, theme, isDark }) {
       root.classList.remove(isDark ? 'light' : 'dark');
       root.classList.add(isDark ? 'dark' : 'light');
     }
-  }, [isDark]);
+
+    if (window.ethereum) {
+      window.ethereum.on('chainChanged', () => {
+        document.location.reload();
+      });
+
+      window.ethereum.on('accountsChanged', function(accounts) {
+        updateWallet({ account: accounts[0] });
+      });
+    }
+  }, [isDark, networkSupported, updateWallet]);
 
   let pane;
   if (error) {
