@@ -5,7 +5,7 @@ import { HEADER_HEIGHT, MENU_WIDTH } from 'config';
 import { IconButton, Tooltip } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import LightIcon from '@material-ui/icons/Brightness7';
-import DarkIcon from '@material-ui/icons/Brightness4';
+import DarkIcon from '@material-ui/icons/Brightness2';
 import { isDarkSelector } from 'selectors/theme';
 import { makeStyles } from '@material-ui/core/styles';
 
