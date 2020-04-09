@@ -1,14 +1,9 @@
 {
   "name": "foam-mapviewer",
-  "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.1",
     "@material-ui/icons": "^4.9.1",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.2.1",
-    "@turf/turf": "^5.1.6",
     "bluebird": "^3.7.2",
     "history": "^4.10.1",
     "latlon-geohash": "^2.0.0",
@@ -33,7 +28,6 @@
   "devDependencies": {
     "eslint-config-prettier": "^6.9.0",
     "eslint-plugin-prettier": "^3.1.2",
-    "install": "^0.13.0",
     "node-sass": "^4.13.1",
     "prettier": "^1.19.1"
   },
