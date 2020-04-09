@@ -1,5 +1,5 @@
 run: node_modules
-	@npm run start
+	@yarn start
 
 deploy:
 	@git push || xargs echo
@@ -9,6 +9,6 @@ server:
 	@NODE_ENV=development node src/server.js
 
 node_modules:
-	@npm i
+	@yarn
 
 .PHONY: server deploy run
