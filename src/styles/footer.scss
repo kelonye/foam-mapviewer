@@ -1,0 +1,18 @@
+.footer {
+  z-index: 10;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  font-size: 11px;
+
+  .dark & {
+    background: $dark-color;
+  }
+}
+
+.mapboxgl-ctrl-bottom-right {
+  right: 0;
+  bottom: 20px;
+}

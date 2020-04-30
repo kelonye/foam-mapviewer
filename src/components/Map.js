@@ -23,9 +23,10 @@ class Component extends React.Component {
         className="map"
         style={{
           top: HEADER_HEIGHT,
-          left,
+          // left,
           height: `calc(100% - ${HEADER_HEIGHT}px)`,
-          width: `calc(100% - ${left}px)`,
+          // width: `calc(100% - ${left}px)`,
+          left: 0,
         }}
         ref={el => (this.mapEl = el)}
       ></div>

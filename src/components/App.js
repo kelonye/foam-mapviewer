@@ -10,6 +10,7 @@ import Menu from './Menu/Menu';
 import Snackbar from './Snackbar';
 import Loader from './Loader';
 import Modals from './Modals/Modals';
+import Footer from './Footer';
 import { Router } from 'react-router-dom';
 import { history } from 'store';
 import themeSelector, { isDarkSelector } from 'selectors/theme';
@@ -56,10 +57,11 @@ function Component({
       <div>
         <MapGL />
         <Header />
-        <Drawer />
-        <Menu />
+        {/*<Drawer />
+        <Menu />*/}
         <Snackbar />
         <Modals />
+        <Footer />
       </div>
     );
   } else {
