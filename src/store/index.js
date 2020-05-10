@@ -18,6 +18,4 @@ export const basename = '/';
 
 export const history = createBrowserHistory({ basename });
 
-store.dispatch({ type: 'noop' }); // required for some reason ??
-
 export default store;

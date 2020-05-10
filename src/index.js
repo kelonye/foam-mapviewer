@@ -7,6 +7,8 @@ import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import store from 'store';
 import App from 'components/App';
+import { ACTION_TYPE_IS_MOBILE } from 'config';
+import { isMobile } from 'utils';
 
 (async() => {
   document.documentElement.classList.remove('anim-loading');
@@ -14,6 +16,11 @@ import App from 'components/App';
   const root = document.createElement('div');
   root.setAttribute('id', 'root');
   document.body.appendChild(root);
+
+  store.dispatch({ type: 'noop' }); // required for some reason ??
+  window.addEventListener('resize', () =>
+    store.dispatch({ type: ACTION_TYPE_IS_MOBILE, payload: isMobile() })
+  );
 
   render(
     <Provider store={store}>

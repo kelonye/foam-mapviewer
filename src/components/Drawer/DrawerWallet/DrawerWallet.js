@@ -11,7 +11,6 @@ import Voting from './DrawerWalletVoting';
 import Signaling from './DrawerWalletSignaling';
 import { history } from 'store';
 import { SECONDARY_COLOR } from 'config';
-import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
   metaMaskButton: {

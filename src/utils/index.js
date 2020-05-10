@@ -37,3 +37,7 @@ export const updateEntry = (data, id, update) => {
   }
   return data;
 };
+
+export function isMobile() {
+  return window.outerWidth < 400;
+}

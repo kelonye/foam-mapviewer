@@ -25,7 +25,7 @@ function Component({
   isLoaded,
   theme,
   isDark,
-
+  isMobile,
   networkSupported,
   updateWallet,
 }) {
@@ -57,11 +57,15 @@ function Component({
       <div>
         <MapGL />
         <Header />
-        {/*<Drawer />
-        <Menu />*/}
+        {isMobile ? null : (
+          <>
+            <Drawer />
+            <Menu />
+          </>
+        )}
         <Snackbar />
         <Modals />
-        <Footer />
+        {!isMobile ? null : <Footer />}
       </div>
     );
   } else {
@@ -79,7 +83,7 @@ function Component({
 
 export default connect(state => {
   const { app, user } = state;
-  const { isLoaded, error } = app;
+  const { isLoaded, error, isMobile } = app;
   let err;
   if (error) {
     console.log(error);
@@ -92,5 +96,6 @@ export default connect(state => {
     error: err,
     theme: themeSelector(state),
     isDark: isDarkSelector(state),
+    isMobile,
   };
 }, mapDispatchToProps)(Component);

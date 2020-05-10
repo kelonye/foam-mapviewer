@@ -16,10 +16,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function Component({ toggleMenu, toggleTheme, isDark }) {
+function Component({ toggleMenu, toggleTheme, isDark, isMobile }) {
   const classes = useStyles();
 
-  const left = (
+  const left = isMobile ? (
+    <div style={{ marginLeft: 15 }}></div>
+  ) : (
     <div className="flex flex--align-center flex--grow">
       <span className="menu-button-container" style={{ width: MENU_WIDTH }}>
         <IconButton
@@ -63,8 +65,10 @@ function Component({ toggleMenu, toggleTheme, isDark }) {
 }
 
 const mapStateToProps = state => {
+  const { isMobile } = state.app;
   return {
     isDark: isDarkSelector(state),
+    isMobile,
   };
 };
 

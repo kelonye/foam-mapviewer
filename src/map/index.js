@@ -20,7 +20,7 @@ import { FOAM_TOKEN_DECIMALS, WEB3 } from 'utils/wallet';
 
 mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 
-export default new (class {
+const map = (window.map = new (class {
   constructor() {
     this.fetchLayersData = _.throttle(this.fetchLayersData, 2000);
   }
@@ -278,4 +278,6 @@ export default new (class {
       this.poiBeingApplied.remove();
     }
   }
-})();
+})());
+
+export default map;
