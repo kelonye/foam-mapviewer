@@ -56,7 +56,7 @@ function Component({ toggleMenu, toggleTheme, isDark, isMobile }) {
       {left}
 
       <div className="header__sep">
-        <div className="header__title-text">FOAM Map Viewer</div>
+        <div className="header__title-text">FOAM Map</div>
       </div>
 
       {right}
