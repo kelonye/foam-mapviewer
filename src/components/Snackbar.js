@@ -14,7 +14,7 @@ function Component({ isAddingPOI, setIsAddingPOI }) {
       message = 'Click on map to add the new Point of Interest...';
       action = (
         <React.Fragment>
-          <Button color="secondary" size="small" onClick={e => handleClose(e)}>
+          <Button color="primary" size="small" onClick={e => handleClose(e)}>
             CANCEL
           </Button>
         </React.Fragment>

@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom';
 const Component = () => {
   return (
     <div>
-      <h4 className="drawer--title">Welcome Cartographer!</h4>
-      <div className="drawer--content">
+      <h4 className="drawer__title">Welcome Cartographer!</h4>
+      <div className="drawer__content">
         <p>
           On the FOAM Map, you create, curate, and search a consensus-driven
           map. Cartographers sort and verify points of interest, such as
@@ -18,8 +18,8 @@ const Component = () => {
 
         <h3>First things first</h3>
         <p>Our guide covers everything you need to start using the FOAM Map.</p>
-        <Link to="https://mapguide.foam.space/en/">
-          <Button variant="outlined" color="secondary" type="submit" fullWidth>
+        <Link to={'/places'}>
+          <Button variant="contained" color="primary" type="submit" fullWidth>
             Get Started
           </Button>
         </Link>

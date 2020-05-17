@@ -1,7 +1,7 @@
 import Promise from 'bluebird';
 import foamToken from 'data/abis/token';
 import foamRegistry from 'data/abis/registry';
-import store from 'store';
+import store from 'utils/store';
 import Web3 from 'web3';
 
 export const WEB3 = new Web3(
@@ -12,8 +12,6 @@ export const WEB3 = new Web3(
       )
 );
 window.WEB3 = WEB3;
-
-export const FOAM_TOKEN_DECIMALS = new WEB3.utils.BN('1000000000000000000');
 
 const ABIS = {
   foamToken,

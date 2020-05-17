@@ -6,7 +6,7 @@ import Joyride, { STATUS } from 'react-joyride';
 
 const STEPS = [
   {
-    target: '[data-tour=layers]',
+    target: '[data-tour=places]',
     content: 'Filter Points of Interests, Signals etc on map.',
   },
   {

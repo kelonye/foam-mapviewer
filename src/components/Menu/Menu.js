@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
 import { HEADER_HEIGHT, MENU_WIDTH } from 'config';
-import LayersIcon from '@material-ui/icons/Layers';
+import PlacesIcon from '@material-ui/icons/Layers';
 import WalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import AddIcon from '@material-ui/icons/Add';
 import HelpIcon from '@material-ui/icons/Help';
@@ -12,10 +12,10 @@ import Add from './MenuAdd';
 
 const BUTTONS = [
   {
-    type: 'layers',
-    tip: 'Layers',
-    label: 'Layers',
-    Icon: LayersIcon,
+    type: 'places',
+    tip: 'Places',
+    label: 'Places',
+    Icon: PlacesIcon,
     route: true,
   },
   {

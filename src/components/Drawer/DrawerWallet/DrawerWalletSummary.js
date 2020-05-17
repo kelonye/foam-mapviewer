@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import FOAM from 'components/FOAM';
 import { Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { SECONDARY_COLOR } from 'config';
+import { PRIMARY_COLOR } from 'config';
 import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   },
   small: { fontSize: 10 },
   link: {
-    color: SECONDARY_COLOR,
+    color: PRIMARY_COLOR,
     textTransform: 'uppercase',
     fontSize: 10,
     marginLeft: 5,

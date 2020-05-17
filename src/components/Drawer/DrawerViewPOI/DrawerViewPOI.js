@@ -3,12 +3,14 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
 import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
 import { Typography, Chip, Button } from '@material-ui/core';
-import { WEB3, FOAM_TOKEN_DECIMALS } from 'utils/wallet';
-import xhr from 'utils/xhr';
+import { loadPOI } from 'utils/foam';
+import sl from 'utils/sl';
 import Geohash from 'latlon-geohash';
 import { Link } from 'react-router-dom';
 import Loader from 'components/Loader';
+import Close from 'components/Drawer/DrawerClose';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,8 +39,11 @@ const useStyles = makeStyles(theme => ({
       opacity: 0.8,
     },
   },
-  challengeContainer: {
+  footer: {
     marginTop: 20,
+  },
+  footerBtn: {
+    marginBottom: 15,
   },
 }));
 
@@ -48,48 +53,50 @@ const Component = ({
   },
   account,
   showDrawer,
+  toggleBookmark,
+  isBookmarked,
 }) => {
   const classes = useStyles();
-  const [
-    {
-      name,
-      address,
-      status,
-      description,
-      phone,
-      web,
-      geohash,
-      tags = [],
-      foam,
-    },
-    setPOI,
-  ] = React.useState({});
-  const [isLoaded, setIsLoaded] = React.useState(false);
+  const [poi, setPOI] = React.useState({});
+  const [isLoading, setIsLoading] = React.useState(false);
+  const {
+    name,
+    address,
+    status,
+    description,
+    phone,
+    web,
+    geohash,
+    tags = [],
+    foam,
+  } = poi;
 
   const onMount = async() => {
-    setIsLoaded(false);
-
-    const {
-      data: {
-        data,
-        state: { deposit },
-      },
-    } = await xhr('get', `/poi/${listingHash}`);
-    data.foam = WEB3.utils
-      .toBN(deposit)
-      .div(FOAM_TOKEN_DECIMALS)
-      .toNumber();
-    setPOI(data);
-    setIsLoaded(true);
+    setIsLoading(true);
+    setPOI(await loadPOI(listingHash));
+    setIsLoading(false);
   };
 
   React.useEffect(
     () => {
       onMount();
-      showDrawer(url);
-    }, // eslint-disable-next-line react-hooks/exhaustive-deps
-    [listingHash]
+    },
+    [listingHash, loadPOI] // eslint-disable-line react-hooks/exhaustive-deps
   );
+
+  React.useEffect(() => {
+    showDrawer(url);
+  }, [showDrawer]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const onToggleBookmark = async() => {
+    await toggleBookmark({ ...poi, listingHash });
+    sl(
+      'success',
+      isBookmarked
+        ? 'Successfully removed place from bookmarks'
+        : 'Successfully added the place to your bookmarks.'
+    );
+  };
 
   const { lon, lat } = !geohash ? {} : Geohash.decode(geohash);
 
@@ -147,9 +154,10 @@ const Component = ({
 
   return (
     <div>
-      <h4 className="drawer--title">Point of Interest</h4>
-      <div className="drawer--content">
-        {!isLoaded ? (
+      <Close goBack />
+      <h4 className="drawer__title drawer__title--padded">Point of Interest</h4>
+      <div className="drawer__content">
+        {isLoading ? (
           <Loader />
         ) : (
           <React.Fragment>
@@ -163,20 +171,37 @@ const Component = ({
               </div>
             ))}
 
-            <Link
-              to={!account ? '#' : `/poi/${listingHash}/challenge`}
-              className={classes.challengeContainer}
-            >
-              <Button
-                variant="outlined"
-                color="secondary"
-                type="submit"
-                fullWidth
-                disabled={!account}
-              >
-                Challenge
-              </Button>
-            </Link>
+            <div className={clsx('flex', 'flex--column', classes.footer)}>
+              <div className={classes.footerBtn}>
+                <Button variant="contained" color="primary" fullWidth>
+                  Get Directions
+                </Button>
+              </div>
+
+              <div className={classes.footerBtn}>
+                <Button
+                  variant="contained"
+                  color="default"
+                  onClick={onToggleBookmark}
+                  fullWidth
+                >
+                  {isBookmarked ? 'Unbookmark' : 'Bookmark'}
+                </Button>
+              </div>
+
+              <div className={classes.footerBtn}>
+                <Link to={!account ? '#' : `/poi/${listingHash}/challenge`}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    fullWidth
+                    disabled={!account}
+                  >
+                    Challenge
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </React.Fragment>
         )}
       </div>
@@ -186,14 +211,14 @@ const Component = ({
 
 export default connect(
   (
-    { wallet: { account } },
+    { wallet: { account }, map: { bookmarksMap } },
     {
       match: {
         params: { listingHash },
       },
     }
   ) => {
-    return { account };
+    return { account, isBookmarked: bookmarksMap[listingHash] };
   },
   mapDispatchToProps
 )(Component);

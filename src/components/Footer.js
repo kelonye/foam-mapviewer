@@ -1,39 +1,47 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import * as mapDispatchToProps from 'actions';
+import { withRouter } from 'react-router-dom';
 import T1Icon from '@material-ui/icons/Explore';
 import T2Icon from '@material-ui/icons/Map';
-import T3Icon from '@material-ui/icons/Search';
+import T3Icon from '@material-ui/icons/Bookmarks';
 import T4Icon from '@material-ui/icons/AccountBalanceWallet';
 import { Rnd } from 'react-rnd';
 import { Route, Switch, Link } from 'react-router-dom';
+import clsx from 'clsx';
 
-import Layers from 'components/Drawer/DrawerLayers';
+import Welcome from 'components/Drawer/DrawerWelcome/DrawerWelcome';
+import Places from 'components/Drawer/DrawerPlaces/DrawerPlaces';
+import PlacesFilterSort from 'components/Drawer/DrawerPlaces/DrawerPlacesFilterSort';
+import MyPlaces from 'components/Drawer/DrawerMyPlaces/DrawerMyPlaces';
+import Bookmarks from 'components/Drawer/DrawerBookmarks/DrawerBookmarks';
 import Wallet from 'components/Drawer/DrawerWallet/DrawerWallet';
-// import Welcome from 'components/Drawer/DrawerWelcome';
-import AddPOI from 'components/Drawer/DrawerAddPOI';
-import ViewPOI from 'components/Drawer/DrawerViewPOI';
+import AddPOI from 'components/Drawer/DrawerAddPOI/DrawerAddPOI';
+import ViewPOI from 'components/Drawer/DrawerViewPOI/DrawerViewPOI';
 
 const TABS = [
-  { label: 'Near Me', Icon: T1Icon, link: '/layers' },
-  { label: 'My Places', Icon: T2Icon, link: '/layers' },
-  { label: 'Search', Icon: T3Icon, link: '/layers' },
+  { label: 'Near Me', Icon: T1Icon, link: '/places' },
+  { label: 'My Places', Icon: T2Icon, link: '/my-places' },
+  { label: 'Bookmarks', Icon: T3Icon, link: '/bookmarks' },
   { label: 'Wallet', Icon: T4Icon, link: '/wallet' },
 ];
 
-export default function({ amount }) {
-  const [y, setY] = React.useState(200);
+const DEFAULT_Y = 200;
+const H = window.outerHeight;
+const W = window.outerWidth;
+
+function Component({ amount }) {
+  const [y, setY] = React.useState(DEFAULT_Y);
 
   return (
     <div>
       <Rnd
-        style={{
-          background: 'rgb(52, 51, 51)',
-          boxShadow: 'rgba(0, 0, 0, 0.8) 0px 0px 10px',
-        }}
+        className="footer-drawer drawer"
         default={{
           x: 0,
-          y: 200,
-          width: 320,
-          height: 200,
+          y: DEFAULT_Y,
+          width: W,
+          height: H - DEFAULT_Y,
         }}
         enableResizing={{
           top: false,
@@ -46,18 +54,26 @@ export default function({ amount }) {
           topLeft: false,
         }}
         dragAxis={'y'}
-        size={{ width: '100%', height: window.outerHeight - y }}
+        size={{ width: '100%', height: H - y }}
         position={{ x: 0, y }}
         onDrag={(e, { y }) => {
           setY(y);
+          // setY(y < 0 ? 0 : y);
         }}
       >
         <Switch>
-          <Route path={'/layers'} component={Layers} />
+          <Route exact path={'/places'} component={Places} />
+          <Route
+            exact
+            path={'/places/filter+sort'}
+            component={PlacesFilterSort}
+          />
+          <Route exact path={'/my-places'} component={MyPlaces} />
+          <Route exact path={'/bookmarks'} component={Bookmarks} />
           <Route path={'/wallet'} component={Wallet} />
-          <Route path={'/add-poi/:lng/:lat'} component={AddPOI} />
-          <Route path={'/poi/:listingHash'} component={ViewPOI} />
-          {/*<Route path={'/'} component={Welcome} />*/}
+          <Route exact path={'/add-poi/:lng/:lat'} component={AddPOI} />
+          <Route exact path={'/poi/:listingHash'} component={ViewPOI} />
+          <Route path={'/'} component={Welcome} />
         </Switch>
       </Rnd>
 
@@ -65,9 +81,11 @@ export default function({ amount }) {
         {TABS.map(({ label, Icon, link }) => (
           <Link
             to={link}
-            className="flex flex--column flex--grow flex--justify-center flex--align-center"
+            className={clsx(
+              'flex flex--column flex--grow flex--justify-center flex--align-center',
+              { active: ~window.location.pathname.search(link) }
+            )}
             key={label}
-            style={{ color: 'white' }}
           >
             <div>{<Icon />}</div>
             <div>{label}</div>
@@ -77,3 +95,9 @@ export default function({ amount }) {
     </div>
   );
 }
+
+export default withRouter(
+  connect(state => {
+    return {};
+  }, mapDispatchToProps)(Component)
+);

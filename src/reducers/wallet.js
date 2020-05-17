@@ -1,7 +1,7 @@
 import { ACTION_TYPE_UPDATE_WALLET } from 'config';
 
 const DEFAULT_STATE = {
-  isLoaded: false,
+  isLoading: false,
   contracts: {},
 };
 

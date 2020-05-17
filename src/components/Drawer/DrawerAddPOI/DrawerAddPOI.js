@@ -146,8 +146,8 @@ const Component = ({
 
   return (
     <form type="action" onSubmit={onFormSubmit}>
-      <h4 className="drawer--title">Add Point of Interest</h4>
-      <div className="drawer--content flex flex--column">
+      <h4 className="drawer__title">Add Point of Interest</h4>
+      <div className="drawer__content flex flex--column">
         <div className={classes.row}>
           <TextField
             id="name"
@@ -207,7 +207,7 @@ const Component = ({
               <Chip
                 key={tag}
                 label={tag}
-                color={tags[tag] ? 'secondary' : 'default'}
+                color={tags[tag] ? 'primary' : 'default'}
                 onClick={() => toggleTag(tag)}
                 className={classes.chip}
               />
@@ -258,8 +258,8 @@ const Component = ({
         </div>
         <div className={classes.row}>
           <Button
-            variant="outlined"
-            color="secondary"
+            variant="contained"
+            color="primary"
             type="submit"
             className={clsx(classes.button, classes.addButton)}
             disabled={!hasMinimumFOAM}
@@ -267,7 +267,7 @@ const Component = ({
             Add
           </Button>
           <Button
-            variant="outlined"
+            variant="contained"
             className={classes.button}
             onClick={() => {
               goHome();

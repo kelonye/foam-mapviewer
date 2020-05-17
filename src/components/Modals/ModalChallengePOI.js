@@ -124,7 +124,7 @@ function Component({
         <Button onClick={handleClose} color="default">
           Cancel
         </Button>
-        <Button onClick={handleSubmit} color="secondary">
+        <Button onClick={handleSubmit} color="primary">
           Challenge
         </Button>
       </DialogActions>

@@ -1,5 +1,8 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import { SECONDARY_COLOR } from 'config';
+import {
+  PRIMARY_COLOR,
+  // SECONDARY_COLOR
+} from 'config';
 import { createSelector } from 'reselect';
 
 export const isDarkSelector = createSelector(
@@ -10,23 +13,16 @@ export const isDarkSelector = createSelector(
 export default createSelector(isDarkSelector, isDark =>
   createMuiTheme({
     typography: {
-      fontFamily: [
-        'Roboto',
-        'Avenir',
-        'proxima-nova',
-        'Source Sans Pro',
-        'Avenir',
-        'sans-serif',
-      ].join(','),
+      fontFamily: ['Inter', 'sans-serif'].join(','),
     },
     palette: {
       type: isDark ? 'dark' : 'light',
       primary: {
-        main: isDark ? '#ffffff' : '#373836',
+        main: PRIMARY_COLOR, // isDark ? '#ffffff' : '#373836',
       },
-      secondary: {
-        main: SECONDARY_COLOR,
-      },
+      // secondary: {
+      //   main: SECONDARY_COLOR,
+      // },
     },
     overrides: {
       MuiButton: {

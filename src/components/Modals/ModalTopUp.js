@@ -43,10 +43,10 @@ function Component({ handleClose, hideDrawer }) {
           Select one of the options to purchase FOAM:
         </DialogContentText>
         <div className="flex flex--justify-center">
-          <Button color="default" variant="outlined" className={classes.button}>
+          <Button color="default" variant="contained" className={classes.button}>
             Radar Relay
           </Button>
-          <Button color="default" variant="outlined" className={classes.button}>
+          <Button color="default" variant="contained" className={classes.button}>
             Uniswap
           </Button>
         </div>

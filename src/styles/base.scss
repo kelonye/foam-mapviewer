@@ -4,7 +4,7 @@ a {
 
 // a,
 // a * {
-//   color: #f50057;
+//   color: #2f80ed;
 // }
 
 html,
@@ -27,6 +27,10 @@ body {
   .dark {
     color: white;
   }
+}
+
+body > iframe {
+  display: none; // todo
 }
 
 .user-selectable {

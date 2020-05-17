@@ -39,5 +39,5 @@ export const updateEntry = (data, id, update) => {
 };
 
 export function isMobile() {
-  return window.outerWidth < 400;
+  return true; // window.outerWidth < 400;
 }

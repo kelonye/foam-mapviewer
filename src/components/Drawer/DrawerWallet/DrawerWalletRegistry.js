@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
-import { MINIMUM_FOAM_STAKE } from 'config';
-import { FOAM_TOKEN_DECIMALS, WEB3 } from 'utils/wallet';
 import { makeStyles } from '@material-ui/core/styles';
-import sl from 'utils/sl';
 import { TextField, Button } from '@material-ui/core';
+import { MINIMUM_FOAM_STAKE } from 'config';
+import sl from 'utils/sl';
+import { deserializeFoam } from 'utils/foam';
 
 const useStyles = makeStyles(theme => ({
   row: {
@@ -57,22 +57,15 @@ function Component({ approveFOAM, approved }) {
             shrink: true,
           }}
           placeholder={`${MINIMUM_FOAM_STAKE} FOAM minimum...`}
-          defaultValue={
-            !approved
-              ? 0
-              : WEB3.utils
-                  .toBN(approved)
-                  .div(FOAM_TOKEN_DECIMALS)
-                  .toNumber()
-          }
+          defaultValue={!approved ? 0 : deserializeFoam(approved)}
           fullWidth
           required
         />
       </div>
       <div className={classes.row}>
         <Button
-          variant="outlined"
-          color="secondary"
+          variant="contained"
+          color="primary"
           type="submit"
           className={classes.button}
         >
