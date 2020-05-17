@@ -1,12 +1,10 @@
 import Promise from 'bluebird';
-import { ACTION_TYPE_UPDATE_WALLET } from 'config';
-import {
-  WEB3,
-  FOAM_TOKEN_DECIMALS,
-  getTokenContract,
-  getRegistryContract,
-} from 'utils/wallet';
+import { ACTION_TYPE_UPDATE_WALLET, ACTION_TYPE_UPDATE_DATA } from 'config';
+import { WEB3, getTokenContract, getRegistryContract } from 'utils/wallet';
+import { serializeFoam } from 'utils/foam';
 import xhr from 'utils/xhr';
+import * as threeBox from 'utils/3box';
+import { loadPOI } from 'utils/foam';
 
 export function loadWallet() {
   return async(dispatch, getState) => {
@@ -16,7 +14,7 @@ export function loadWallet() {
       } = getState();
       if (!account) return;
 
-      dispatch(updateWallet({ isLoaded: false }));
+      dispatch(updateWallet({ isLoading: true }));
 
       const tokenContract = getTokenContract();
       const registryContract = getRegistryContract();
@@ -55,7 +53,7 @@ export function loadWallet() {
         })
       );
     } finally {
-      dispatch(updateWallet({ isLoaded: true }));
+      dispatch(updateWallet({ isLoading: false }));
     }
   };
 }
@@ -74,16 +72,20 @@ export function updateWallet(payload) {
   };
 }
 
+export function updateAccount(account) {
+  return async(dispatch, getState) => {
+    dispatch(updateWallet({ account }));
+  };
+}
+
 export function createPOI(fields, { foam }) {
   return async(dispatch, getState) => {
-    dispatch(updateWallet({ isLoaded: false }));
+    dispatch(updateData({ isLoadingPlaces: true }));
 
     try {
       const ipfsAddress = await xhr('post', '/poi/ipfs', fields);
       const listingHash = WEB3.utils.sha3(ipfsAddress);
-      const amount = WEB3.utils.toHex(
-        new WEB3.utils.BN(foam).mul(FOAM_TOKEN_DECIMALS)
-      );
+      const amount = serializeFoam(foam);
 
       await getRegistryContract().write(
         'apply',
@@ -92,7 +94,7 @@ export function createPOI(fields, { foam }) {
         ipfsAddress
       );
     } finally {
-      dispatch(updateWallet({ isLoaded: true }));
+      dispatch(updateData({ isLoadingPlaces: false }));
     }
   };
 }
@@ -105,7 +107,7 @@ export function approveFOAM(amount) {
     await getTokenContract().write(
       'approve',
       contracts.foamRegistry,
-      WEB3.utils.toHex(new WEB3.utils.BN(amount).mul(FOAM_TOKEN_DECIMALS))
+      serializeFoam(amount)
     );
   };
 }
@@ -126,5 +128,40 @@ export function loadWalletApproved(amount) {
         ),
       })
     );
+  };
+}
+
+export function updateData(payload) {
+  return { type: ACTION_TYPE_UPDATE_DATA, payload };
+}
+
+export function loadBookmarks() {
+  return async(dispatch, getState) => {
+    dispatch(updateData({ isLoadingBookmarks: true }));
+    const bookmarksMap = await threeBox.loadBookmarks();
+    const bookmarksList = await Promise.all(
+      Object.keys(bookmarksMap).map(listingHash => loadPOI(listingHash))
+    );
+    dispatch(
+      updateData({ bookmarksList, bookmarksMap, isLoadingBookmarks: false })
+    );
+  };
+}
+
+export function toggleBookmark(listingHash, poi) {
+  return async(dispatch, getState) => {
+    const bookmarksMap = Object.assign({}, getState().map.bookmarksMap);
+    const adding = !bookmarksMap[listingHash];
+    if (adding) {
+      bookmarksMap[listingHash] = true;
+    } else {
+      delete bookmarksMap[listingHash];
+    }
+    await threeBox.saveBookmarks(bookmarksMap);
+    const bookmarksList = Object.values(bookmarksMap);
+    if (adding) {
+      bookmarksList.push(poi);
+    }
+    dispatch(updateData({ bookmarksMap, bookmarksList }));
   };
 }

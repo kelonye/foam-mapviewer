@@ -10,10 +10,12 @@ import Menu from './Menu/Menu';
 import Snackbar from './Snackbar';
 import Loader from './Loader';
 import Modals from './Modals/Modals';
+import Footer from './Footer';
 import { Router } from 'react-router-dom';
-import { history } from 'store';
+import { history } from 'utils/store';
 import themeSelector, { isDarkSelector } from 'selectors/theme';
 import { CssBaseline } from '@material-ui/core';
+import * as threeBox from 'utils/3box';
 
 const useStyles = makeStyles(theme => ({
   error: { padding: 50, color: DANGER_COLOR },
@@ -24,9 +26,9 @@ function Component({
   isLoaded,
   theme,
   isDark,
-
-  networkSupported,
-  updateWallet,
+  isMobile,
+  account,
+  loadBookmarks,
 }) {
   const classes = useStyles();
 
@@ -36,17 +38,18 @@ function Component({
       root.classList.remove(isDark ? 'light' : 'dark');
       root.classList.add(isDark ? 'dark' : 'light');
     }
+  }, [isDark]);
 
-    if (window.ethereum) {
-      window.ethereum.on('chainChanged', () => {
-        document.location.reload();
-      });
-
-      window.ethereum.on('accountsChanged', function(accounts) {
-        updateWallet({ account: accounts[0] });
-      });
+  const reload3Box = async() => {
+    if (account) {
+      await threeBox.setUp(account);
+      await loadBookmarks();
     }
-  }, [isDark, networkSupported, updateWallet]);
+  };
+
+  React.useEffect(() => {
+    reload3Box();
+  }, [account, loadBookmarks]); // eslint-disable-line react-hooks/exhaustive-deps
 
   let pane;
   if (error) {
@@ -56,10 +59,15 @@ function Component({
       <div>
         <MapGL />
         <Header />
-        <Drawer />
-        <Menu />
+        {isMobile ? null : (
+          <>
+            <Drawer />
+            <Menu />
+          </>
+        )}
         <Snackbar />
         <Modals />
+        {!isMobile ? null : <Footer />}
       </div>
     );
   } else {
@@ -76,8 +84,12 @@ function Component({
 }
 
 export default connect(state => {
-  const { app, user } = state;
-  const { isLoaded, error } = app;
+  const {
+    app,
+    user,
+    wallet: { account },
+  } = state;
+  const { isLoaded, error, isMobile } = app;
   let err;
   if (error) {
     console.log(error);
@@ -90,5 +102,7 @@ export default connect(state => {
     error: err,
     theme: themeSelector(state),
     isDark: isDarkSelector(state),
+    isMobile,
+    account,
   };
 }, mapDispatchToProps)(Component);

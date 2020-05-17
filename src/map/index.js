@@ -1,11 +1,10 @@
 import poisLayer from './pois-layer';
-import store from 'store';
+import store from 'utils/store';
 import mapboxgl from 'mapbox-gl';
 import { poisMapDataSelector } from 'selectors/map';
-import { showDrawer, setIsAddingPOI } from 'actions';
+import { showDrawer, setIsAddingPOI, updateData } from 'actions';
 import {
-  ACTION_TYPE_UPDATE_LAYERS_DATA,
-  LAYER_TYPE_POI,
+  ACTION_TYPE_UPDATE_DATA,
   DEFAULT_LOCATION,
   // IS_DEV,
   MAPBOX_ACCESS_TOKEN,
@@ -16,11 +15,11 @@ import xhr from 'utils/xhr';
 import _ from 'lodash';
 import cache from 'utils/cache';
 import pinSVG from './pin';
-import { FOAM_TOKEN_DECIMALS, WEB3 } from 'utils/wallet';
+import { deserializeFoam } from 'utils/foam';
 
 mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 
-export default new (class {
+const map = (window.map = new (class {
   constructor() {
     this.fetchLayersData = _.throttle(this.fetchLayersData, 2000);
   }
@@ -161,7 +160,7 @@ export default new (class {
 
   async updatePOIs() {
     await store.dispatch({
-      type: ACTION_TYPE_UPDATE_LAYERS_DATA,
+      type: ACTION_TYPE_UPDATE_DATA,
       payload: await this.fetchLayersData(),
     });
     this.updatePOIsData();
@@ -176,7 +175,7 @@ export default new (class {
         data,
       });
       this.map.addLayer(poisLayer);
-      if (!window.location.pathname) store.dispatch(showDrawer('/layers'));
+      if (!window.location.pathname) store.dispatch(showDrawer('/places'));
     } else {
       poisSource.setData(data);
     }
@@ -184,6 +183,8 @@ export default new (class {
 
   async fetchLayersData() {
     const [[swLng, swLat], [neLng, neLat]] = this.map.getBounds().toArray();
+
+    store.dispatch(updateData({ isLoadingPlaces: true }));
 
     const query = {
       neLat,
@@ -224,10 +225,7 @@ export default new (class {
             owner,
             name,
             status,
-            foam: WEB3.utils
-              .toBN(deposit)
-              .div(FOAM_TOKEN_DECIMALS)
-              .toNumber(),
+            foam: deserializeFoam(deposit),
             tags: ptags,
             ...Geohash.decode(geohash),
           };
@@ -235,18 +233,16 @@ export default new (class {
           poisByListingHash[poi.listingHash] = poi;
         }
       );
-    } catch (e) {}
+    } catch (e) {
+    } finally {
+      store.dispatch(updateData({ isLoadingPlaces: false }));
+    }
 
-    return [
-      {
-        type: LAYER_TYPE_POI,
-        data: {
-          poisIds,
-          poisByListingHash,
-          tags,
-        },
-      },
-    ];
+    return {
+      poisIds,
+      poisByListingHash,
+      tags,
+    };
   }
 
   getStyle() {
@@ -278,4 +274,6 @@ export default new (class {
       this.poiBeingApplied.remove();
     }
   }
-})();
+})());
+
+export default map;

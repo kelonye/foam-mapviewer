@@ -1,6 +1,7 @@
 import compose from 'utils/compose';
 import LoadData from './data';
 import MatchLocationPath from './match-location-path';
+import { isMobile } from 'utils';
 
 class Init {
   async load(getState) {
@@ -14,6 +15,8 @@ class Init {
     }
 
     this.state.app.isLoaded = true;
+
+    this.state.app.isMobile = isMobile();
 
     return this.state;
   }

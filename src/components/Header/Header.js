@@ -10,16 +10,21 @@ import { isDarkSelector } from 'selectors/theme';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
+  container: props => ({
+    backgroundColor: theme.backgroundColor,
+  }),
   icon: {
     height: 28,
     width: 28,
   },
 }));
 
-function Component({ toggleMenu, toggleTheme, isDark }) {
+function Component({ toggleMenu, toggleTheme, isDark, isMobile }) {
   const classes = useStyles();
 
-  const left = (
+  const left = isMobile ? (
+    <div style={{ marginLeft: 15 }}></div>
+  ) : (
     <div className="flex flex--align-center flex--grow">
       <span className="menu-button-container" style={{ width: MENU_WIDTH }}>
         <IconButton
@@ -53,8 +58,8 @@ function Component({ toggleMenu, toggleTheme, isDark }) {
     >
       {left}
 
-      <div className="header__sep">
-        <div className="header__title-text">FOAM Map Viewer</div>
+      <div className="header__sep flex flex--justify-center">
+        <img src="/logo.png" alt="FOAM logo" height="30px" />
       </div>
 
       {right}
@@ -63,8 +68,10 @@ function Component({ toggleMenu, toggleTheme, isDark }) {
 }
 
 const mapStateToProps = state => {
+  const { isMobile } = state.app;
   return {
     isDark: isDarkSelector(state),
+    isMobile,
   };
 };
 

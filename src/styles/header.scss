@@ -4,9 +4,11 @@
   left: 0;
   right: 0;
   border-bottom: 1px solid $border-color;
+  background: white;
 
   .dark & {
     border-bottom-color: $dark-border-color;
+    background: $dark-color;
   }
 
   &__menu {

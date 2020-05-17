@@ -2,16 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
 import { Button, Tabs, Tab } from '@material-ui/core';
-import Loader from 'components/Loader';
 import { makeStyles } from '@material-ui/core/styles';
 import { Route, Switch } from 'react-router-dom';
+import Loader from 'components/Loader';
 import Summary from './DrawerWalletSummary';
 import Registry from './DrawerWalletRegistry';
 import Voting from './DrawerWalletVoting';
 import Signaling from './DrawerWalletSignaling';
-import { history } from 'store';
+import { history } from 'utils/store';
 import { SECONDARY_COLOR } from 'config';
-import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
   metaMaskButton: {
@@ -42,7 +41,7 @@ const ROUTE_COMPONENTS = [Summary, Registry, Voting, Signaling];
 const ROUTE_LABELS = ['Summary', 'Registry', 'Voting', 'Signaling'];
 
 const Component = ({
-  isLoaded,
+  isLoading,
   loadWallet,
   account,
   activateWallet,
@@ -70,15 +69,15 @@ const Component = ({
 
   return (
     <div>
-      <h4 className="drawer--title">Wallet</h4>
-      <div className="drawer--content">
-        {!isLoaded ? (
+      <h4 className="drawer__title">Wallet</h4>
+      <div className="drawer__content">
+        {isLoading ? (
           <Loader />
         ) : account ? (
           <div>
             <Tabs
               value={activeTab}
-              indicatorColor="secondary"
+              indicatorColor="primary"
               textColor="inherit"
               onChange={handleActiveTabChange}
               aria-label="tabs"

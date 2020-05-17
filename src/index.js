@@ -5,7 +5,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
-import store from 'store';
+import store from 'utils/store';
+import * as actions from 'actions';
 import App from 'components/App';
 
 (async() => {
@@ -14,6 +15,20 @@ import App from 'components/App';
   const root = document.createElement('div');
   root.setAttribute('id', 'root');
   document.body.appendChild(root);
+
+  store.dispatch({ type: 'noop' }); // required for some reason ??
+  window.addEventListener('resize', () =>
+    store.dispatch(actions.updateIsMobile())
+  );
+
+  if (window.ethereum) {
+    window.ethereum.on('chainChanged', () => {
+      document.location.reload();
+    });
+    window.ethereum.on('accountsChanged', function(accounts) {
+      store.dispatch(actions.updateAccount(accounts[0]));
+    });
+  }
 
   render(
     <Provider store={store}>

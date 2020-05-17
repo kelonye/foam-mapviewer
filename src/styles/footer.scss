@@ -1,0 +1,41 @@
+.footer {
+  z-index: 10;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  font-size: 11px;
+  background: white;
+
+  .dark & {
+    background: $dark-color;
+  }
+
+  a {
+    color: white;
+
+    &.active {
+      &,
+      &:visited {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+.footer-drawer {
+  .dark & {
+    background: $dark-4;
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 0px 10px;
+  }
+
+  .drawer__title--padded {
+    padding-left: 44px;
+  }
+}
+
+.mapboxgl-ctrl-bottom-right {
+  right: 0;
+  bottom: 20px;
+}

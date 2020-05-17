@@ -14,18 +14,21 @@ class Component extends React.Component {
     if (prevProps.left !== this.props.left) {
       map.map.resize();
     }
+    if (prevProps.isMobile !== this.props.isMobile) {
+      setTimeout(() => map.map.resize(), 301);
+    }
   }
 
   render() {
-    const { left } = this.props;
+    const { left, isMobile } = this.props;
     return (
       <div
         className="map"
         style={{
           top: HEADER_HEIGHT,
-          left,
+          left: isMobile ? 0 : left,
           height: `calc(100% - ${HEADER_HEIGHT}px)`,
-          width: `calc(100% - ${left}px)`,
+          ...(isMobile ? {} : { width: `calc(100% - ${left}px)` }),
         }}
         ref={el => (this.mapEl = el)}
       ></div>
@@ -34,7 +37,9 @@ class Component extends React.Component {
 }
 
 export default connect(state => {
+  const { isMobile } = state.app;
   return {
     left: widthSelector(state),
+    isMobile,
   };
 }, mapDispatchToProps)(Component);

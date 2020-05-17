@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { MENU_WIDTH, DRAWER_WIDTH, LAYER_TYPE_POI } from 'config';
+import { MENU_WIDTH, DRAWER_WIDTH } from 'config';
 import _ from 'lodash';
 
 export const leftSelector = createSelector(
@@ -13,17 +13,33 @@ export const leftSelector = createSelector(
   }
 );
 
+export const tagsArraySelector = createSelector(
+  state => state.map.tags,
+  tags =>
+    Object.entries(tags)
+      .filter(([, v]) => v)
+      .map(([k]) => k)
+);
+
+export const tagsSelector = createSelector(
+  state => state.map.tags,
+  tagsArraySelector,
+  tags => {
+    return _.orderBy(
+      Object.entries(tags).map(([name, visible]) => ({ name, visible })),
+      'name'
+    );
+  }
+);
+
 export const poisSelector = createSelector(
-  state => state.map.layers[LAYER_TYPE_POI].visible,
-  state => state.map.layers[LAYER_TYPE_POI].tagsArray,
-  state => state.map.layers[LAYER_TYPE_POI].poisIds,
-  state => state.map.layers[LAYER_TYPE_POI].poisByListingHash,
-  (visible, tags, poisIds, poisByListingHash) => {
-    return !visible
-      ? []
-      : poisIds
-          .map(poiId => poisByListingHash[poiId])
-          .filter(poi => !!_.intersection(poi.tags, tags).length);
+  tagsArraySelector,
+  state => state.map.poisIds,
+  state => state.map.poisByListingHash,
+  (tags, poisIds, poisByListingHash) => {
+    return poisIds
+      .map(poiId => poisByListingHash[poiId])
+      .filter(poi => !!_.intersection(poi.tags, tags).length);
   }
 );
 
