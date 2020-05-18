@@ -55,9 +55,10 @@ const Component = ({
   showDrawer,
   toggleBookmark,
   isBookmarked,
+  loadedPOI,
 }) => {
   const classes = useStyles();
-  const [poi, setPOI] = React.useState({});
+  const [poi, setPOI] = React.useState(loadedPOI || {});
   const [isLoading, setIsLoading] = React.useState(false);
   const {
     name,
@@ -72,9 +73,11 @@ const Component = ({
   } = poi;
 
   const onMount = async() => {
-    setIsLoading(true);
-    setPOI(await loadPOI(listingHash));
-    setIsLoading(false);
+    if (!loadedPOI) {
+      setIsLoading(true);
+      setPOI(await loadPOI(listingHash));
+      setIsLoading(false);
+    }
   };
 
   React.useEffect(
@@ -211,14 +214,18 @@ const Component = ({
 
 export default connect(
   (
-    { wallet: { account }, map: { bookmarksMap } },
+    { wallet: { account }, map: { bookmarksMap, poisByListingHash } },
     {
       match: {
         params: { listingHash },
       },
     }
   ) => {
-    return { account, isBookmarked: bookmarksMap[listingHash] };
+    return {
+      account,
+      isBookmarked: bookmarksMap[listingHash],
+      loadedPOI: poisByListingHash[listingHash],
+    };
   },
   mapDispatchToProps
 )(Component);
