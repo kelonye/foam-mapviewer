@@ -9,7 +9,7 @@ import store from 'utils/store';
 import * as actions from 'actions';
 import App from 'components/App';
 
-(async() => {
+(async () => {
   document.documentElement.classList.remove('anim-loading');
   document.getElementById('loader-container').remove();
   const root = document.createElement('div');
@@ -21,7 +21,7 @@ import App from 'components/App';
     store.dispatch(actions.updateIsMobile())
   );
 
-  if (window.ethereum) {
+  if (window.ethereum?.on) {
     window.ethereum.on('chainChanged', () => {
       document.location.reload();
     });

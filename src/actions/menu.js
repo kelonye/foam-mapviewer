@@ -1,13 +1,13 @@
 import { ACTION_TYPE_TOGGLE_MENU } from 'config';
-import { hideDrawer } from 'actions';
+import * as actions from 'actions';
 
 export function toggleMenu(payload) {
-  return async(dispatch, getState) => {
+  return async (dispatch, getState) => {
     dispatch({ type: ACTION_TYPE_TOGGLE_MENU });
 
     const { menu, drawer } = getState();
     if (!menu.isShowing && drawer.isShowing) {
-      dispatch(hideDrawer());
+      dispatch(actions.hideDrawer());
     }
   };
 }

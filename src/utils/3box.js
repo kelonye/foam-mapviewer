@@ -41,13 +41,10 @@ export async function threeBox(k, v) {
 
 export async function loadBookmarks() {
   if (setupPromise) await setupPromise;
-  return ((await threeBox('bookmarks')) || []).reduce((ret, bookmark) => {
-    ret[bookmark] = true;
-    return ret;
-  }, {}); // new Map()
+  return (await threeBox('bookmarks')) || [];
 }
 
-export async function saveBookmarks(bookmarkMap) {
+export async function saveBookmarks(ids) {
   if (setupPromise) await setupPromise;
-  return await threeBox('bookmarks', Object.keys(bookmarkMap));
+  return await threeBox('bookmarks', ids);
 }

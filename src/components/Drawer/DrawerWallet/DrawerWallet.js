@@ -1,27 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
-import { Button, Tabs, Tab } from '@material-ui/core';
+import { Tabs, Tab } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Route, Switch } from 'react-router-dom';
-import Loader from 'components/Loader';
+import RequireAccount from 'components/RequireAccount';
 import Summary from './DrawerWalletSummary';
 import Registry from './DrawerWalletRegistry';
 import Voting from './DrawerWalletVoting';
 import Signaling from './DrawerWalletSignaling';
 import { history } from 'utils/store';
-import { SECONDARY_COLOR } from 'config';
 
 const useStyles = makeStyles(theme => ({
-  metaMaskButton: {
-    backgroundColor: '#f5841f',
-    boxShadow: 'none',
-    borderBottom: 'solid 4px #763e1a',
-    color: '#763e1a',
-    '&:hover': {
-      backgroundColor: '#f5841f',
-    },
-  },
   tab: {
     minWidth: 'auto',
     padding: 7,
@@ -30,25 +20,13 @@ const useStyles = makeStyles(theme => ({
   activeTabContent: {
     paddingTop: 20,
   },
-  walletError: {
-    color: SECONDARY_COLOR,
-    marginTop: 10,
-  },
 }));
 
 const ROUTES = ['/', '/registry', '/voting', '/signaling'];
 const ROUTE_COMPONENTS = [Summary, Registry, Voting, Signaling];
 const ROUTE_LABELS = ['Summary', 'Registry', 'Voting', 'Signaling'];
 
-const Component = ({
-  isLoading,
-  loadWallet,
-  account,
-  activateWallet,
-  path,
-  showDrawer,
-  match,
-}) => {
+const Component = ({ loadWallet, account, path, showDrawer, match }) => {
   const classes = useStyles();
   let activeTab = ROUTES.indexOf(path);
   activeTab = -1 === activeTab ? 0 : activeTab;
@@ -68,64 +46,35 @@ const Component = ({
   );
 
   return (
-    <div>
+    <div className={classes.container}>
       <h4 className="drawer__title">Wallet</h4>
       <div className="drawer__content">
-        {isLoading ? (
-          <Loader />
-        ) : account ? (
-          <div>
-            <Tabs
-              value={activeTab}
-              indicatorColor="primary"
-              textColor="inherit"
-              onChange={handleActiveTabChange}
-              aria-label="tabs"
-            >
-              {ROUTE_LABELS.map(label => (
-                <Tab className={classes.tab} key={label} {...{ label }} />
-              ))}
-            </Tabs>
+        <RequireAccount>
+          <Tabs
+            value={activeTab}
+            indicatorColor="primary"
+            textColor="inherit"
+            onChange={handleActiveTabChange}
+            aria-label="tabs"
+          >
+            {ROUTE_LABELS.map(label => (
+              <Tab className={classes.tab} key={label} {...{ label }} />
+            ))}
+          </Tabs>
 
-            <div className={classes.activeTabContent}>
-              <Switch>
-                {ROUTES.map((path, i) => (
-                  <Route
-                    exact
-                    key={path}
-                    path={`/wallet${ROUTES[i]}`}
-                    component={ROUTE_COMPONENTS[i]}
-                  />
-                ))}
-              </Switch>
-            </div>
+          <div className={classes.activeTabContent}>
+            <Switch>
+              {ROUTES.map((path, i) => (
+                <Route
+                  exact
+                  key={path}
+                  path={`/wallet${ROUTES[i]}`}
+                  component={ROUTE_COMPONENTS[i]}
+                />
+              ))}
+            </Switch>
           </div>
-        ) : (
-          <div>
-            <Button
-              variant="contained"
-              onClick={activateWallet}
-              className={classes.metaMaskButton}
-              fullWidth
-            >
-              Connect to Wallet
-            </Button>
-            {/*
-            <div
-              className={clsx(
-                classes.walletError,
-                'flex',
-                'flex--justify-center',
-                'center-align'
-              )}
-            >
-              {account
-                ? null
-                : 'A Web 3.0-enabled Ethereum Wallet (such as MetaMask) is required'}
-            </div>
-            */}
-          </div>
-        )}
+        </RequireAccount>
       </div>
     </div>
   );
@@ -133,7 +82,6 @@ const Component = ({
 
 export default connect(({ wallet }, { match }) => {
   return {
-    ...wallet,
     path: window.location.pathname.replace('/wallet', ''),
   };
 }, mapDispatchToProps)(Component);

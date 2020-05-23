@@ -13,38 +13,32 @@ export const leftSelector = createSelector(
   }
 );
 
-export const tagsArraySelector = createSelector(
-  state => state.map.tags,
-  tags =>
-    Object.entries(tags)
-      .filter(([, v]) => v)
-      .map(([k]) => k)
+export const tagsInViewSelector = createSelector(
+  state => state.map.poisInView.tags.ids,
+  state => state.map.poisInView.tags.map,
+  (ids, map) => ids.map(id => map[id])
 );
 
-export const tagsSelector = createSelector(
-  state => state.map.tags,
-  tagsArraySelector,
-  tags => {
-    return _.orderBy(
-      Object.entries(tags).map(([name, visible]) => ({ name, visible })),
-      'name'
-    );
+export const filteredTagsInViewSelector = createSelector(
+  tagsInViewSelector,
+  tags => tags.filter(poi => poi.visible)
+);
+
+export const poisInViewSelector = createSelector(
+  filteredTagsInViewSelector,
+  state => state.map.poisInView.ids,
+  state => state.map.pois,
+  (tags, ids, map) => {
+    const tagIds = tags.map(tag => tag.name);
+    return ids
+      .map(poiId => map[poiId])
+      .filter(poi => !!_.intersection(poi.tags, tagIds).length);
   }
 );
 
-export const poisSelector = createSelector(
-  tagsArraySelector,
-  state => state.map.poisIds,
-  state => state.map.poisByListingHash,
-  (tags, poisIds, poisByListingHash) => {
-    return poisIds
-      .map(poiId => poisByListingHash[poiId])
-      .filter(poi => !!_.intersection(poi.tags, tags).length);
-  }
-);
-
-export const poisMapDataSelector = createSelector(poisSelector, pois => {
-  return {
+export const poisInViewMapDataSelector = createSelector(
+  poisInViewSelector,
+  pois => ({
     type: 'FeatureCollection',
     features: pois.map(p => ({
       type: 'Feature',
@@ -56,5 +50,17 @@ export const poisMapDataSelector = createSelector(poisSelector, pois => {
         listingHash: p.listingHash,
       },
     })),
-  };
-});
+  })
+);
+
+export const myPOIsSelector = createSelector(
+  state => state.map.myPOIs.ids,
+  state => state.map.pois,
+  (ids, map) => ids.map(id => map[id])
+);
+
+export const bookmarksSelector = createSelector(
+  state => state.map.bookmarks.ids,
+  state => state.map.pois,
+  (ids, map) => ids.map(id => map[id])
+);

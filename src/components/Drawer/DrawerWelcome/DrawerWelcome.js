@@ -16,11 +16,13 @@ const Component = () => {
           FOAM Map and discover places ranked the highest.
         </p>
 
-        <h3>First things first</h3>
-        <p>Our guide covers everything you need to start using the FOAM Map.</p>
+        <h3>Get started</h3>
+        <p>
+          Click below to start exploring places already registered near you!
+        </p>
         <Link to={'/places'}>
           <Button variant="contained" color="primary" type="submit" fullWidth>
-            Get Started
+            View places new me
           </Button>
         </Link>
       </div>

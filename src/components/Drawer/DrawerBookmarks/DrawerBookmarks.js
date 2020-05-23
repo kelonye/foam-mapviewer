@@ -4,17 +4,12 @@ import * as mapDispatchToProps from 'actions';
 import { makeStyles } from '@material-ui/core/styles';
 import Loader from 'components/Loader';
 import POI from 'components/Drawer/DrawerPOI';
+import RequireAccount from 'components/RequireAccount';
+import { bookmarksSelector } from 'selectors/map';
 
 const useStyles = makeStyles(theme => ({}));
 
-const Component = ({
-  isLoading,
-  account,
-  bookmarksList,
-  loadBookmarks,
-  showDrawer,
-  match,
-}) => {
+const Component = ({ isLoading, bookmarks, showDrawer, match }) => {
   const classes = useStyles();
 
   React.useEffect(
@@ -24,37 +19,35 @@ const Component = ({
     [] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
-  // React.useEffect(
-  //   function() {
-  //     loadBookmarks();
-  //   [loadBookmarks, account] // eslint-disable-line react-hooks/exhaustive-deps
-  // );
-
   return (
     <div className={classes.container}>
       <h4 className="drawer__title">Saved Places</h4>
       <div className="drawer__content">
-        {isLoading ? (
-          <Loader />
-        ) : !bookmarksList.length ? (
-          <div className="text-center">No bookmarks found</div>
-        ) : (
-          <div>
-            {bookmarksList.map(poi => (
-              <div key={poi.listingHash}>
-                <POI poi={poi} />
-              </div>
-            ))}
-          </div>
-        )}
+        <RequireAccount>
+          {isLoading ? (
+            <Loader />
+          ) : !bookmarks.length ? (
+            <div className="text-center">No bookmarks found</div>
+          ) : (
+            <div>
+              {bookmarks.map(poi => (
+                <div key={poi.listingHash}>
+                  <POI poi={poi} />
+                </div>
+              ))}
+            </div>
+          )}
+        </RequireAccount>
       </div>
     </div>
   );
 };
 
-export default connect(
-  ({ map: { bookmarksList, isLoadingBookmarks: isLoading } }) => {
-    return { bookmarksList, isLoading };
-  },
-  mapDispatchToProps
-)(Component);
+export default connect(state => {
+  const {
+    map: {
+      bookmarks: { isLoading },
+    },
+  } = state;
+  return { bookmarks: bookmarksSelector(state), isLoading };
+}, mapDispatchToProps)(Component);

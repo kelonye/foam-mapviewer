@@ -8,7 +8,7 @@ import {
   Switch,
   Typography,
 } from '@material-ui/core';
-import { tagsSelector } from 'selectors/map';
+import { tagsInViewSelector } from 'selectors/map';
 import Close from 'components/Drawer/DrawerClose';
 
 const useStyles = makeStyles(theme => ({
@@ -62,6 +62,6 @@ const Component = ({ tags, togglePOITagVisibility, showDrawer, match }) => {
 
 export default connect(state => {
   return {
-    tags: tagsSelector(state),
+    tags: tagsInViewSelector(state),
   };
 }, mapDispatchToProps)(Component);

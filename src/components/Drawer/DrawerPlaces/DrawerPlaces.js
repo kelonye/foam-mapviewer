@@ -4,7 +4,7 @@ import * as mapDispatchToProps from 'actions';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import Loader from 'components/Loader';
-import { poisSelector } from 'selectors/map';
+import { poisInViewSelector } from 'selectors/map';
 import { Link } from 'react-router-dom';
 import POI from 'components/Drawer/DrawerPOI';
 
@@ -41,14 +41,14 @@ const Component = ({ isLoading, pois, showDrawer, match }) => {
         ) : !pois.length ? (
           <div className="text-center">No POIs found</div>
         ) : (
-          <div>
-            {pois.map(poi => (
-              <div key={poi.listingHash}>
-                <POI poi={poi} />
+              <div>
+                {pois.map(poi => (
+                  <div key={poi.listingHash}>
+                    <POI poi={poi} />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        )}
+            )}
       </div>
     </div>
   );
@@ -56,10 +56,10 @@ const Component = ({ isLoading, pois, showDrawer, match }) => {
 
 export default connect(state => {
   const {
-    map: { isLoadingPlaces: isLoading },
+    map: { poisInView: { isLoading } },
   } = state;
   return {
-    pois: poisSelector(state),
+    pois: poisInViewSelector(state),
     isLoading,
   };
 }, mapDispatchToProps)(Component);

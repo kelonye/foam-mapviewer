@@ -44,8 +44,7 @@ function Component({ isAddingPOI, setIsAddingPOI }) {
   );
 }
 
-export default connect(state => {
-  const { isAddingPOI } = state.map;
+export default connect(({ map: { addPOI: { isAdding: isAddingPOI } } }) => {
   return {
     isAddingPOI,
   };

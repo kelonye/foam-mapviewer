@@ -5,7 +5,6 @@ import * as mapDispatchToProps from 'actions';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import { Typography, Chip, Button } from '@material-ui/core';
-import { loadPOI } from 'utils/foam';
 import sl from 'utils/sl';
 import Geohash from 'latlon-geohash';
 import { Link } from 'react-router-dom';
@@ -45,6 +44,11 @@ const useStyles = makeStyles(theme => ({
   footerBtn: {
     marginBottom: 15,
   },
+  toggleBookmarkLoader: {
+    top: 3,
+    position: 'relative',
+    marginLeft: 10,
+  },
 }));
 
 const Component = ({
@@ -55,11 +59,12 @@ const Component = ({
   showDrawer,
   toggleBookmark,
   isBookmarked,
-  loadedPOI,
+  poi,
+  viewPOI,
+  isLoading,
+  isTogglingBookmark,
 }) => {
   const classes = useStyles();
-  const [poi, setPOI] = React.useState(loadedPOI || {});
-  const [isLoading, setIsLoading] = React.useState(false);
   const {
     name,
     address,
@@ -70,29 +75,21 @@ const Component = ({
     geohash,
     tags = [],
     foam,
-  } = poi;
-
-  const onMount = async() => {
-    if (!loadedPOI) {
-      setIsLoading(true);
-      setPOI(await loadPOI(listingHash));
-      setIsLoading(false);
-    }
-  };
+  } = poi || {};
 
   React.useEffect(
     () => {
-      onMount();
+      viewPOI(listingHash);
     },
-    [listingHash, loadPOI] // eslint-disable-line react-hooks/exhaustive-deps
+    [listingHash] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   React.useEffect(() => {
     showDrawer(url);
-  }, [showDrawer]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const onToggleBookmark = async() => {
-    await toggleBookmark({ ...poi, listingHash });
+  const onToggleBookmark = async () => {
+    await toggleBookmark(listingHash);
     sl(
       'success',
       isBookmarked
@@ -175,20 +172,27 @@ const Component = ({
             ))}
 
             <div className={clsx('flex', 'flex--column', classes.footer)}>
+              {/*
               <div className={classes.footerBtn}>
                 <Button variant="contained" color="primary" fullWidth>
                   Get Directions
                 </Button>
               </div>
-
+              */}
               <div className={classes.footerBtn}>
                 <Button
                   variant="contained"
                   color="default"
                   onClick={onToggleBookmark}
+                  disabled={isTogglingBookmark}
                   fullWidth
                 >
                   {isBookmarked ? 'Unbookmark' : 'Bookmark'}
+                  {!isTogglingBookmark ? null : (
+                    <div className={classes.toggleBookmarkLoader}>
+                      <Loader size={20} />
+                    </div>
+                  )}
                 </Button>
               </div>
 
@@ -214,17 +218,28 @@ const Component = ({
 
 export default connect(
   (
-    { wallet: { account }, map: { bookmarksMap, poisByListingHash } },
+    {
+      wallet: { account },
+      map: {
+        pois,
+        viewPOI: { isLoading },
+        bookmarks,
+      },
+    },
     {
       match: {
         params: { listingHash },
       },
     }
   ) => {
+    const isBookmarked = ~bookmarks.ids.indexOf(listingHash);
+    const poi = pois[listingHash];
     return {
       account,
-      isBookmarked: bookmarksMap[listingHash],
-      loadedPOI: poisByListingHash[listingHash],
+      isBookmarked,
+      isLoading,
+      isTogglingBookmark: bookmarks.isLoading || bookmarks.isToggling,
+      poi,
     };
   },
   mapDispatchToProps

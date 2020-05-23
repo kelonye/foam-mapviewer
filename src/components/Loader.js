@@ -1,7 +1,7 @@
 import React from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { CircularProgress } from '@material-ui/core';
 
-export default function({ opacity = 1, fullscreen }) {
+export default function({ opacity = 1, fullscreen, size = 40 }) {
   return (
     <div
       style={{
@@ -28,6 +28,7 @@ export default function({ opacity = 1, fullscreen }) {
           left={0}
           top={0}
           status="loading"
+          size={size}
         />
       </div>
     </div>

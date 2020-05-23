@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
-import { Route, Switch } from 'react-router-dom';
+import {
+  // Route,
+  Switch,
+} from 'react-router-dom';
 import { HEADER_HEIGHT, DRAWER_WIDTH } from 'config';
 import { widthSelector as menuWidthSelector } from 'selectors/menu';
 import Close from 'components/Drawer/DrawerClose';

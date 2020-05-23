@@ -1,5 +1,6 @@
 import { WEB3 } from 'utils/wallet';
 import xhr from 'utils/xhr';
+import Geohash from 'latlon-geohash';
 
 export const FOAM_TOKEN_DECIMALS = new WEB3.utils.BN('1000000000000000000');
 
@@ -24,4 +25,27 @@ export async function loadPOI(listingHash) {
   data.foam = deserializeFoam(deposit);
   data.listingHash = listingHash;
   return data;
+}
+
+export function parsePOI(poi) {
+  const {
+    listingHash,
+    owner,
+    geohash,
+    name,
+    tags: ptags,
+    state: {
+      status: { type: status },
+      deposit,
+    },
+  } = poi;
+  return {
+    listingHash,
+    owner,
+    name,
+    status,
+    foam: deserializeFoam(deposit),
+    tags: ptags,
+    ...Geohash.decode(geohash),
+  };
 }

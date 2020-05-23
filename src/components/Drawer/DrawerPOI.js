@@ -26,7 +26,7 @@ const Component = ({ poi }) => {
       className={clsx(classes.container, 'drawer-poi')}
     >
       <div className={classes.name}>{poi.name}</div>
-      <div className={classes.foam}>{poi.foam}</div>
+      <div className={classes.foam}>{poi.foam} FOAM</div>
       <div className={classes.tags}>{poi.tags?.join(', ')}</div>
     </Link>
   );

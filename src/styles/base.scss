@@ -30,7 +30,8 @@ body {
 }
 
 body > iframe {
-  display: none; // todo
+  // display: none; // todo
+  position: fixed;
 }
 
 .user-selectable {

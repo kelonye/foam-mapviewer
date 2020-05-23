@@ -1,21 +1,12 @@
 import poisLayer from './pois-layer';
 import store from 'utils/store';
 import mapboxgl from 'mapbox-gl';
-import { poisMapDataSelector } from 'selectors/map';
-import { showDrawer, setIsAddingPOI, updateData } from 'actions';
-import {
-  ACTION_TYPE_UPDATE_DATA,
-  DEFAULT_LOCATION,
-  // IS_DEV,
-  MAPBOX_ACCESS_TOKEN,
-  SECONDARY_COLOR,
-} from 'config';
-import Geohash from 'latlon-geohash';
-import xhr from 'utils/xhr';
+import { poisInViewMapDataSelector } from 'selectors/map';
+import * as actions from 'actions';
+import { DEFAULT_LOCATION, MAPBOX_ACCESS_TOKEN, SECONDARY_COLOR } from 'config';
 import _ from 'lodash';
 import cache from 'utils/cache';
 import pinSVG from './pin';
-import { deserializeFoam } from 'utils/foam';
 
 mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 
@@ -37,7 +28,7 @@ const map = (window.map = new (class {
       bearing,
     }));
 
-    map.on('load', async() => {
+    map.on('load', async () => {
       this.onLoad();
       map.on('move', e => this.onMove(e));
       map.on('mouseenter', 'pois', e => this.onMouseEnterPOIs(e));
@@ -65,9 +56,11 @@ const map = (window.map = new (class {
 
   onMouseEnterPOIs(event) {
     const {
-      map: { isAddingPOI },
+      map: {
+        addPOI: { isAdding },
+      },
     } = store.getState();
-    if (isAddingPOI) {
+    if (isAdding) {
       return;
     }
 
@@ -100,9 +93,11 @@ const map = (window.map = new (class {
 
   onMouseLeavePOIs(e) {
     const {
-      map: { isAddingPOI },
+      map: {
+        addPOI: { isAdding },
+      },
     } = store.getState();
-    if (isAddingPOI) {
+    if (isAdding) {
       return;
     }
 
@@ -115,9 +110,11 @@ const map = (window.map = new (class {
 
   onClickPOIs(event) {
     const {
-      map: { isAddingPOI },
+      map: {
+        addPOI: { isAdding },
+      },
     } = store.getState();
-    if (isAddingPOI) {
+    if (isAdding) {
       return;
     }
 
@@ -126,19 +123,21 @@ const map = (window.map = new (class {
     } = event;
     const { listingHash } = pt.properties;
 
-    store.dispatch(showDrawer(`/poi/${listingHash}`));
+    store.dispatch(actions.showDrawer(`/poi/${listingHash}`));
   }
 
   onClick(event) {
     const {
-      map: { isAddingPOI },
+      map: {
+        addPOI: { isAdding },
+      },
     } = store.getState();
-    if (isAddingPOI) {
+    if (isAdding) {
       const {
         lngLat: { lng, lat },
       } = event;
-      store.dispatch(showDrawer(`/add-poi/${lng}/${lat}`));
-      store.dispatch(setIsAddingPOI(false));
+      store.dispatch(actions.showDrawer(`/add-poi/${lng}/${lat}`));
+      store.dispatch(actions.setIsAddingPOI(false));
       return;
     }
   }
@@ -159,15 +158,12 @@ const map = (window.map = new (class {
   }
 
   async updatePOIs() {
-    await store.dispatch({
-      type: ACTION_TYPE_UPDATE_DATA,
-      payload: await this.fetchLayersData(),
-    });
+    await this.fetchLayersData();
     this.updatePOIsData();
   }
 
   async updatePOIsData() {
-    const data = poisMapDataSelector(store.getState());
+    const data = poisInViewMapDataSelector(store.getState());
     const poisSource = this.map.getSource('pois');
     if (!poisSource) {
       this.map.addSource('pois', {
@@ -175,7 +171,8 @@ const map = (window.map = new (class {
         data,
       });
       this.map.addLayer(poisLayer);
-      if (!window.location.pathname) store.dispatch(showDrawer('/places'));
+      if (!window.location.pathname)
+        store.dispatch(actions.showDrawer('/places'));
     } else {
       poisSource.setData(data);
     }
@@ -183,8 +180,6 @@ const map = (window.map = new (class {
 
   async fetchLayersData() {
     const [[swLng, swLat], [neLng, neLat]] = this.map.getBounds().toArray();
-
-    store.dispatch(updateData({ isLoadingPlaces: true }));
 
     const query = {
       neLat,
@@ -197,52 +192,7 @@ const map = (window.map = new (class {
       status: ['application', 'challenged', 'listing'],
     };
 
-    const tags = {};
-    const poisByListingHash = {};
-    const poisIds = [];
-    try {
-      // const data = IS_DEV
-      //   ? require('data/sample-pois.json')
-      //   : await xhr('get', '/poi/filtered', query);
-      const data = await xhr('get', '/poi/filtered', query);
-      data.forEach(
-        ({
-          listingHash,
-          owner,
-          geohash,
-          name,
-          tags: ptags,
-          state: {
-            status: { type: status },
-            deposit,
-          },
-        }) => {
-          ptags.forEach(tag => {
-            tags[tag] = true;
-          });
-          const poi = {
-            listingHash,
-            owner,
-            name,
-            status,
-            foam: deserializeFoam(deposit),
-            tags: ptags,
-            ...Geohash.decode(geohash),
-          };
-          poisIds.push(poi.listingHash);
-          poisByListingHash[poi.listingHash] = poi;
-        }
-      );
-    } catch (e) {
-    } finally {
-      store.dispatch(updateData({ isLoadingPlaces: false }));
-    }
-
-    return {
-      poisIds,
-      poisByListingHash,
-      tags,
-    };
+    await store.dispatch(actions.loadPOIsInView(query));
   }
 
   getStyle() {
