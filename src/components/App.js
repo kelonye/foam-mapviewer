@@ -15,7 +15,6 @@ import { Router } from 'react-router-dom';
 import { history } from 'utils/store';
 import themeSelector, { isDarkSelector } from 'selectors/theme';
 import { CssBaseline } from '@material-ui/core';
-import * as threeBox from 'utils/3box';
 
 const useStyles = makeStyles(theme => ({
   error: { padding: 50, color: DANGER_COLOR },
@@ -32,24 +31,22 @@ function Component({
 }) {
   const classes = useStyles();
 
-  React.useEffect(() => {
-    const root = document.documentElement;
-    if (root.classList.contains(isDark ? 'light' : 'dark')) {
-      root.classList.remove(isDark ? 'light' : 'dark');
-      root.classList.add(isDark ? 'dark' : 'light');
-    }
-  }, [isDark]);
+  // React.useEffect(() => {
+  //   const root = document.documentElement;
+  //   if (root.classList.contains(isDark ? 'light' : 'dark')) {
+  //     root.classList.remove(isDark ? 'light' : 'dark');
+  //     root.classList.add(isDark ? 'dark' : 'light');
+  //   }
+  // }, [isDark]);
 
-  const reload3Box = async() => {
-    if (account) {
-      await threeBox.setUp(account);
-      await loadBookmarks();
-    }
-  };
-
-  React.useEffect(() => {
-    reload3Box();
-  }, [account, loadBookmarks]); // eslint-disable-line react-hooks/exhaustive-deps
+  React.useEffect(
+    () => {
+      if (account) {
+        loadBookmarks();
+      }
+    },
+    [loadBookmarks, account] // eslint-disable-line react-hooks/exhaustive-deps
+  );
 
   let pane;
   if (error) {

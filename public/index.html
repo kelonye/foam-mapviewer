@@ -4,10 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Responsive foam map viewer"
-    />
+    <meta name="description" content="Responsive foam map viewer" />
     <link rel="icon" href="%PUBLIC_URL%/favicon-32x32.png" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
     <!--
@@ -60,7 +57,7 @@
       }
 
       .dark body {
-        background: #212121
+        background: #212121;
       }
 
       #loader-container {
@@ -142,7 +139,7 @@
         }
       }
     </style>
-    <script>
+    <!-- <script>
       var root = document.documentElement.classList;
       if (themeIsDark()) {
         root.remove('light');
@@ -163,12 +160,17 @@
           return false;
         }
       }
-    </script>
+    </script> -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158895083-1"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-158895083-1"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag() {
+        dataLayer.push(arguments);
+      }
       gtag('js', new Date());
 
       gtag('config', 'UA-158895083-1');
