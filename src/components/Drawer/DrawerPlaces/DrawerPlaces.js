@@ -39,16 +39,18 @@ const Component = ({ isLoading, pois, showDrawer, match }) => {
         {isLoading ? (
           <Loader />
         ) : !pois.length ? (
-          <div className="text-center">No POIs found</div>
+          <div className="flex flex--column flex--align-center">
+            No places found.
+          </div>
         ) : (
-              <div>
-                {pois.map(poi => (
-                  <div key={poi.listingHash}>
-                    <POI poi={poi} />
-                  </div>
-                ))}
+          <div>
+            {pois.map(poi => (
+              <div key={poi.listingHash}>
+                <POI poi={poi} />
               </div>
-            )}
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -56,7 +58,9 @@ const Component = ({ isLoading, pois, showDrawer, match }) => {
 
 export default connect(state => {
   const {
-    map: { poisInView: { isLoading } },
+    map: {
+      poisInView: { isLoading },
+    },
   } = state;
   return {
     pois: poisInViewSelector(state),

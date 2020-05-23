@@ -27,7 +27,9 @@ const Component = ({ isLoading, bookmarks, showDrawer, match }) => {
           {isLoading ? (
             <Loader />
           ) : !bookmarks.length ? (
-            <div className="text-center">No bookmarks found</div>
+            <div className="flex flex--column flex--align-center">
+              No bookmarks found.
+            </div>
           ) : (
             <div>
               {bookmarks.map(poi => (

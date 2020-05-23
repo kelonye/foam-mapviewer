@@ -118,6 +118,7 @@ export function loadMyPOIs() {
     const {
       wallet: { account },
     } = getState();
+    if (!account) return;
 
     dispatch({
       type: ACTION_TYPE_UPDATE_DATA,
@@ -160,6 +161,8 @@ export function loadBookmarks() {
     const {
       wallet: { account },
     } = getState();
+    if (!account) return;
+
     await threeBox.setUp(account);
     const pois = {};
     const bookmarks = { isLoading: false, ids: [] };

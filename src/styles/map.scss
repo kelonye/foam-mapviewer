@@ -50,3 +50,8 @@
     border-left-color: $dark-color;
   }
 }
+
+.mapboxgl-ctrl-bottom-right {
+  right: 0;
+  bottom: 20px;
+}

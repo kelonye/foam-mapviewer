@@ -179,22 +179,24 @@ const Component = ({
                 </Button>
               </div>
               */}
-              <div className={classes.footerBtn}>
-                <Button
-                  variant="contained"
-                  color="default"
-                  onClick={onToggleBookmark}
-                  disabled={isTogglingBookmark}
-                  fullWidth
-                >
-                  {isBookmarked ? 'Unbookmark' : 'Bookmark'}
-                  {!isTogglingBookmark ? null : (
-                    <div className={classes.toggleBookmarkLoader}>
-                      <Loader size={20} />
-                    </div>
-                  )}
-                </Button>
-              </div>
+              {!account ? null : (
+                <div className={classes.footerBtn}>
+                  <Button
+                    variant="contained"
+                    color="default"
+                    onClick={onToggleBookmark}
+                    disabled={isTogglingBookmark}
+                    fullWidth
+                  >
+                    {isBookmarked ? 'Unbookmark' : 'Bookmark'}
+                    {!isTogglingBookmark ? null : (
+                      <div className={classes.toggleBookmarkLoader}>
+                        <Loader size={20} />
+                      </div>
+                    )}
+                  </Button>
+                </div>
+              )}
 
               <div className={classes.footerBtn}>
                 <Link to={!account ? '#' : `/poi/${listingHash}/challenge`}>

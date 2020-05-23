@@ -33,6 +33,11 @@ const W = window.outerWidth;
 function Component({ amount }) {
   const [y, setY] = React.useState(DEFAULT_Y);
 
+  React.useEffect(() => {
+    const el = document.body.querySelector('.mapboxgl-ctrl-bottom-right');
+    if (el) el.style.bottom = `${H - y - 40}px`;
+  }, [y]);
+
   return (
     <div>
       <Rnd

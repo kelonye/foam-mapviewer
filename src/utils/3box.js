@@ -5,13 +5,13 @@ let setupPromise;
 let space;
 
 export async function setUp(addr) {
+  // console.log(addr);
   if (space) return;
   if (setupPromise) return await setupPromise;
   setupPromise = setupSpace(addr);
 }
 
 async function setupSpace(addr) {
-  // console.log(addr);
   const provider = await Box.get3idConnectProvider();
   const box = await Box.openBox(addr, provider);
   space = await box.openSpace(APP_SLUG);
