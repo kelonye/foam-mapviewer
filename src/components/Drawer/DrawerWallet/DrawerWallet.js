@@ -16,6 +16,7 @@ const useStyles = makeStyles(theme => ({
     minWidth: 'auto',
     padding: 7,
     fontSize: 13,
+    width: '25%',
   },
   activeTabContent: {
     paddingTop: 20,
