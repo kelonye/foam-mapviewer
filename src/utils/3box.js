@@ -12,8 +12,13 @@ export async function setUp(addr) {
 }
 
 async function setupSpace(addr) {
-  const provider = await Box.get3idConnectProvider();
-  const box = await Box.openBox(addr, provider);
+  // const provider = await Box.get3idConnectProvider();
+  // const box = await Box.openBox(addr, provider);
+  // space = await box.openSpace(APP_SLUG);
+
+  const box = await Box.create(window.ethereum);
+  const spaces = [ APP_SLUG];
+  await box.auth(spaces, { address: addr });
   space = await box.openSpace(APP_SLUG);
 }
 
