@@ -24,10 +24,8 @@ function Component({
   error,
   isLoaded,
   theme,
-  isDark,
+  // isDark,
   isMobile,
-  account,
-  loadBookmarks,
 }) {
   const classes = useStyles();
 
@@ -38,15 +36,6 @@ function Component({
   //     root.classList.add(isDark ? 'dark' : 'light');
   //   }
   // }, [isDark]);
-
-  React.useEffect(
-    () => {
-      if (account) {
-        loadBookmarks();
-      }
-    },
-    [loadBookmarks, account] // eslint-disable-line react-hooks/exhaustive-deps
-  );
 
   let pane;
   if (error) {
@@ -84,7 +73,7 @@ export default connect(state => {
   const {
     app,
     user,
-    wallet: { account },
+    // wallet: { account },
   } = state;
   const { isLoaded, error, isMobile } = app;
   let err;
@@ -100,6 +89,6 @@ export default connect(state => {
     theme: themeSelector(state),
     isDark: isDarkSelector(state),
     isMobile,
-    account,
+    // account,
   };
 }, mapDispatchToProps)(Component);

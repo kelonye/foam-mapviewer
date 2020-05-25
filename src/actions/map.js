@@ -14,14 +14,14 @@ export function updateData(payload) {
 }
 
 export function togglePOITagVisibility(payload) {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     dispatch({ type: ACTION_TYPE_POI_TAG_VISIBILITY, payload });
     map.updatePOIsData();
   };
 }
 
 export function setIsAddingPOI(isAdding) {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     dispatch({
       type: ACTION_TYPE_UPDATE_DATA,
       payload: { addPOI: { isAdding } },
@@ -31,7 +31,7 @@ export function setIsAddingPOI(isAdding) {
 }
 
 export function createPOI(fields, { foam }) {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     dispatch(updateData({ isLoadingPlaces: true }));
 
     try {
@@ -52,7 +52,7 @@ export function createPOI(fields, { foam }) {
 }
 
 export function viewPOI(listingHash) {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     const {
       map: { pois },
     } = getState();
@@ -72,7 +72,7 @@ export function viewPOI(listingHash) {
 }
 
 export function loadPOIsInView(query) {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     dispatch({
       type: ACTION_TYPE_UPDATE_DATA,
       payload: { poisInView: { isLoading: true } },
@@ -114,7 +114,7 @@ export function loadPOIsInView(query) {
 }
 
 export function loadMyPOIs() {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     const {
       wallet: { account },
     } = getState();
@@ -155,15 +155,15 @@ export function loadMyPOIs() {
   };
 }
 
-export function loadBookmarks() {
-  return async (dispatch, getState) => {
+export function loadBookmarks(reset) {
+  return async(dispatch, getState) => {
     dispatch(updateData({ bookmarks: { isLoading: true } }));
     const {
       wallet: { account },
     } = getState();
     if (!account) return;
 
-    await threeBox.setUp(account);
+    await threeBox.setUp(account, reset);
     const pois = {};
     const bookmarks = { isLoading: false, ids: [] };
     bookmarks.ids = await threeBox.loadBookmarks();
@@ -175,7 +175,7 @@ export function loadBookmarks() {
 }
 
 export function toggleBookmark(listingHash) {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     dispatch(updateData({ bookmarks: { isToggling: true } }));
     const {
       wallet: { account },

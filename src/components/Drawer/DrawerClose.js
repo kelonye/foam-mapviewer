@@ -3,15 +3,12 @@ import { connect } from 'react-redux';
 import * as mapDispatchToProps from 'actions';
 import { IconButton } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { history } from 'utils/store';
 
 const ICON_SIZE = 30;
 
-const onGoBack = () => history.go(-2);
-
-const Component = ({ goBack, hideDrawer }) => (
+const Component = ({ goBack, hideDrawer, navigate }) => (
   <div className="drawer__close">
-    <IconButton onClick={goBack ? onGoBack : hideDrawer}>
+    <IconButton onClick={goBack ? () => navigate(goBack) : hideDrawer}>
       <ArrowBackIcon
         style={{
           margin: '-4px 0px 0 -3px',

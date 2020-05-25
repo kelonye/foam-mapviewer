@@ -22,9 +22,13 @@ export function completeBootLoader() {
         document.location.reload();
       });
       window.ethereum.on('accountsChanged', function(accounts) {
-        store.dispatch(actions.updateAccount(accounts[0]));
+        const account = accounts[0];
+        store.dispatch(actions.updateAccount(account));
+        store.dispatch(actions.loadBookmarks(true));
       });
     }
+
+    store.dispatch(actions.loadBookmarks(true));
   }
   
   export function enableNotifications() {

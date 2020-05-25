@@ -30,13 +30,18 @@ const DEFAULT_Y = 200;
 const H = window.outerHeight;
 const W = window.outerWidth;
 
-function Component({ amount }) {
+function Component({ locationPathName }) {
   const [y, setY] = React.useState(DEFAULT_Y);
-
+  
   React.useEffect(() => {
     const el = document.body.querySelector('.mapboxgl-ctrl-bottom-right');
     if (el) el.style.bottom = `${H - y - 40}px`;
   }, [y]);
+
+  React.useEffect(() => {
+    // console.log(locationPathName);
+    setY(DEFAULT_Y);
+  }, [setY, locationPathName]);
 
   return (
     <div>
@@ -103,6 +108,8 @@ function Component({ amount }) {
 
 export default withRouter(
   connect(state => {
-    return {};
+    return {
+      locationPathName: window.location.pathname,
+    };
   }, mapDispatchToProps)(Component)
 );

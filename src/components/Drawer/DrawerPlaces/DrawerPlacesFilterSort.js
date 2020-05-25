@@ -29,7 +29,7 @@ const Component = ({ tags, togglePOITagVisibility, showDrawer, match }) => {
 
   return (
     <div>
-      <Close goBack />
+      <Close goBack={'/places'} />
       <h4 className="drawer__title drawer__title--padded">Filter / Sort</h4>
       <div className="drawer__content">
         <FormGroup>

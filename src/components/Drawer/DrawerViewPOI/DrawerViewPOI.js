@@ -88,7 +88,7 @@ const Component = ({
     showDrawer(url);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const onToggleBookmark = async () => {
+  const onToggleBookmark = async() => {
     await toggleBookmark(listingHash);
     sl(
       'success',
@@ -154,7 +154,7 @@ const Component = ({
 
   return (
     <div>
-      <Close goBack />
+      <Close goBack={'/places'} />
       <h4 className="drawer__title drawer__title--padded">Point of Interest</h4>
       <div className="drawer__content">
         {isLoading ? (

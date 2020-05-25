@@ -4,10 +4,21 @@ import { APP_SLUG } from 'config';
 let setupPromise;
 let space;
 
-export async function setUp(addr) {
+export async function setUp(addr, reset = false) {
+  if (reset) {
+    if (setupPromise) {
+      await setupPromise;
+      setupPromise = null;
+    }
+    space = null;
+  }
   // console.log(addr);
   if (space) return;
-  if (setupPromise) return await setupPromise;
+  if (setupPromise) {
+   const s = await setupPromise;
+    setupPromise = null;
+    return s;
+  }
   setupPromise = setupSpace(addr);
 }
 
@@ -17,8 +28,7 @@ async function setupSpace(addr) {
   // space = await box.openSpace(APP_SLUG);
 
   const box = await Box.create(window.ethereum);
-  const spaces = [ APP_SLUG];
-  await box.auth(spaces, { address: addr });
+  await box.auth([ APP_SLUG], { address: addr });
   space = await box.openSpace(APP_SLUG);
 }
 
