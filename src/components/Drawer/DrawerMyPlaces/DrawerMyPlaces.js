@@ -18,6 +18,7 @@ const Component = ({
   match,
   loadMyPOIs,
   setIsAddingPOI,
+  account,
 }) => {
   const classes = useStyles();
 
@@ -38,6 +39,7 @@ const Component = ({
           color="primary"
           type="submit"
           size="small"
+          disabled={!account}
           onClick={() => setIsAddingPOI(true)}
         >
           + register
@@ -94,9 +96,11 @@ export default connect(state => {
     map: {
       myPOIs: { isLoading },
     },
+    wallet: { account },
   } = state;
   return {
     pois: myPOIsSelector(state),
     isLoading,
+    account,
   };
 }, mapDispatchToProps)(Component);

@@ -5,7 +5,7 @@ import { serializeFoam } from 'utils/foam';
 import xhr from 'utils/xhr';
 
 export function loadWallet() {
-  return async(dispatch, getState) => {
+  return async (dispatch, getState) => {
     try {
       const {
         wallet: { contracts, account },
@@ -57,8 +57,9 @@ export function loadWallet() {
 }
 
 export function activateWallet() {
-  return async(dispatch, getState) => {
-    await window.ethereum.enable();
+  return async (dispatch, getState) => {
+    const [account] = await window.ethereum.enable();
+    dispatch(updateAccount(account));
     dispatch(loadWallet());
   };
 }
@@ -71,13 +72,13 @@ export function updateWallet(payload) {
 }
 
 export function updateAccount(account) {
-  return async(dispatch, getState) => {
+  return async (dispatch, getState) => {
     dispatch(updateWallet({ account }));
   };
 }
 
 export function approveFOAM(amount) {
-  return async(dispatch, getState) => {
+  return async (dispatch, getState) => {
     const {
       wallet: { contracts },
     } = getState();
@@ -90,7 +91,7 @@ export function approveFOAM(amount) {
 }
 
 export function loadWalletApproved(amount) {
-  return async(dispatch, getState) => {
+  return async (dispatch, getState) => {
     const {
       wallet: { contracts, account },
     } = getState();

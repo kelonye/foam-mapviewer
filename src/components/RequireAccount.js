@@ -37,6 +37,7 @@ const Component = ({ isLoading, account, activateWallet, children }) => {
             variant="contained"
             onClick={activateWallet}
             className={classes.metaMaskButton}
+            disabled={!window.enable}
             fullWidth
           >
             Connect Wallet
