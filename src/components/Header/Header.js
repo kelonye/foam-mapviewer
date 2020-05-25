@@ -5,25 +5,33 @@ import {
   HEADER_HEIGHT,
   // MENU_WIDTH
 } from 'config';
-// import { IconButton, Tooltip } from '@material-ui/core';
+import { IconButton, Tooltip } from '@material-ui/core';
 // import MenuIcon from '@material-ui/icons/Menu';
 // import LightIcon from '@material-ui/icons/Brightness7';
 // import DarkIcon from '@material-ui/icons/Brightness2';
+import RegisterPlaceIcon from '@material-ui/icons/Add';
 import { isDarkSelector } from 'selectors/theme';
-// import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
-// const useStyles = makeStyles(theme => ({
-//   container: props => ({
-//     backgroundColor: theme.backgroundColor,
-//   }),
-//   icon: {
-//     height: 28,
-//     width: 28,
-//   },
-// }));
+const useStyles = makeStyles(theme => ({
+  container: props => ({
+    backgroundColor: theme.backgroundColor,
+  }),
+  icon: {
+    height: 28,
+    width: 28,
+  },
+}));
 
-function Component({ toggleMenu, toggleTheme, isDark, isMobile }) {
-  // const classes = useStyles();
+function Component({
+  toggleMenu,
+  toggleTheme,
+  isDark,
+  isMobile,
+  setIsAddingPOI,
+  account,
+}) {
+  const classes = useStyles();
 
   // const left = isMobile ? (
   //   <div style={{ marginLeft: 15 }}></div>
@@ -54,6 +62,14 @@ function Component({ toggleMenu, toggleTheme, isDark, isMobile }) {
   //   </Tooltip>
   // );
 
+  const right = !account ? null : (
+    <Tooltip title="Register place">
+      <IconButton onClick={() => setIsAddingPOI(true)} data-tour="theme">
+        <RegisterPlaceIcon className={classes.icon} />
+      </IconButton>
+    </Tooltip>
+  );
+
   return (
     <div
       className={'header flex flex--align-center'}
@@ -65,16 +81,20 @@ function Component({ toggleMenu, toggleTheme, isDark, isMobile }) {
         <img src="/logo.png" alt="FOAM logo" height="30px" />
       </div>
 
-      {/*{right}*/}
+      {right}
     </div>
   );
 }
 
 const mapStateToProps = state => {
-  const { isMobile } = state.app;
+  const {
+    app: { isMobile },
+    wallet: { account },
+  } = state;
   return {
     isDark: isDarkSelector(state),
     isMobile,
+    account,
   };
 };
 

@@ -58,9 +58,17 @@ export function loadWallet() {
 
 export function activateWallet() {
   return async (dispatch, getState) => {
-    const [account] = await window.ethereum.enable();
-    dispatch(updateAccount(account));
-    dispatch(loadWallet());
+    let account;
+    try {
+      [account] = await window.ethereum.enable();
+      dispatch(updateAccount(account));
+    } catch (e) {
+      console.alert('A web3 capable browser is required!');
+    }
+    if (account) {
+      dispatch(updateAccount(account));
+      dispatch(loadWallet());
+    }
   };
 }
 

@@ -32,7 +32,7 @@ const W = window.outerWidth;
 
 function Component({ locationPathName }) {
   const [y, setY] = React.useState(DEFAULT_Y);
-  
+
   React.useEffect(() => {
     const el = document.body.querySelector('.mapboxgl-ctrl-bottom-right');
     if (el) el.style.bottom = `${H - y - 40}px`;
@@ -70,6 +70,7 @@ function Component({ locationPathName }) {
           setY(y);
           // setY(y < 0 ? 0 : y);
         }}
+        enableUserSelectHack={false}
       >
         <Switch>
           <Route exact path={'/places'} component={Places} />
