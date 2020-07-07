@@ -11,7 +11,7 @@ function Component({ isAddingPOI, setIsAddingPOI }) {
   function getContent() {
     let message, action;
     if (isAddingPOI) {
-      message = 'Click on map to add the new Point of Interest...';
+      message = 'Click on map to add the new place...';
       action = (
         <React.Fragment>
           <Button color="primary" size="small" onClick={e => handleClose(e)}>

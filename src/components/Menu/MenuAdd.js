@@ -45,7 +45,7 @@ class Component extends React.Component {
           onClose={() => this.closeMenu()}
         >
           <MenuItem onClick={() => this.startAddPOI()}>
-            Register a Point of Interest
+            Register a Place
           </MenuItem>
           <MenuItem onClick={() => this.startCreateSignal()} disabled>
             Create a Signal

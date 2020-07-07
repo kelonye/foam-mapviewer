@@ -27,7 +27,7 @@ const BUTTONS = [
   },
   {
     type: 'add',
-    tip: 'Add Points of Interest, Signals ... etc',
+    tip: 'Add Places, Signals ... etc',
     label: 'Add',
     Icon: AddIcon,
     Component: Add,

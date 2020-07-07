@@ -63,7 +63,7 @@ const Component = ({
       ],
     },
     {
-      heading: 'Points of Interest',
+      heading: 'Places',
       stats: [
         ['Verified', poisListed],
         ['Challenged', poisChallenged],

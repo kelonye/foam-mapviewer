@@ -74,7 +74,7 @@ const Component = ({
 
   const hasMinimumFOAM = approvedFOAM >= MINIMUM_FOAM_STAKE;
 
-  const onMount = async() => {
+  const onMount = async () => {
     map.showPOIBeingApplied([lng, lat]);
 
     console.log('looking up address %s, %s', lng, lat);
@@ -139,14 +139,14 @@ const Component = ({
     await createPOI(fields, opts);
     sl(
       'success',
-      'Transaction was created, Wait until it\'s mined ...',
+      "Transaction was created, Wait until it's mined ...",
       'Success'
     );
   }
 
   return (
     <form type="action" onSubmit={onFormSubmit}>
-      <h4 className="drawer__title">Add Point of Interest</h4>
+      <h4 className="drawer__title">Add Place</h4>
       <div className="drawer__content flex flex--column">
         <div className={classes.row}>
           <TextField

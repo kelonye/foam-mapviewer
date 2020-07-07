@@ -11,9 +11,9 @@ const Component = () => {
       <div className="drawer__content">
         <p>
           On the FOAM Map, you create, curate, and search a consensus-driven
-          map. Cartographers sort and verify points of interest, such as
-          landmarks, businesses, and tourist attractions. Anyone can search the
-          FOAM Map and discover places ranked the highest.
+          map. Cartographers sort and verify Places, such as landmarks,
+          businesses, and tourist attractions. Anyone can search the FOAM Map
+          and discover places ranked the highest.
         </p>
 
         <h3>Get started</h3>

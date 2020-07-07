@@ -42,7 +42,7 @@ function Component({
     navigate(`/poi/${listingHash}`);
   };
 
-  const handleSubmit = async() => {
+  const handleSubmit = async () => {
     if (!amount) {
       return sl('error', 'A minimum of 50 FOAM is required.', 'Error');
     }
@@ -67,7 +67,7 @@ function Component({
 
     sl(
       'success',
-      'Transaction was created, Wait until it\'s mined ...',
+      "Transaction was created, Wait until it's mined ...",
       'Success',
       handleClose
     );
@@ -87,7 +87,7 @@ function Component({
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="dialog-description">
-          Describe the issues with this Point of Interest
+          Describe the issues with this Place
         </DialogContentText>
         <div className="flex flex--justify-center" style={{ marginBottom: 20 }}>
           <TextField
