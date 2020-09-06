@@ -20,7 +20,7 @@ import AddPOI from 'components/Drawer/DrawerAddPOI/DrawerAddPOI';
 import ViewPOI from 'components/Drawer/DrawerViewPOI/DrawerViewPOI';
 
 const TABS = [
-  { label: 'Near Me', Icon: T1Icon, link: '/places' },
+  { label: 'In View', Icon: T1Icon, link: '/places' },
   { label: 'My Places', Icon: T2Icon, link: '/my-places' },
   { label: 'Bookmarks', Icon: T3Icon, link: '/bookmarks' },
   { label: 'Wallet', Icon: T4Icon, link: '/wallet' },
@@ -34,6 +34,7 @@ function Component({ locationPathName }) {
   const [y, setY] = React.useState(DEFAULT_Y);
 
   React.useEffect(() => {
+    // console.log(y);
     const el = document.body.querySelector('.mapboxgl-ctrl-bottom-right');
     if (el) el.style.bottom = `${H - y - 40}px`;
   }, [y]);

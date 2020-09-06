@@ -19,7 +19,7 @@ export function completeBootLoader() {
   export function watchWeb3Changes() {
     if (window.ethereum?.on) {
       window.ethereum.on('chainChanged', () => {
-        document.location.reload();
+        // document.location.reload();
       });
       window.ethereum.on('accountsChanged', function(accounts) {
         const account = accounts[0];

@@ -22,7 +22,7 @@ const Component = () => {
         </p>
         <Link to={'/places'}>
           <Button variant="contained" color="primary" type="submit" fullWidth>
-            View places new me
+            Explore places
           </Button>
         </Link>
       </div>

@@ -6,14 +6,18 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import store from 'utils/store';
-import {completeBootLoader, watchIsMobileChanges, watchWeb3Changes} from 'utils/boot';
+import {
+  completeBootLoader,
+  watchIsMobileChanges, 
+  // watchWeb3Changes
+} from 'utils/boot';
 
 import App from 'components/App';
 
 (async() => {
   completeBootLoader();
   watchIsMobileChanges();
-  watchWeb3Changes();
+  // watchWeb3Changes();
   // enableNotifications();
   // watchGeoLocation();
 

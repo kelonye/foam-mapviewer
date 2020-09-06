@@ -74,7 +74,7 @@ const Component = ({
 
   const hasMinimumFOAM = approvedFOAM >= MINIMUM_FOAM_STAKE;
 
-  const onMount = async () => {
+  const onMount = async() => {
     map.showPOIBeingApplied([lng, lat]);
 
     console.log('looking up address %s, %s', lng, lat);
@@ -139,7 +139,7 @@ const Component = ({
     await createPOI(fields, opts);
     sl(
       'success',
-      "Transaction was created, Wait until it's mined ...",
+      'Transaction was created, Wait until it\'s mined ...',
       'Success'
     );
   }

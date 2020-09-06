@@ -37,42 +37,48 @@ export class Contract {
   }
 
   getContract(contractType) {
-    const json = ABIS[contractType];
-    return new WEB3.eth.Contract(
-      json.abi,
-      store.getState().wallet.contracts[contractType]
-    );
+      const json = ABIS[contractType];
+      return new WEB3.eth.Contract(
+          json.abi,
+          store.getState().wallet.contracts[contractType]
+      );
+  }
+  
+  async read(method, args = [], options = {}) {
+    return this.callContract(false, method, args, options);
   }
 
-  async read(method, ...args) {
-    return this.callContract(false, method, ...args);
+  async write(method, args = [], options = {}) {
+    return this.callContract(true, method, args, options);
   }
 
-  async write(method, ...args) {
-    return this.callContract(true, method, ...args);
-  }
-
-  async callContract(write, method, ...args) {
+  async callContract(write, method, args) {
     return new Promise((resolve, reject) => {
-      const writeOpts = {};
-      if (write) {
-        const {
+      const options = {};
+      const {
           wallet: { account },
-        } = store.getState();
-        writeOpts.from = account;
+      } = store.getState();
+      if (account) {
+        options.from = account;
       }
       this.contract.methods[method](...args)[write ? 'send' : 'call'](
-        ...(write ? [writeOpts] : []),
+        options,
         (err, response) => {
-          if (err) return reject(err);
-          resolve(response.c?.[0] ?? response);
+          if (err) {
+            return reject(new Error(err.message));
+          }
+          if (response.c && response.c.length) {
+            return resolve(response.c);
+          }
+          resolve(response);
+          // resolve(response.c?.[0] ?? response);
         }
       );
     });
   }
 
   on(eventName, fn) {
-    this.contract.events[eventName]({}, fn);
+    return this.contract.events[eventName]({}, fn);
   }
 }
 

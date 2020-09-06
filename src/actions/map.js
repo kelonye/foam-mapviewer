@@ -41,9 +41,7 @@ export function createPOI(fields, { foam }) {
 
       await getRegistryContract().write(
         'apply',
-        listingHash,
-        amount,
-        ipfsAddress
+        [listingHash, amount, ipfsAddress]
       );
     } finally {
       dispatch(updateData({ isLoadingPlaces: false }));

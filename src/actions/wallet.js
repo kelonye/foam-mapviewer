@@ -5,7 +5,7 @@ import { serializeFoam } from 'utils/foam';
 import xhr from 'utils/xhr';
 
 export function loadWallet() {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     try {
       const {
         wallet: { contracts, account },
@@ -25,18 +25,18 @@ export function loadWallet() {
         poisPending = 0;
 
       [
-        balance,
-        approved,
-        staked,
+        // balance,
+        // approved,
+        // staked,
         {
           pendingPOIs: poisPending,
           challengedPOIs: poisChallenged,
           verifiedPOIs: poisListed,
         },
       ] = await Promise.all([
-        tokenContract.read('balanceOf', account),
-        tokenContract.read('allowance', account, contracts.foamRegistry),
-        registryContract.read('totalStaked', account),
+        tokenContract.read('balanceOf', [account]),
+        // tokenContract.read('allowance', [account, contracts.foamRegistry]),
+        // registryContract.read('totalStaked', [account]),
         xhr('get', `/user/${account}/assets`),
       ]);
 
@@ -57,10 +57,10 @@ export function loadWallet() {
 }
 
 export function activateWallet() {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     let account;
     try {
-      [account] = await window.ethereum.enable();
+      [account] = await window.ethereum.request({ method: 'eth_requestAccounts' });
       dispatch(updateAccount(account));
     } catch (e) {
       console.alert('A web3 capable browser is required!');
@@ -80,26 +80,25 @@ export function updateWallet(payload) {
 }
 
 export function updateAccount(account) {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     dispatch(updateWallet({ account }));
   };
 }
 
 export function approveFOAM(amount) {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     const {
       wallet: { contracts },
     } = getState();
     await getTokenContract().write(
       'approve',
-      contracts.foamRegistry,
-      serializeFoam(amount)
+      [contracts.foamRegistry, serializeFoam(amount)]
     );
   };
 }
 
 export function loadWalletApproved(amount) {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     const {
       wallet: { contracts, account },
     } = getState();
@@ -109,8 +108,7 @@ export function loadWalletApproved(amount) {
       updateWallet({
         approved: await getTokenContract().read(
           'allowance',
-          account,
-          contracts.foamRegistry
+          [account, contracts.foamRegistry]
         ),
       })
     );

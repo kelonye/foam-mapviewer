@@ -28,7 +28,7 @@ const map = (window.map = new (class {
       bearing,
     }));
 
-    map.on('load', async () => {
+    map.on('load', async() => {
       this.onLoad();
       map.on('move', e => this.onMove(e));
       map.on('mouseenter', 'pois', e => this.onMouseEnterPOIs(e));
