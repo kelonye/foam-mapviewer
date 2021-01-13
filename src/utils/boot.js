@@ -2,7 +2,7 @@ import store from 'utils/store';
 import * as actions from 'actions';
 
 export function completeBootLoader() {
-    document.documentElement.classList.remove('anim-loading');
+    document.documentElement.classList.remove('booting');
     document.getElementById('loader-container').remove();
     const root = document.createElement('div');
     root.setAttribute('id', 'root');
